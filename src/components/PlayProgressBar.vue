@@ -9,8 +9,9 @@
       @pointerdown="pointerDown"
       @pointermove="pointerMove"
       @pointerup="pointerUp"
+      :class="{'pointer-down': isPointerDown}"
     >
-      <div class="groove">
+      <div :class="['groove', {'pointer-down': isPointerDown}]">
         <div
           class="played-section"
           ref="played"
@@ -61,11 +62,12 @@ export default {
         return;
       }
       const percentage = Math.max(current / this.duration, 0);
-      if (percentage < 0.01) {
-        this.$refs.pointer.style.transition = 'none';
-      }
+      // no need to animate when switching songs
+      this.$refs.pointer.style.transition =
+        percentage < 0.01 ? 'none' : '';
+      // minus pointer's width to prevent it going beyond the right end
       this.$refs.pointer.style.transform =
-        `translateX(calc(${percentage} * (70vw - 0.5rem))`;
+        `translateX(calc(${percentage * 60}vw - 0.5rem))`;
       this.$refs.played.style.width = `${percentage * 100}%`;
     }
   },
@@ -86,11 +88,20 @@ export default {
 
     pointerDown(event) {
       this.isPointerDown = true;
-      this.rect = this.$refs.container.getBoundingClientRect();
-      this.width = this.rect.right - this.rect.left;
-      const relativeLeft = event.clientX - this.rect.left;
+      const rect = this.$refs.container.getBoundingClientRect();
+      this.rectLeft = rect.left + 12;
+      this.rectRight = rect.right - 12;
+      this.width = this.rectRight - this.rectLeft;
+      let relativeLeft;
+      if (event.clientX - this.rectLeft > this.width) {
+        relativeLeft = this.width;
+      } else if (event.clientX - this.rectLeft < 0) {
+        relativeLeft = 0;
+      } else {
+        relativeLeft = event.clientX - this.rectLeft;
+      }
       this.$refs.pointer.style.transform =
-        `translateX(${relativeLeft}px`;
+        `translateX(${relativeLeft - 8}px`;
       this.$refs.played.style.width = `${relativeLeft / this.width * 100}%`;
       event.target.setPointerCapture(event.pointerId);
     },
@@ -98,15 +109,17 @@ export default {
     pointerMove(event) {
       if (this.isPointerDown) {
         let relativeLeft;
-        if (event.clientX - this.rect.left > this.width) {
+        if (event.clientX - this.rectLeft > this.width) {
           relativeLeft = this.width;
-        } else if (event.clientX - this.rect.left < 0) {
+        } else if (event.clientX - this.rectLeft < 0) {
           relativeLeft = 0;
         } else {
-          relativeLeft = event.clientX - this.rect.left;
+          relativeLeft = event.clientX - this.rectLeft;
         }
-        this.$refs.pointer.style.transform = `translateX(${relativeLeft}px`;
-        this.$refs.played.style.width = `${relativeLeft / this.width * 100}%`;
+        this.$refs.pointer.style.transform =
+          `translateX(${relativeLeft - 8}px`;
+        this.$refs.played.style.width =
+          `${relativeLeft / this.width * 100}%`;
       }
     },
 
@@ -114,7 +127,7 @@ export default {
       this.isPointerDown = false;
       this.$refs.pointer.classList.add('smooth-move');
       const percentage =
-        (event.clientX - this.rect.left) / (this.rect.right - this.rect.left);
+        (event.clientX - this.rectLeft) / (this.rectRight - this.rectLeft);
       this.seek(this.duration * percentage);
     }
   }
@@ -128,8 +141,8 @@ export default {
   height: 100%;
   display: grid;
   grid-template-columns:
-    [start current-start] minmax(3rem, 15vw) [current-end bar-start]
-    1fr [bar-end duration-start] minmax(3rem, 15vw) [duration-end end];
+    [start current-start] minmax(3.5rem, 1fr) [current-end bar-start]
+    70vw [bar-end duration-start] minmax(3.5rem, 1fr) [duration-end end];
   grid-template-rows: 1fr;
   place-items: center;
   user-select: none;
@@ -137,15 +150,30 @@ export default {
 
 .container {
   grid-column: bar;
-  height: 1rem;
+  height: 1.6rem;
   display: grid;
   place-items: center;
   cursor: pointer;
   touch-action: none;
+  padding: 0 12px;
+  border-radius: 1.6rem;
+  transition: background-color 300ms;
+}
+
+.container.pointer-down {
+  background-color: #00000030;
+}
+
+.time:first-child {
+  justify-self: end;
+}
+
+.time:last-child {
+  justify-self: start;
 }
 
 .groove {
-  width: 70vw;
+  width: 60vw;
   height: 0.1rem;
   border-radius: 0.1rem;
   background-color: #dddddd80;
@@ -155,6 +183,12 @@ export default {
   align-items: center;
   align-content: center;
   justify-items: start;
+  transition: all 100ms;
+}
+
+.groove.pointer-down {
+  height: 0.2rem;
+  border-radius: 0.2rem;
 }
 
 .pointer {
@@ -177,16 +211,21 @@ export default {
   grid-row: start / end;
   grid-column: start / end;
   height: 0.1rem;
-  background-color: #ffffff80;
+  background-color: #ffffffa0;
+  transition: all 100ms;
+}
+
+.played-section.pointer-down{
+  height: 0.2rem;
 }
 
 .pointer.pointer-down {
-  height: 1rem;
-  width: 1rem;
+  height: 1.2rem;
+  width: 1.2rem;
   transition: none;
   transition:
-    height linear 300ms,
-    width linear 300ms;
+    height linear 100ms,
+    width linear 100ms;
 }
 
 .pointer.waiting {

@@ -1,23 +1,26 @@
 <template>
   <div
     id="play-cover"
-    :class="{'rolling': playing}"
   >
     <div class="transition-group">
-      <img
+      <div
         v-for="cover in recentCovers"
         ref="covers"
         :id="cover.key"
         :key="cover.key"
-        alt="专辑图片"
-        class="cover"
-        :src="cover.src || require('@/assets/default-cover.png')"
-        @dragstart.prevent
-        @pointerdown="pointerDown"
-        @pointerup="pointerUp"
-        @pointermove="pointerMove"
-        @error="onError"
+        class="image-container"
       >
+        <img
+          alt="专辑图片"
+          :class="['cover', {'rolling': playing && !isPointerDown}]"
+          :src="cover.src || require('@/assets/default-cover.png')"
+          @dragstart.prevent
+          @pointerdown="pointerDown"
+          @pointerup="pointerUp"
+          @pointermove="pointerMove"
+          @error="onError"
+        >
+      </div>
     </div>
   </div>
 </template>
@@ -44,18 +47,28 @@ export default {
 
   watch: {
     playID(id) {
+      // When playlist is cleared, recentCovers should be cleared too
       if (!id) {
         this.recentCovers.length = 0;
         return;
       }
-      // If current song is changed
+
+      // Slide will also cause playID to change
+      // Just return in this case
+      if (this.isSliding) {
+        return;
+      }
+
+      // If current song is changed by clicking buttons or end event
       // determine whether it was the last song or the next song
       // and slide the cover accordingly
       // in this case, sliding is passive
       // further pointer events will be canceled
       if (this.recentCovers[2].src === this.currentSong.cover) {
+        console.log('if left');
         this.slide('left', true);
       } else if (this.recentCovers[0].src === this.currentSong.cover) {
+        console.log('if right');
         this.slide('right', true);
       } else {
         console.log('else');
@@ -155,6 +168,8 @@ export default {
     },
 
     slide(dir, passive = false) {
+      // Set isSliding to true to prevent playID watcher's callbck
+      this.isSliding = true;
       // if it is a passive sliding
       // which means it is not called by pointer event
       // set isPointerDown to false to prevent further pointer events
@@ -195,7 +210,6 @@ export default {
 
           // flush the browser rendering to force reflow
           this._reflow = document.body.offsetHeight;
-
           // add transition class and set the position to animate(play)
           movings.forEach((item) => {
             item.classList.add('cover-move');
@@ -213,6 +227,8 @@ export default {
             const newLastCover = this.normalizeCover(this.lastSong.cover);
             this.$set(this.recentCovers, 0, newLastCover);
           }
+
+          this.isSliding = false;
         });
 
       // auxilary functions
@@ -244,8 +260,6 @@ export default {
   place-items: center;
   justify-content: center;
   box-shadow: 0 0 20px #00000020;
-  animation: 30s linear infinite rolling;
-  animation-play-state: paused;
   user-select: none;
 }
 
@@ -264,17 +278,17 @@ export default {
   width: 60vmin;
   border-radius: 30vmin;
   box-shadow: 0 0 10px #00000040;
+  animation: 30s linear infinite rolling;
+  animation-play-state: paused;
 }
 
 .cover-move {
   transition: transform 350ms ease;
 }
 
-/*
-#play-cover.rolling {
+.cover.rolling {
   animation-play-state: running;
 }
-*/
 
 @keyframes rolling {
   from {

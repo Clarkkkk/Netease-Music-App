@@ -68,6 +68,7 @@ body {
   margin: 0;
   font-size: 14px;
   font-family: Avenir, Helvetica, Arial, sans-serif;
+  letter-spacing: 0.03em;
   background-color: black;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

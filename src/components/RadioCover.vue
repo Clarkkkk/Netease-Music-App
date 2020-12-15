@@ -127,7 +127,7 @@ export default {
 .left-leave-active,
 .right-enter-active,
 .right-leave-active {
-  transition: transform 1500ms ease,
+  transition: transform 450ms ease,
   opacity 300ms ease;
   transform: perspective(1000px) rotateY(0deg) translateX(0%) scale(1.0);
 }
