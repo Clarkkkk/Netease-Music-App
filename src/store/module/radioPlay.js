@@ -52,6 +52,8 @@ export default {
         state.radioIndex = 1;
       }
       state.radioList = state.radioList.concat(list);
+      setItem('radioIndex', state.radioIndex);
+      setItem('radioList', state.radioList);
       console.log('list update');
       console.log(state);
       console.log(list);

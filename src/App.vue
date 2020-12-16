@@ -36,6 +36,8 @@ export default {
         this.$store.commit('routeHistory/touchEnd');
       });
     }
+    // check app version
+    this.$store.dispatch('checkVersion');
   },
 
   mounted() {

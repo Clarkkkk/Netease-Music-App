@@ -9,6 +9,7 @@ import routeHistory from './module/routeHistory.js';
 import {getItem, setItem} from '@/functions/storage.js';
 
 Vue.use(Vuex);
+const VERSION = '0.12.1';
 
 const store = new Vuex.Store({
   modules: {
@@ -21,7 +22,8 @@ const store = new Vuex.Store({
 
   state: {
     radio: getItem('radio', 'boolean'),
-    likelist: []
+    likelist: [],
+    version: getItem('version', 'string')
   },
 
   getters: {
@@ -40,10 +42,25 @@ const store = new Vuex.Store({
 
     updateLikelist(state, list) {
       state.likelist = list;
+    },
+
+    setVersion(state) {
+      state.version = VERSION;
+      setItem('version', state.version);
     }
   },
 
   actions: {
+    checkVersion({commit, state}) {
+      // if app version doesn't match, clear all the play data
+      // to prevent potential error
+      if (state.version !== VERSION) {
+        commit('setVersion');
+        commit('radioPlay/clear');
+        commit('commonPlay/clear');
+      }
+    },
+
     updateLikelist(context) {
       fetchJSON('/likelist', context.state.auth.userID)
         .then((res) => {

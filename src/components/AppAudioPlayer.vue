@@ -54,10 +54,12 @@ export default {
           .then(() => this.$refs.audio.play())
           .catch((e) => {
             console.log(e);
-            return new Promise((r) => setTimeout(() => r(), 1000));
-          })
-          .then(() => this.$refs.audio.play())
-          .catch(() => this.ended());
+            if (e.message.includes('interact')) {
+              alert('请手动点击播放键');
+            } else {
+              this.ended();
+            }
+          });
       } else {
         this.$refs.audio.pause();
         this.src = '';
