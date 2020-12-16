@@ -49,7 +49,7 @@ export default {
   watch: {
     radioIndex(newIndex) {
       console.log(newIndex);
-      if (newIndex > 0 && this.radioList.length - newIndex === 1) {
+      if (newIndex > 0 && this.radioList.length - newIndex === 2) {
         console.log(this.radioList);
         this.updateList();
       }

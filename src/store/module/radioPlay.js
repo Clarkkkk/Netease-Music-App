@@ -47,7 +47,7 @@ export default {
         state.radioIndex++;
       }
       // if the list is too long, clear the played songs
-      if (state.radioIndex > 2) {
+      if (state.radioList.length > 10) {
         state.radioList = state.radioList.slice(state.radioIndex - 1);
         state.radioIndex = 1;
       }

@@ -33,7 +33,7 @@ export default {
     return {
       isPointerDown: false,
       pointerDownX: 0,
-      direction: '',
+      direction: 'left',
       vibrate: false
     };
   },
