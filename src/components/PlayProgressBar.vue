@@ -13,7 +13,7 @@
     >
       <div :class="['groove', {'pointer-down': isPointerDown}]">
         <div
-          class="played-section"
+          :class="['played-section', {'pointer-down': isPointerDown}]"
           ref="played"
         ></div>
         <div
@@ -187,8 +187,8 @@ export default {
 }
 
 .groove.pointer-down {
-  height: 0.2rem;
-  border-radius: 0.2rem;
+  height: 0.3rem;
+  border-radius: 0.3rem;
 }
 
 .pointer {
@@ -211,12 +211,14 @@ export default {
   grid-row: start / end;
   grid-column: start / end;
   height: 0.1rem;
+  border-radius: 0.1rem;
   background-color: #ffffffa0;
-  transition: all 100ms;
+  transition: height 100ms, border-radius 100ms;
 }
 
 .played-section.pointer-down{
-  height: 0.2rem;
+  height: 0.3rem;
+  border-radius: 0.3rem;
 }
 
 .pointer.pointer-down {

@@ -9,7 +9,7 @@ function fetchJSON(api, init, withCookie = true) {
   // If no response in 5 seconds, abort the request
   const controller = new AbortController();
   const signal = controller.signal;
-  const id = setTimeout(() => controller.abort(), 5000);
+  const id = setTimeout(() => controller.abort(), 6000);
 
   // Add timestamp to avoid cache result
   const requestURL = serverURL + api + '?timestamp=' + Date.now();

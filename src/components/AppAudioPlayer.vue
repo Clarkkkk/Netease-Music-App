@@ -39,7 +39,7 @@ export default {
 
   created: function() {
     if (this.playID) {
-      this.getUrl(this.playID);
+      this.getUrl();
     }
   },
 
@@ -50,7 +50,7 @@ export default {
   watch: {
     playID: function(newID) {
       if (newID) {
-        this.getUrl(newID)
+        this.getUrl()
           .then(() => this.$refs.audio.play())
           .catch((e) => {
             console.log(e);
@@ -73,8 +73,13 @@ export default {
       'played', 'paused', 'waiting'
     ]),
     ...mapActions(['ended']),
-    getUrl(id) {
-      if (id) {
+    getUrl() {
+      const id = this.currentSong.id;
+      const url = this.currentSong.url;
+      if (url) {
+        this.src = url;
+        return Promise.resolve();
+      } else {
         return fetchJSON('/check/music', {id: id})
           .then((res) => {
             if (res.success) {

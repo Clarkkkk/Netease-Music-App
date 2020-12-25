@@ -23,12 +23,14 @@ export default {
   mutations: {
     next(state) {
       console.log('next:');
-      console.log(state);
+      // if index exceeds the list(which happens when list update fails)
+      if (state.radioIndex >= state.radioList.length - 1) {
+        return;
+      }
       state.radioIndex++;
       setItem('radioIndex', state.radioIndex);
       state.allowBack = true;
       console.log(state);
-      console.log(state.radioIndex);
     },
 
     last(state) {
@@ -56,8 +58,6 @@ export default {
       setItem('radioList', state.radioList);
       console.log('list update');
       console.log(state);
-      console.log(list);
-      console.log(state.radioList);
     },
 
     clear(state) {

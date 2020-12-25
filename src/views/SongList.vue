@@ -101,7 +101,7 @@ export default {
   props: ['type', 'listId'],
 
   computed: {
-    // date string in everydata recommendation page
+    // date string in everyday recommendation page
     dateString: function() {
       const today = new Date();
       const hours = today.getHours();
@@ -115,7 +115,7 @@ export default {
       } else if (hours >= 0 && hours <= 5) {
         greetings = '早点睡哦';
       }
-      return `${today.getMonth()}月${today.getDate()}日，${greetings}`;
+      return `${today.getMonth() + 1}月${today.getDate()}日，${greetings}`;
     },
 
     bgStyle: function() {
@@ -233,6 +233,8 @@ export default {
         const ids = this.ids.slice(this.index, end).join(',');
         fetchJSON('/song/detail', {ids: ids})
           .then((res) => {
+            console.log('detail');
+            console.log(res);
             if (res && res.code === 200) {
               this.createList(res.songs)
                 .then(() => this.seen = false);

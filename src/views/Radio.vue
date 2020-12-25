@@ -49,7 +49,7 @@ export default {
   watch: {
     radioIndex(newIndex) {
       console.log(newIndex);
-      if (newIndex > 0 && this.radioList.length - newIndex === 2) {
+      if (newIndex > 0 && this.radioList.length - newIndex <= 2) {
         console.log(this.radioList);
         this.updateList();
       }
@@ -69,7 +69,7 @@ export default {
       fetchJSON('/personal_fm')
         .then((res) => {
           console.log(res);
-          const list = res.data.map((song) => {
+          this.tempList = res.data.map((song) => {
             const arString = song.artists.map((item) => item.name).join('/');
             const url = song.album.picUrl.replace('http:', 'https:');
             const cover = url ? url + '?param=600y600' : '';
@@ -81,7 +81,20 @@ export default {
               cover: cover
             };
           });
-          this.radioListUpdate(list);
+          const ids = this.tempList.map((song) => song.id).join(',');
+          return fetchJSON('/song/url', {id: ids});
+        }).then((res) => {
+          // get url of the songs
+          for (const song of this.tempList) {
+            for (const data of res.data) {
+              if (data.id === song.id) {
+                song.url = data.url;
+                break;
+              }
+            }
+          }
+          this.radioListUpdate(this.tempList);
+          this.tempList.length = 0;
         });
     },
     onScroll(event) {
