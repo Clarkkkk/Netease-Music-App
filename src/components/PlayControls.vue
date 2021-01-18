@@ -28,7 +28,6 @@
       class="list"
       @click.native="$emit('update:showPlayList', true)"
     />
-
   </div>
 </template>
 

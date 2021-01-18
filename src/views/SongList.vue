@@ -153,7 +153,7 @@ export default {
             this.name = res.playlist.name;
             this.creator = res.playlist.creator.nickname;
             this.description = res.playlist.description;
-            this.cover = res.playlist.coverImgUrl;
+            this.cover = res.playlist.coverImgUrl.replace('http:', 'https:');
             this.tags = res.playlist.tags;
             this.ids = res.playlist.trackIds.map((item) => item.id);
             this.index = res.playlist.tracks.length;
@@ -247,8 +247,22 @@ export default {
 
   methods: {
     playAll() {
-      this.$store.commit('commonPlay/playTheList', this.list);
-      this.$router.push('/play');
+      console.log('ids: ' + this.ids.length);
+      console.log('index: ' + this.index);
+      if (this.more) {
+        const ids = this.ids.slice(this.index).join(',');
+        fetchJSON('/song/detail', {ids: ids})
+          .then((res) => {
+            if (res && res.code === 200) {
+              this.createList(res.songs);
+              this.$store.commit('commonPlay/playTheList', this.list);
+              this.$router.push('/play');
+            }
+          });
+      } else {
+        this.$store.commit('commonPlay/playTheList', this.list);
+        this.$router.push('/play');
+      }
     },
 
     createList(songs) {

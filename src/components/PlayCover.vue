@@ -276,6 +276,7 @@ export default {
   object-fit: cover;
   height: 60vmin;
   width: 60vmin;
+  display: block;
   border-radius: 30vmin;
   box-shadow: 0 0 10px #00000040;
   animation: 30s linear infinite rolling;

@@ -62,7 +62,8 @@ function fetchJSON(api, init, withCookie = true) {
           return Promise.reject(new Error('Request timeout'));
         }
       } else {
-        if (err.name === 'AbortError') {
+        // remind the user if retry for twice or more
+        if (err.name === 'AbortError' && retryCount > 1) {
           alert('网络似乎有点慢，正在重试……');
         }
         retryCount++;

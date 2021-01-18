@@ -7,7 +7,7 @@
     @canplay="durationChange($event.target.duration)"
     @durationchange="durationChange($event.target.duration)"
     @timeupdate="timeUpdate($event.target.currentTime)"
-    @play="played"
+    @play="played();updateMeta()"
     @pause="paused"
     @waiting="waiting(true)"
     @playing="waiting(false)"
@@ -17,8 +17,7 @@
 
 <script>
 import fetchJSON from '@/functions/fetchJSON.js';
-import {mapState, mapGetters, createNamespacedHelpers} from 'vuex';
-const {mapMutations, mapActions} = createNamespacedHelpers('playStatus');
+import {mapState, mapGetters, mapMutations, mapActions} from 'vuex';
 export default {
   data: function() {
     return {
@@ -38,6 +37,7 @@ export default {
   },
 
   created: function() {
+    this.setActionhandlers();
     if (this.playID) {
       this.getUrl();
     }
@@ -54,6 +54,8 @@ export default {
           .then(() => this.$refs.audio.play())
           .catch((e) => {
             console.log(e);
+            // autoplay is not allowed
+            // if user doesn't interact with the webpage first
             if (e.message.includes('interact')) {
               alert('请手动点击播放键');
             } else {
@@ -64,20 +66,35 @@ export default {
         this.$refs.audio.pause();
         this.src = '';
       }
+    },
+
+    radio: function() {
+      this.setActionhandlers();
     }
   },
 
   methods: {
-    ...mapMutations([
+    ...mapMutations('playStatus', [
       'setPlayer', 'durationChange', 'timeUpdate',
-      'played', 'paused', 'waiting'
+      'played', 'paused', 'waiting', 'seek'
     ]),
-    ...mapActions(['ended']),
+    ...mapMutations('commonPlay', {
+      commonPlayLast: 'last',
+      commonPlayNext: 'next'
+    }),
+    ...mapMutations('radioPlay', {
+      radioPlayNext: 'next'
+    }),
+    ...mapActions('playStatus', ['ended']),
+
+    // get the current song's url
     getUrl() {
       const id = this.currentSong.id;
       const url = this.currentSong.url;
+      // if this.currentSong.url exists, use it
+      // else fetch the url
       if (url) {
-        this.src = url;
+        this.src = url.replace('http:', 'https:');
         return Promise.resolve();
       } else {
         return fetchJSON('/check/music', {id: id})
@@ -100,6 +117,54 @@ export default {
             console.log(e.message);
             this.ended();
           });
+      }
+    },
+
+    updateMeta() {
+      if ('mediaSession' in navigator) {
+        console.log(MediaMetadata);
+        navigator.mediaSession.metadata = new MediaMetadata({
+          title: this.currentSong.name || '',
+          artist: this.currentSong.artist || '',
+          album: this.currentSong.album || '',
+          artwork: [
+            {
+              src: this.currentSong.cover + '?param=512y512',
+              type: 'image/jpg',
+              sizes: '512x512'
+            }
+          ]
+        });
+        console.log(navigator.mediaSession.metadata);
+      } else {
+        console.log('mediasession not available');
+      }
+    },
+
+    setActionhandlers() {
+      const isRadio = this.radio;
+      let actionHandlers;
+      if (isRadio) {
+        actionHandlers = [
+          ['previoustrack', null],
+          ['nexttrack', this.radioPlayNext],
+          ['seekto', (details) => this.seek(details.seekTime)]
+        ];
+      } else {
+        actionHandlers = [
+          ['previoustrack', this.commonPlayLast],
+          ['nexttrack', this.commonPlayNext],
+          ['seekto', (details) => this.seek(details.seekTime)]
+        ];
+      }
+
+      for (const [action, handler] of actionHandlers) {
+        try {
+          navigator.mediaSession.setActionHandler(action, handler);
+        } catch (error) {
+          console.log(error);
+          console.log(`${error}: The media session action "${action}" is not supported yet.`);
+        }
       }
     }
   }
