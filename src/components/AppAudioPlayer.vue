@@ -28,6 +28,7 @@ export default {
   computed: {
     ...mapState('commonPlay', ['mode']),
     ...mapState(['radio']),
+    ...mapState('auth', ['login']),
     ...mapGetters(['currentSong']),
     playID() {
       // console.log(this.currentSong);
@@ -58,10 +59,29 @@ export default {
             // if user doesn't interact with the webpage first
             if (e.message.includes('interact')) {
               alert('请手动点击播放键');
+              return Promise.resolve();
             } else {
               this.ended();
+              return Promise.reject(new Error(e));
             }
-          });
+          }).then(() => {
+            // if loop, scrobble every loop
+            const currentSongId = this.currentSong.id;
+            let intervalId;
+            intervalId = setInterval(() => {
+              if (
+                this.mode==='song-loop' &&
+                !this.radio &&
+                this.currentSong.id === currentSongId
+              ) {
+                this.scrobble();
+              } else {
+                clearInterval(intervalId);
+                intervalId = 0;
+              }
+            }, this.$el.duration);
+            return this.scrobble(newID);
+          }).then((res) => console.log(res));
       } else {
         this.$refs.audio.pause();
         this.src = '';
@@ -117,6 +137,16 @@ export default {
             console.log(e.message);
             this.ended();
           });
+      }
+    },
+
+    scrobble() {
+      if (this.login) {
+        return fetchJSON('/scrobble', {
+          id: this.currentSong.id,
+          sourceid: this.currentSong.albumId,
+          time: Math.floor(this.$el.duration)
+        });
       }
     },
 

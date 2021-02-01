@@ -18,7 +18,7 @@ export default {
       lastClick: 0
     };
   },
-  props: ['songName', 'songArtist', 'songAlbum', 'songId', 'songCover'],
+  props: ['songName', 'songArtist', 'songAlbum', 'songId', 'songCover', 'songAlbumId'],
   computed: {
     songInfoString: function() {
       if (this.songAlbum) {
@@ -44,6 +44,7 @@ export default {
               name: this.songName,
               artist: this.songArtist,
               album: this.songAlbum,
+              albumId: this.songAlbumId,
               cover: this.songCover.replace('http:', 'https:')
             });
             this.$router.push('/play');

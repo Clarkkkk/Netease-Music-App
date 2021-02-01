@@ -58,6 +58,7 @@
         :songArtist="song.artist"
         :songId="song.id"
         :songAlbum="song.album"
+        :songAlbumId="song.albumId"
         :songCover="song.cover"
       />
       <app-intersection-observer
@@ -275,6 +276,7 @@ export default {
           name: song.name,
           artist: arString,
           album: song.al.name,
+          albumId: song.al.id,
           cover: song.al.picUrl.replace('http:', 'https:')
         };
       });
