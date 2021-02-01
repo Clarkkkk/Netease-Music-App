@@ -55,13 +55,16 @@ export default {
     this.amount;
     this.pointerDownX;
     this.relativeX;
+    this.pointerDownTime;
     fetchJSON('/banner', {type: '2'})
       .then((res) => {
+        console.log(res);
         this.banners = res.banners.map((item) => {
           return {
             pic: item.pic.replace('http:', 'https:'),
             bannerId: item.bannerId,
-            typeTitle: item.typeTitle
+            typeTitle: item.typeTitle,
+            originalData: item
           };
         });
         this.amount = this.banners.length;
@@ -111,9 +114,15 @@ export default {
       // get the final position when transition ends
       const targetLeft = event.target.getBoundingClientRect().left;
       this.relativeX = currentLeft - targetLeft;
-      // move all the pics to where they were when pointer down
-      for (const pic of this.$refs.pics) {
-        pic.style = `transform:translateX(${this.relativeX}px)`;
+
+      if (this.relativeX === 0) {
+        // if the picture is not moving, then it is safe to click
+        this.pointerDownTime = Date.now();
+      } else {
+        // move all the pics to where they were when pointer down
+        for (const pic of this.$refs.pics) {
+          pic.style = `transform:translateX(${this.relativeX}px)`;
+        }
       }
     },
 
@@ -139,6 +148,26 @@ export default {
           }
           for (const pic of this.$refs.pics) {
             pic.style = '';
+          }
+
+          if (
+            this.pointerDownTime &&
+            Math.abs(pointerMoveX) < 10 &&
+            Date.now() - this.pointerDownTime < 600
+          ) {
+            const banner = this.loopPics[1].originalData;
+            if (banner.targetType === 1) {
+              this.$store.commit('commonPlay/addToPlay', {
+                id: banner.song.id,
+                name: banner.song.name,
+                artist: banner.song.ar.map((item) => item.name).join('/'),
+                album: banner.song.al.name,
+                cover: banner.song.al.picUrl.replace('http:', 'https:')
+              });
+              this.$router.push('/play');
+            } else if (banner.targetType === 1000) {
+              console.log(this.loopPics[1].originalData);
+            }
           }
         }
         // resume to loop
