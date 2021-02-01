@@ -27,6 +27,7 @@
           :songName="song.name"
           :songArtist="song.artist"
           :songAlbum="song.album"
+          :songAlbumId="song.albumId"
           :songCover="song.cover"
         >
           <template v-slot:count>
@@ -101,6 +102,7 @@ export default {
             name: item.song.name,
             artist: arString,
             album: item.song.al.name,
+            albumId: item.song.al.id,
             cover: item.song.al.picUrl,
             playCount: item.playCount
           };

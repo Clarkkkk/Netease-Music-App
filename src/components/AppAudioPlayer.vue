@@ -58,10 +58,18 @@ export default {
             // if user doesn't interact with the webpage first
             if (e.message.includes('interact')) {
               alert('请手动点击播放键');
+              return Promise.resolve();
             } else {
               this.ended();
+              return Promise.reject(new Error(e));
             }
-          });
+          }).then(() => {
+            return fetchJSON('/scrobble', {
+              id: newID,
+              sourceid: this.currentSong.albumId,
+              time: this.$el.duration
+            });
+          }).then((res) => console.log(res));
       } else {
         this.$refs.audio.pause();
         this.src = '';

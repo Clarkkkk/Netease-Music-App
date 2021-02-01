@@ -88,6 +88,7 @@ export default {
           name: song.name,
           artist: arString,
           album: song.al.name,
+          albumId: song.al.id,
           cover: song.al.picUrl
         };
       });

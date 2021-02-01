@@ -162,6 +162,7 @@ export default {
                 name: banner.song.name,
                 artist: banner.song.ar.map((item) => item.name).join('/'),
                 album: banner.song.al.name,
+                albumId: banner.song.al.id,
                 cover: banner.song.al.picUrl.replace('http:', 'https:')
               });
               this.$router.push('/play');
