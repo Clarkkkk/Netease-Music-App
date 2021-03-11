@@ -1,7 +1,7 @@
 /*  Simplied and enhanced version of fetch API  */
 import store from '@/store';
 const serverURL = process.env.NODE_ENV === 'development' ?
-  'http://192.168.50.138:3000' : 'https://carllllo.work/api';
+  'http://192.168.50.138:3000' : 'https://api.carllllo.work/music';
 const RETRY_TIMES = 3;
 let retryCount = 0;
 

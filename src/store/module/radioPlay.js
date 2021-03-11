@@ -10,6 +10,12 @@ export default {
 
   getters: {
     currentSong({radioIndex, radioList}) {
+      if (radioIndex > radioList.length - 1) {
+        console.log('radioIndex exceeds!');
+        console.log('radioIndex: ' + radioIndex);
+        console.log(radioList);
+        throw new Error('radioIndex exceeds the boundary of radioList!');
+      }
       return radioIndex >= 0 ? radioList[radioIndex] : {};
     },
     lastSong({radioIndex, radioList}) {
@@ -24,7 +30,10 @@ export default {
     next(state) {
       console.log('next:');
       // if index exceeds the list(which happens when list update fails)
-      if (state.radioIndex >= state.radioList.length - 1) {
+      if (state.radioIndex > state.radioList.length - 1) {
+        console.log('radioIndex exceeds!');
+        console.log('radioIndex: ' + state.radioIndex);
+        console.log(state.radioList);
         return;
       }
       state.radioIndex++;
