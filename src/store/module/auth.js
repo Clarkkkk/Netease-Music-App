@@ -1,5 +1,5 @@
 import {getItem, setItem} from '@/functions/storage.js';
-
+import fetchJSON from '@/functions/fetchJSON';
 export default {
   namespaced: true,
   state: {
@@ -8,10 +8,10 @@ export default {
   },
 
   mutations: {
-    login(state, res) {
+    login(state, id) {
       console.log('commit login');
       state.login = true;
-      state.userID = res.profile.userId;
+      state.userID = id;
       setItem('login', state.login);
       setItem('userID', state.userID);
     },
@@ -21,6 +21,20 @@ export default {
       state.userID = '';
       setItem('login', state.login);
       setItem('userID', state.userID);
+    }
+  },
+
+  actions: {
+    checkLogin({commit}) {
+      return fetchJSON('/login/status').then((res) => {
+        console.log(res);
+        const profile = res.data.profile;
+        if (profile) {
+          commit('login', profile.userId);
+        } else {
+          commit('logout');
+        }
+      });
     }
   }
 };
