@@ -4,27 +4,22 @@ export default {
   namespaced: true,
   state: {
     login: getItem('login', 'boolean'),
-    userID: getItem('userID', 'number'),
-    cookie: getItem('cookie', 'string')
+    userID: getItem('userID', 'number')
   },
 
   mutations: {
     login(state, res) {
       console.log('commit login');
       state.login = true;
-      state.cookie = res.cookie;
       state.userID = res.profile.userId;
       setItem('login', state.login);
-      setItem('cookie', state.cookie);
       setItem('userID', state.userID);
     },
 
     logout(state) {
       state.login = false;
-      state.cookie = '';
       state.userID = '';
       setItem('login', state.login);
-      setItem('cookie', state.cookie);
       setItem('userID', state.userID);
     }
   }

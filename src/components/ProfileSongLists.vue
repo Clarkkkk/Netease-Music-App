@@ -71,7 +71,7 @@ export default {
           uid: this.userID,
           limit: limit,
           offset: this.offset
-        }).then((res) => {
+        }, false).then((res) => {
           this.lists = [...this.lists, ...res.playlist];
           this.more = this.type === 'created' ?
             this.offset < this.count : res.more;
@@ -92,7 +92,7 @@ export default {
       uid: this.userID,
       limit: limit,
       offset: this.offset
-    }).then((res) => {
+    }, false).then((res) => {
       console.log(res);
       this.lists = this.type === 'created' ?
         res.playlist.slice(1) : res.playlist;

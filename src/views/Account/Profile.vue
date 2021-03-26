@@ -125,7 +125,7 @@ export default {
       });
 
     // favorite list
-    fetchJSON('/user/playlist', {uid: this.userID, limit: 1})
+    fetchJSON('/user/playlist', {uid: this.userID, limit: 1}, false)
       .then((res) => {
         this.favoriteList = res.playlist[0];
       });

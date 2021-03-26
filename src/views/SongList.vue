@@ -147,7 +147,7 @@ export default {
           }
         });
     } else if (this.type === 'songlist') {
-      fetchJSON('/playlist/detail', {id: this.listId})
+      fetchJSON('/playlist/detail', {id: this.listId}, false)
         .then((res) => {
           if (res.code === 200) {
             console.log(res);

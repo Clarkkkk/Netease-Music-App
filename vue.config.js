@@ -31,11 +31,15 @@ module.exports = {
         {
           // Use a RegExp that matches the start of the origin:
           urlPattern: new RegExp('^https://carllllo.work'),
-          handler: 'StaleWhileRevalidate',
+          handler: 'CacheFirst',
           options: {
+            cacheName: 'appShell',
             // Configure which responses are considered cacheable.
             cacheableResponse: {
               statuses: [200]
+            },
+            expiration: {
+              maxAgeSeconds: 7 * 24 * 60 * 60
             }
           }
         }

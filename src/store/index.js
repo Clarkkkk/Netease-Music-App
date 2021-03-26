@@ -9,7 +9,7 @@ import routeHistory from './module/routeHistory.js';
 import {getItem, setItem} from '@/functions/storage.js';
 
 Vue.use(Vuex);
-const VERSION = '0.12.1';
+const VERSION = '0.12.2';
 
 const store = new Vuex.Store({
   modules: {
@@ -62,9 +62,8 @@ const store = new Vuex.Store({
     },
 
     updateLikelist(context) {
-      fetchJSON('/likelist', context.state.auth.userID)
+      fetchJSON('/likelist', {uid: context.state.auth.userID})
         .then((res) => {
-          console.log(res);
           context.commit('updateLikelist', res.ids);
         });
     },

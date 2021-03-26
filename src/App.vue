@@ -25,6 +25,20 @@ export default {
   computed: {
     transitionName() {
       return this.$store.state.routeHistory.transitionName;
+    },
+
+    login() {
+      return this.$store.state.auth.login;
+    },
+
+    userID() {
+      return this.$store.state.auth.userID;
+    }
+  },
+
+  watch: {
+    login(isLogin) {
+      isLogin && this.$store.dispatch('updateLikelist');
     }
   },
 
@@ -46,13 +60,7 @@ export default {
       event.preventDefault();
     });
     // fetch likelist
-    if (this.$store.state.auth.login) {
-      this.$nextTick()
-        .then(() => fetchJSON('/likelist', this.$store.state.auth.userID))
-        .then((res) => {
-          this.$store.commit('updateLikelist', res.ids);
-        });
-    }
+    this.login && this.$store.dispatch('updateLikelist');
   }
 };
 </script>
