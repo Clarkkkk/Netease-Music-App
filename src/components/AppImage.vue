@@ -7,6 +7,12 @@
     loading="lazy"
     @error="load"
   >
+  <img
+    v-else
+    src="@/assets/default-pic.jpg"
+    :alt="picAlt"
+    class="app-image"
+  >
 </template>
 
 <script>

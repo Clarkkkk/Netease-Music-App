@@ -11,15 +11,12 @@ Vue.component('app-icon', AppIcon);
 const req = require.context('./assets/icons', false, /\.svg$/);
 req.keys().map(req);
 
-// check if logged in first
-store.dispatch('auth/checkLogin').then(() => {
-  new Vue({
-    router,
-    store,
-    render: (h) => {
-      return h(App);
-    }
-  }).$mount('#app');
-});
+new Vue({
+  router,
+  store,
+  render: (h) => {
+    return h(App);
+  }
+}).$mount('#app');
 
 

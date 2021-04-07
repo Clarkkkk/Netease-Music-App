@@ -3,7 +3,7 @@ export default {
   state: {
     isSafari: false,
     lastTouch: 0,
-    transitionName: '',
+    transitionName: 'fade',
     history: []
   },
 

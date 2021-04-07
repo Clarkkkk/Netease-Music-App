@@ -2,7 +2,8 @@
   <div id="app">
     <transition :name="transitionName">
       <keep-alive>
-        <router-view />
+        <app-loading-icon class="loading" v-if="loading" />
+        <router-view v-else />
       </keep-alive>
     </transition>
     <transition :name="transitionName">
@@ -16,12 +17,20 @@
 <script>
 import AppAudioPlayer from '@/components/AppAudioPlayer.vue';
 import AppDock from '@/components/AppDock.vue';
-import fetchJSON from '@/functions/fetchJSON.js';
+import AppLoadingIcon from '@/components/AppLoadingIcon';
 export default {
   components: {
     AppAudioPlayer,
-    AppDock
+    AppDock,
+    AppLoadingIcon
   },
+
+  data() {
+    return {
+      loading: true
+    };
+  },
+
   computed: {
     transitionName() {
       return this.$store.state.routeHistory.transitionName;
@@ -52,6 +61,9 @@ export default {
     }
     // check app version
     this.$store.dispatch('checkVersion');
+    this.$store.dispatch('auth/checkLogin').then(() => {
+      this.loading = false;
+    });
   },
 
   mounted() {
@@ -59,8 +71,6 @@ export default {
     this.$el.addEventListener('touchmove', (event) => {
       event.preventDefault();
     });
-    // fetch likelist
-    this.login && this.$store.dispatch('updateLikelist');
   }
 };
 </script>
@@ -96,6 +106,14 @@ body {
   z-index: 0;
 }
 
+.loading {
+  height: 100vh !important;
+  width: 100vw !important;
+  background-color: white;
+  position: fixed;
+  top: 0;
+}
+
 .hidden-bar {
   position: absolute;
   top: 7vh;
@@ -118,6 +136,15 @@ body {
   to {
     opacity: 1;
   }
+}
+
+.fade-enter-active, .fade-leave-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0.5;
 }
 
 /* slide-left */

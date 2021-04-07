@@ -69,6 +69,7 @@ export default {
 .input-area {
   grid-column: search-start / search-end;
   height: 2rem;
+  width: 100%;
   margin: 0 0.5rem;
   border-radius: 2rem;
   background-color: #00000030;

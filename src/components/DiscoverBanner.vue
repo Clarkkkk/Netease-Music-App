@@ -1,29 +1,39 @@
 <template>
   <div id="discover-banner">
-    <div
-      name="banner"
-      class="transition-group"
-    >
+    <transition name="fade">
       <div
-        v-for="pic in loopPics"
-        :key="pic.bannerId"
-        ref="pics"
-        class="pic-container"
-        @pointerdown="pointerDown"
-        @pointerup="pointerUp"
-        @pointermove="pointerMove"
+        v-if="loading"
+        class="default-pic"
+        key="loading"
       >
-        <img
-          alt="轮播图片"
-          :src="pic.pic + '?param=810y315'"
-          @dragstart.prevent
-        >
-        <span
-          class="type-title"
-          :type="pic.typeTitle"
-        >{{ pic.typeTitle }}</span>
+        <img src="@/assets/default-pic.jpg">
       </div>
-    </div>
+      <div
+        v-else
+        key="pics"
+        class="transition-group"
+      >
+        <div
+          v-for="pic in loopPics"
+          :key="pic.bannerId"
+          ref="pics"
+          class="pic-container"
+          @pointerdown="pointerDown"
+          @pointerup="pointerUp"
+          @pointermove="pointerMove"
+        >
+          <img
+            alt="轮播图片"
+            :src="pic.pic + '?param=810y315'"
+            @dragstart.prevent
+          >
+          <span
+            class="type-title"
+            :type="pic.typeTitle"
+          >{{ pic.typeTitle }}</span>
+        </div>
+      </div>
+    </transition>
     <div class="dot-container">
       <div
         v-for="dot in dots"
@@ -44,6 +54,7 @@ export default {
       loopPics: [],
       dots: [],
       currentIndex: 0,
+      loading: true
     };
   },
 
@@ -77,13 +88,9 @@ export default {
         for (let i = 0; i < this.amount; i++) {
           this.dots[i] = i;
         }
-      });
-  },
-
-  mounted: function() {
-    // start to loop after all the elements are rendered
-    this.$nextTick()
-      .then(() => this.loop());
+        this.loading = false;
+        return this.$nextTick();
+      }).then(() => this.loop());
   },
 
   methods: {
@@ -190,7 +197,7 @@ export default {
       // use FLIP to animate(first, last, invert, play)
       const oldLeft = [];
       const newLeft = [];
-      const [...movings] = this.$refs.pics;
+      const movings = [...this.$refs.pics];
       // record the left coordinate before moving(first)
       movings.forEach((item) => {
         oldLeft.push(getLeft(item));
@@ -259,8 +266,23 @@ export default {
   grid-template-columns: [start] 1fr [end];
   grid-template-rows: [start] 1fr [dot-start] 2rem [dot-end end];
   justify-items: center;
+  align-items: center;
   justify-content: space-around;
   user-select: none;
+}
+
+.default-pic {
+  grid-row: start / end;
+  grid-column: start / end;
+  height: 90%;
+  width: 90%;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.default-pic > img {
+  width: 100%;
+  height: 100%;
 }
 
 .transition-group {

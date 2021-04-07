@@ -1,10 +1,9 @@
-import {getItem, setItem} from '@/functions/storage.js';
 import fetchJSON from '@/functions/fetchJSON';
 export default {
   namespaced: true,
   state: {
-    login: getItem('login', 'boolean'),
-    userID: getItem('userID', 'number')
+    login: undefined,
+    userID: 0
   },
 
   mutations: {
@@ -12,15 +11,11 @@ export default {
       console.log('commit login');
       state.login = true;
       state.userID = id;
-      setItem('login', state.login);
-      setItem('userID', state.userID);
     },
 
     logout(state) {
       state.login = false;
       state.userID = '';
-      setItem('login', state.login);
-      setItem('userID', state.userID);
     }
   },
 
