@@ -60,6 +60,7 @@
         :songAlbum="song.album"
         :songAlbumId="song.albumId"
         :songCover="song.cover"
+        :hasMenu="true"
       />
       <app-intersection-observer
         v-if="!loading"

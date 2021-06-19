@@ -7,18 +7,46 @@
       {{ songInfoString }}
     </span>
     <slot name="count"></slot>
+    <div class="menu" @click="openMenu" @tap="openMenu" v-if="hasMenu">
+      <app-icon
+        icon="vertical-dots"
+        class="dots"
+      />
+    </div>
+    <app-pop-menu
+      v-if="showMenu"
+      menuArr="[]"
+      v-bind:show.sync="showMenu"
+    />
   </div>
 </template>
 
 <script>
 import fetchJSON from '@/functions/fetchJSON.js';
+import AppPopMenu from './AppPopMenu.vue';
 export default {
   data() {
     return {
-      lastClick: 0
+      lastClick: 0,
+      showMenu: false,
+      menuArr: [
+        {
+          name: '下一首播放',
+          func: () => {}
+        },
+        {
+          name: '收藏到歌单',
+          func: () => {}
+        }
+      ]
     };
   },
-  props: ['songName', 'songArtist', 'songAlbum', 'songId', 'songCover', 'songAlbumId'],
+  props: ['songName', 'songArtist', 'songAlbum', 'songId', 'songCover', 'songAlbumId', 'hasMenu'],
+  
+  components: {
+    AppPopMenu
+  },
+
   computed: {
     songInfoString: function() {
       if (this.songAlbum) {
@@ -52,6 +80,14 @@ export default {
             alert('这首歌暂无版权');
           }
         });
+    },
+
+    openMenu(event) {
+      if (Date.now() - this.lastClick < 100) return;
+      this.lastClick = Date.now();
+      event.stopPropagation()
+      console.log(event)
+      this.showMenu = true
     }
   }
 };
@@ -102,5 +138,17 @@ export default {
   justify-self: end;
   font-size: 0.8rem;
   color: #666;
+}
+
+.menu {
+  grid-row: start / end;
+  grid-column: count;
+  height: 100%;
+  width: 2rem;
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 </style>
