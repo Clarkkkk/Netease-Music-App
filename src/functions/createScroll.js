@@ -22,19 +22,20 @@ function createScroll(contentIndex, wrapper, onScroll) {
   // create BScroll
   const scroll = new BScroll(wrapper, {
     scrollY: true,
-    mouseWheel: true,
+    mouseWheel: {
+      easeTime: 100
+    },
     scrollbar: true,
     probeType: 3,
-    tap: 'tap',
+    click: true,
     bounceTime: 400,
     swipeBounceTime: 400,
     specifiedIndexAsContent: contentIndex
   });
   // style the scroll bar
-  const barStyle = scroll.plugins.scrollbar.indicators[0].elStyle;
-  const wrapperStyle = scroll.plugins.scrollbar.indicators[0].wrapperStyle;
-  barStyle.border = 'none';
-  wrapperStyle.width = '5px';
+  const indicator = scroll.plugins.scrollbar.indicators[0];
+  indicator.indicatorEl.style.border = 'none';
+  indicator.wrapper.style.width = '5px';
 
   // add scroll event handler if there is any
   onScroll && scroll.on('scroll', onScroll);

@@ -18,7 +18,7 @@
               :id="'id' + song.id"
               :key="song.id"
               :class="['entry', {'playing': song.id===playID}]"
-              @tap="playSongOfList(song)"
+              @click="playSongOfList(song)"
             >
               <app-icon class="icon" icon="speaker" v-if="song.id===playID"/>
               <div class="song-info">
@@ -78,7 +78,7 @@ export default {
     }
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     this.scroll.destroy();
   },
 
@@ -228,7 +228,8 @@ export default {
 /* The list */
 
 /* transition */
-.list-enter, .list-leave-to {
+.list-enter-from,
+.list-leave-to {
   transform: translateY(25rem) translateZ(0);
 }
 

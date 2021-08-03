@@ -12,12 +12,12 @@
       <play-cover/>
       <play-interactions/>
       <play-progress-bar/>
-      <play-controls :showPlayList.sync="showPlayList"/>
+      <play-controls v-model:showPlayList="showPlayList"/>
 
       <transition name="play-list">
         <play-list
           v-if="showPlayList"
-          :show.sync="showPlayList"
+          v-model:show="showPlayList"
         />
       </transition>
     </div>
@@ -146,7 +146,7 @@ export default {
 }
 /* header */
 
-.play-list-enter, .play-list-leave-to {
+.play-list-enter-from, .play-list-leave-to {
   opacity: 0;
 }
 

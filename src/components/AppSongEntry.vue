@@ -1,5 +1,5 @@
 <template>
-  <div class="app-song-entry" @click="play" @tap="play">
+  <div class="app-song-entry" @click.left="play" @click.right="openMenu" >
     <span class="name">
       {{ songName }}
     </span>
@@ -7,16 +7,15 @@
       {{ songInfoString }}
     </span>
     <slot name="count"></slot>
-    <div class="menu" @click="openMenu" @tap="openMenu" v-if="hasMenu">
+    <div class="menu" @click="openMenu" v-if="hasMenu">
       <app-icon
         icon="vertical-dots"
         class="dots"
       />
     </div>
     <app-pop-menu
-      v-if="showMenu"
-      menuArr="[]"
-      v-bind:show.sync="showMenu"
+      :menuArr="menuArr"
+      v-model:show="showMenu"
     />
   </div>
 </template>
@@ -57,7 +56,9 @@ export default {
     }
   },
   methods: {
-    play() {
+    play(event) {
+      console.log('play')
+      console.log(event)  
       // avoid duplicate click fired by both click and tap
       if (Date.now() - this.lastClick < 100) {
         return;
@@ -83,11 +84,10 @@ export default {
     },
 
     openMenu(event) {
-      if (Date.now() - this.lastClick < 100) return;
-      this.lastClick = Date.now();
-      event.stopPropagation()
-      console.log(event)
-      this.showMenu = true
+      event.preventDefault();
+      event.stopPropagation();
+      console.log(event);
+      this.showMenu = true;
     }
   }
 };

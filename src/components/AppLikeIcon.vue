@@ -62,7 +62,7 @@ export default {
   color: var(--app-color);
 }
 
-.like-enter, .like-leave-to {
+.like-enter-from, .like-leave-to {
   opacity: 0.5;
   transform: scale(0.3);
 }

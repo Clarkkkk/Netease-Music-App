@@ -6,7 +6,7 @@
       v-for="list in lists"
       :key="list.id"
       class="list"
-      @tap="tap(list.id)"
+      @click="tap(list.id)"
     >
       <app-image
         :src="list.coverImgUrl"
@@ -17,7 +17,7 @@
     </div>
     <app-intersection-observer
       v-if="!loading"
-      :seen.sync="seen"
+      v-model:seen="seen"
       :is-bottom="!more"
     />
   </div>
@@ -62,6 +62,7 @@ export default {
 
   watch: {
     seen(val) {
+      console.log(val)
       if (val && this.more) {
         this.offset += 15;
         const limit = this.type === 'created' ?

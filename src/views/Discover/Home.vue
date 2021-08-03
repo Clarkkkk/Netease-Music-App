@@ -16,14 +16,14 @@
       <div class="contents">
         <discover-banner/>
         <div class="features">
-          <div class="feature-container" @tap="tap('recommendation')">
+          <div class="feature-container" @click="tap('recommendation')">
             <div class="calendar-container">
               <app-icon icon="calendar"/>
               <span>17</span>
             </div>
             <span>每日推荐</span>
           </div>
-          <div class="feature-container" @tap="tap('/radio')">
+          <div class="feature-container" @click="tap('/radio')">
             <app-icon icon="radio"/>
             <span>私人FM</span>
           </div>
@@ -34,7 +34,7 @@
             class="list-container"
             v-for="list in recommend"
             :key="list.id"
-            @tap="tap('songlist/' + list.id)"
+            @click="tap('/songlist/' + list.id)"
           >
             <app-image
               class="list-img"
@@ -109,7 +109,7 @@ export default {
   },
 
   deactivated() {
-    this.scroll.disable();
+    this.scroll && this.scroll.disable();
   },
 
   activated() {
@@ -119,7 +119,7 @@ export default {
     }
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     this.scroll.destroy();
   },
 
@@ -131,6 +131,7 @@ export default {
     },
 
     tap(to) {
+      console.log(to)
       if (to.includes('songlist') || this.login) {
         this.$router.push(to);
       } else {

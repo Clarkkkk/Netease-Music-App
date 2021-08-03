@@ -82,6 +82,27 @@ module.exports = {
     ]
   },
   chainWebpack: (config) => {
+    
+/*
+config.resolve.alias.set('vue', '@vue/compat')
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .tap(options => {
+        return {
+          ...options,
+          compilerOptions: {
+            compatConfig: {
+              MODE: 3,
+              INSTANCE_LISTENERS: true,
+              INSTANCE_ATTRS_CLASS_STYLE: false
+            }
+          }
+        }
+      })
+      */
+      
+
     config.module.rule('svg')
       .exclude.add(resolve('src/assets/icons'))
       .end();

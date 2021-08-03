@@ -19,13 +19,15 @@ export default {
   props: ['seen', 'is-bottom'],
   created() {
     const options = {
-      root: document.querySelector('#app'),
       rootMargin: '0px 0px 65% 0px',
       threshold: 0.0
     };
     const callback = (entries, observer) => {
+      console.log(entries)
+      console.log(this.isBottom)
       entries.forEach((entry) => {
         if (entry.target === this.$el && !this.seen && entry.isIntersecting) {
+          console.log('seen')
           this.$emit('update:seen', true);
         }
       });
@@ -41,7 +43,7 @@ export default {
       .then(() => this.observer.observe(this.$el));
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     this.observer.disconnect();
   }
 };

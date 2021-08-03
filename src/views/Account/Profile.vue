@@ -13,7 +13,7 @@
         <img class="avatar fade-in" :src="avtSrc" ref="avatar">
         <span class="nickname" ref="nickname">{{ nickname }}</span>
         <span class="level" ref="level">{{ 'LV. ' + level }}</span>
-        <div class="logout" @tap="logout" ref="logout">
+        <div class="logout" @click="logout" ref="logout">
           <app-icon icon="log-out"/>
           <span>登出</span>
         </div>
@@ -23,11 +23,11 @@
     <div class="content">
       <div class="placeholder"></div>
       <div class="features">
-        <div class="feature-container" @tap="routeTo('rank')">
+        <div class="feature-container" @click="routeTo('rank')">
           <app-icon icon="bar-chart"/>
           <span>听歌排行</span>
         </div>
-        <div class="feature-container" @tap="routeTo('favorite')">
+        <div class="feature-container" @click="routeTo('favorite')">
           <div class="icon-container">
             <app-icon icon="like-fill"/>
           </div>
@@ -39,13 +39,13 @@
         <nav class="nav">
           <span
             :class="{active: listsType === 'created'}"
-            @tap="navTo('created')"
+            @click="navTo('created')"
           >
             创建歌单
           </span>
           <span
             :class="{active: listsType === 'saved'}"
-            @tap="navTo('saved')"
+            @click="navTo('saved')"
           >
             收藏歌单
           </span>
@@ -168,7 +168,7 @@ export default {
   },
 
   deactivated() {
-    this.scroll.disable();
+    this.scroll && this.scroll.disable();
   },
 
   activated() {
@@ -178,8 +178,8 @@ export default {
     }
   },
 
-  beforeDestroy() {
-    this.scroll.destroy();
+  beforeUnmount() {
+    this.scroll && this.scroll.destroy();
   },
 
   methods: {

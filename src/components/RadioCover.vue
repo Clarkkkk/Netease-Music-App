@@ -132,13 +132,13 @@ export default {
   transform: perspective(1000px) rotateY(0deg) translateX(0%) scale(1.0);
 }
 
-.right-enter, .left-leave-to {
+.right-enter-from, .left-leave-to {
   transform: perspective(1000px) rotateY(60deg) translateX(-50%) scale(0.6);
   transform-origin: 0% 50%;
   opacity: 0;
 }
 
-.right-leave-to, .left-enter {
+.right-leave-to, .left-enter-from {
   transform: perspective(1000px) rotateY(-60deg) translateX(50%) scale(0.6);
   transform-origin: 100% 50%;
   opacity: 0;

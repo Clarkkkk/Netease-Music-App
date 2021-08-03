@@ -1,5 +1,5 @@
 <template>
-  <div class="app-back-button" @tap="back" @click="back">
+  <div class="app-back-button" @click="back">
     <app-icon icon="go-back" />
   </div>
 </template>

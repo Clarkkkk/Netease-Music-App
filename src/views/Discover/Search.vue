@@ -19,9 +19,11 @@
         >
       </template>
     </app-search-bar>
-    <keep-alive include="discover-search-default">
-      <router-view :searchText.sync="searchText"></router-view>
-    </keep-alive>
+    <router-view v-slot="{Component}">
+      <keep-alive include="discover-search-default">
+        <component v-model:searchText="searchText" :is="Component" />
+      </keep-alive>
+    </router-view>
   </div>
 </template>
 

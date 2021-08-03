@@ -1,11 +1,14 @@
 <template>
   <div id="app">
-    <transition :name="transitionName">
-      <keep-alive>
-        <app-loading-icon class="loading" v-if="loading" />
-        <router-view v-else />
-      </keep-alive>
-    </transition>
+    <app-loading-icon class="loading" v-if="loading" />
+    <router-view v-else v-slot="{ Component }">
+      <transition :name="transitionName">
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
+      </transition>
+    </router-view>
+
     <transition :name="transitionName">
       <app-dock />
     </transition>
@@ -143,12 +146,12 @@ body {
   transition: opacity 300ms;
 }
 
-.fade-enter, .fade-leave-to {
+.fade-enter-from, .fade-leave-to {
   opacity: 0.5;
 }
 
 /* slide-left */
-.slide-left-enter {
+.slide-left-enter-from {
   transform: translateX(100vw) !important;
 }
 
@@ -175,7 +178,7 @@ body {
   transform: translateX(100vw) !important;
 }
 
-.slide-right-enter {
+.slide-right-enter-from {
   transform: translateX(-30vw) !important;
 }
 

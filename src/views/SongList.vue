@@ -41,7 +41,7 @@
         </div>
       </div>
 
-      <div class="playall" @tap="playAll">
+      <div class="playall" @click="playAll">
         <app-icon icon="play-circle"/>
         <span>播放全部</span>
       </div>
@@ -64,7 +64,7 @@
       />
       <app-intersection-observer
         v-if="!loading"
-        :seen.sync="seen"
+        v-model:seen="seen"
         :is-bottom="!more"
       />
     </div>
@@ -148,7 +148,7 @@ export default {
           }
         });
     } else if (this.type === 'songlist') {
-      fetchJSON('/playlist/detail', {id: this.listId}, false)
+      fetchJSON('/playlist/detail', {id: this.listId})
         .then((res) => {
           if (res.code === 200) {
             console.log(res);
@@ -197,7 +197,7 @@ export default {
     }
   },
 
-  beforeDestroy() {
+  beforeUnmount() {
     this.scroll.destroy();
   },
 

@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import {createStore} from 'vuex';
 import fetchJSON from '@/functions/fetchJSON.js';
 import auth from './module/auth.js';
 import commonPlay from './module/commonPlay.js';
@@ -8,10 +9,10 @@ import playStatus from './module/playStatus.js';
 import routeHistory from './module/routeHistory.js';
 import {getItem, setItem} from '@/functions/storage.js';
 
-Vue.use(Vuex);
+//Vue.use(Vuex);
 const VERSION = '0.12.2';
 
-const store = new Vuex.Store({
+const store = createStore({
   modules: {
     auth,
     commonPlay,

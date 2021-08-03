@@ -16,7 +16,7 @@
         <div
           v-for="pic in loopPics"
           :key="pic.bannerId"
-          ref="pics"
+          :ref="setLoopPicsRefs"
           class="pic-container"
           @pointerdown="pointerDown"
           @pointerup="pointerUp"
@@ -39,7 +39,6 @@
         v-for="dot in dots"
         :key="dot"
         :class="['dot', {'current-dot': dot===currentIndex}]"
-        :current-dot="dot===currentIndex"
       />
     </div>
   </div>
@@ -52,6 +51,7 @@ export default {
     return {
       banners: [],
       loopPics: [],
+      loopPicsRefs: [],
       dots: [],
       currentIndex: 0,
       loading: true
@@ -69,7 +69,6 @@ export default {
     this.pointerDownTime;
     fetchJSON('/banner', {type: '2'})
       .then((res) => {
-        console.log(res);
         this.banners = res.banners.map((item) => {
           return {
             pic: item.pic.replace('http:', 'https:'),
@@ -93,11 +92,19 @@ export default {
       }).then(() => this.loop());
   },
 
+  beforeUpdate() {
+    //this.loopPicsRefs.length = 0;
+  },
+
   methods: {
     loop() {
       this.intervalID = setInterval(() => {
         this.slide('left');
       }, 6000);
+    },
+
+    setLoopPicsRefs(el) {
+      el && this.loopPicsRefs.push(el);
     },
 
     pointerDown(event) {
@@ -112,7 +119,7 @@ export default {
       // get the current position
       const currentLeft = event.target.getBoundingClientRect().left;
       // terminate all transitions
-      for (const pic of this.$refs.pics) {
+      for (const pic of this.loopPicsRefs) {
         // pic.style = '' is necessary for Firefox
         // while it is not empty during transition
         pic.style = '';
@@ -127,7 +134,7 @@ export default {
         this.pointerDownTime = Date.now();
       } else {
         // move all the pics to where they were when pointer down
-        for (const pic of this.$refs.pics) {
+        for (const pic of this.loopPicsRefs) {
           pic.style = `transform:translateX(${this.relativeX}px)`;
         }
       }
@@ -146,14 +153,14 @@ export default {
         } else if (pointerMoveX < -50) {
           this.slide('left');
         } else {
-          for (const pic of this.$refs.pics) {
+          for (const pic of this.loopPicsRefs) {
             pic.classList.add('banner-move');
             pic.addEventListener('transitionend', function removeHandler() {
               pic.classList.remove('banner-move');
               pic.removeEventListener('transitionend', removeHandler);
             });
           }
-          for (const pic of this.$refs.pics) {
+          for (const pic of this.loopPicsRefs) {
             pic.style = '';
           }
 
@@ -163,6 +170,7 @@ export default {
             Date.now() - this.pointerDownTime < 600
           ) {
             const banner = this.loopPics[1].originalData;
+            // targetType: 1 is song, 1000 is songlist, 10 is album, 3000 is website
             if (banner.targetType === 1) {
               this.$store.commit('commonPlay/addToPlay', {
                 id: banner.song.id,
@@ -186,7 +194,7 @@ export default {
     pointerMove(event) {
       if (this.isPointerDown) {
         const currentX = event.clientX - this.pointerDownX + this.relativeX;
-        for (const pic of this.$refs.pics) {
+        for (const pic of this.loopPicsRefs) {
           pic.style =
             `transform:translateX(${currentX}px)`;
         }
@@ -197,7 +205,7 @@ export default {
       // use FLIP to animate(first, last, invert, play)
       const oldLeft = [];
       const newLeft = [];
-      const movings = [...this.$refs.pics];
+      const movings = [...this.loopPicsRefs];
       // record the left coordinate before moving(first)
       movings.forEach((item) => {
         oldLeft.push(getLeft(item));
@@ -338,7 +346,7 @@ export default {
   grid-row: dot;
   grid-column: start / end;
   width: 30%;
-  min-width: 10rem;
+  min-width: 12rem;
   display: grid;
   grid-template-rows: 1fr;
   grid-template-columns: repeat(auto-fit, 1rem);

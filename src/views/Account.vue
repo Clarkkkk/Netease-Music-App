@@ -3,11 +3,13 @@
     <div v-if="!$store.state.auth.login" class="header">
       <span>未登录</span>
     </div>
-    <transition :name="transitionName">
-      <keep-alive :include="includeNames">
-        <router-view></router-view>
-      </keep-alive>
-    </transition>
+    <router-view v-slot="{Component}">
+      <transition :name="transitionName">
+        <keep-alive :include="includeNames">
+          <component :is="Component" />
+        </keep-alive>
+      </transition>
+    </router-view>
   </div>
 </template>
 

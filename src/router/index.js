@@ -1,12 +1,11 @@
 import Vue from 'vue';
-import VueRouter from 'vue-router';
+import { createRouter, createWebHistory } from 'vue-router';
 import Discover from '@/views/Discover.vue';
 import Home from '@/views/Discover/Home.vue';
 import Account from '@/views/Account.vue';
 import store from '@/store';
 
-
-Vue.use(VueRouter);
+//Vue.use(VueRouter);
 
 const routes = [
   {
@@ -167,9 +166,8 @@ const routes = [
   }
 ];
 
-const router = new VueRouter({
-  mode: 'history',
-  base: '/music/',
+const router = createRouter({
+  history: createWebHistory('/music/'),
   routes
 });
 
@@ -192,6 +190,7 @@ router.beforeEach((to, from, next) => {
     clear();
     push('discover');
     next('/');
+    return;
   } else if (to.name === from.name) {
     console.log('Same path.');
     return;
