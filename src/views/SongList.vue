@@ -462,6 +462,14 @@ export default {
   font-size: 1rem;
   cursor: pointer;
 }
+
+.playall:hover {
+  background-color: #ffffffdd;
+}
+
+.playall:active {
+  background-color: #f8f8f8dd;
+}
 /* fixed container */
 
 /* list */

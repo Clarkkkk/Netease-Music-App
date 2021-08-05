@@ -362,6 +362,18 @@ export default {
   font-size: 1rem;
   font-weight: bold;
   color: #333;
+  cursor: pointer;
+  transition: all 300ms;
+}
+
+.feature-container:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 30px #ddd;
+}
+
+.feature-container:active {
+  transform: scale(1);
+  box-shadow: 0 0 30px #ddd;
 }
 
 .feature-container > svg {
