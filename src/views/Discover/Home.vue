@@ -240,6 +240,18 @@ export default {
   font-size: 1rem;
   font-weight: bold;
   color: #333;
+  cursor: pointer;
+  transition: all 300ms;
+}
+
+.feature-container:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 30px #ddd;
+}
+
+.feature-container:active {
+  transform: scale(1);
+  box-shadow: 0 0 30px #ddd;
 }
 
 .feature-container > svg {
@@ -315,6 +327,13 @@ export default {
   height: 100%;
   width: 100%;
   border-radius: 0.3rem;
+  cursor: pointer;
+  transition: all 300ms;
+}
+
+.list-img:hover {
+  transform: translateY(-2px) scale(1.01);
+  box-shadow: 0 0 30px #00000030;
 }
 
 .list-name {
@@ -327,6 +346,7 @@ export default {
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 2;
   font-size: 0.7rem;
+  cursor: pointer;
 }
 
 .list-count {

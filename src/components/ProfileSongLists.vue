@@ -153,6 +153,11 @@ export default {
   align-items: center;
   cursor: pointer;
   user-select: none;
+  transition: all 300ms;
+}
+
+.list:hover {
+  background-color: #eee;
 }
 
 .list > img {

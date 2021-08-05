@@ -107,6 +107,10 @@ export default {
   cursor: pointer;
 }
 
+.app-song-entry:hover {
+  background-color: #00000005;
+}
+
 .name {
   width: 100%;
   height: 100%;

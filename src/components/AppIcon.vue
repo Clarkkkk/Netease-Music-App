@@ -22,13 +22,16 @@ export default {
   width: 1em;
   fill: currentColor !important;
   -webkit-tap-highlight-color: transparent;
+  transition: all 300ms;
 }
 
-.app-icon:hover, .app-icon:foucs {
-  filter: drop-shadow( 0 0 2px #ddd);
+.app-icon:hover {
+  filter: drop-shadow( 0 0 2px #bbb);
+  transform: scale(1.1);
 }
 
 .app-icon:active {
   filter: drop-shadow( 0 0 2px #bbb);
+  transform: scale(1);
 }
 </style>
