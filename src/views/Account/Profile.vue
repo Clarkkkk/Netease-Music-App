@@ -164,7 +164,7 @@ export default {
 
   // refresh the scroll after all the content is loaded
   updated() {
-    this.scroll.refresh();
+    this.scroll && this.scroll.refresh();
   },
 
   deactivated() {

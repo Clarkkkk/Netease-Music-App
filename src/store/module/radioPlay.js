@@ -30,16 +30,16 @@ export default {
     next(state) {
       console.log('next:');
       // if index exceeds the list(which happens when list update fails)
-      if (state.radioIndex > state.radioList.length - 1) {
+      if (state.radioIndex >= state.radioList.length - 1) {
         console.log('radioIndex exceeds!');
         console.log('radioIndex: ' + state.radioIndex);
         console.log(state.radioList);
+        alert('暂无下一首，请等候加载，或刷新页面重试');
         return;
       }
       state.radioIndex++;
       setItem('radioIndex', state.radioIndex);
       state.allowBack = true;
-      console.log(state);
     },
 
     last(state) {

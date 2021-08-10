@@ -120,7 +120,7 @@ export default {
   },
 
   beforeUnmount() {
-    this.scroll.destroy();
+    this.scroll && this.scroll.destroy();
   },
 
   methods: {

@@ -65,21 +65,19 @@ export default {
   },
 
   update() {
-    this.scroll.refresh();
+    this.scroll && this.scroll.refresh();
   },
 
   deactivated() {
-    this.scroll.disable();
+    this.scroll && this.scroll.disable();
   },
 
   activated() {
-    if (this.scroll) {
-      this.scroll.enable();
-    }
+    this.scroll && this.scroll.enable();
   },
 
   beforeUnmount() {
-    this.scroll.destroy();
+    this.scroll && this.scroll.destroy();
   },
 
   methods: {

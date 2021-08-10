@@ -61,7 +61,7 @@ function fetchJSON(api, body, withCookie = true) {
         return new Promise((resolve) => {
           setTimeout(() => {
             resolve(fetchJSON(api, body, withCookie));
-          }, 500 * retryCount);
+          }, 300 * retryCount * retryCount);
         });
       }
     });

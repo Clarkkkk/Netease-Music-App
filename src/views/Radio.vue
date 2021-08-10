@@ -56,8 +56,17 @@ export default {
     }
   },
 
+  mounted() {
+    console.log(this.radioList)
+    console.log(this.radioIndex)
+    if (this.radioList.length <= 3 || this.radioList.length - this.radioIndex <= 2) {
+      console.log('activated update list');
+      this.updateList();
+    }
+  },
+
   activated() {
-    if (this.radioList.length < 3) {
+    if (this.radioList.length <= 3) {
       console.log('activated update list');
       this.updateList();
     }
