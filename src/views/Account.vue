@@ -28,13 +28,14 @@ export default {
 
     // cache the current page when routing to a new page
     includeNames() {
-      let history = [...this.$store.state.routeHistory.history];
-      history.forEach((item, i, arr) => {
-        if (childRoutes[item]) {
-          arr[i] = childRoutes[item];
+      const history = this.$store.state.routeHistory.history;
+      return history.map((item, i, arr) => {
+        if (childRoutes[item.name]) {
+          return childRoutes[item.name];
+        } else {
+          return item.name;
         }
       });
-      return history;
     }
   }
 }

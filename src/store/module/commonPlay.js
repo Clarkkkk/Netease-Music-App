@@ -133,11 +133,15 @@ export default {
         }
       }
       if (!contain) {
-        state.playList.splice(state.playIndex, 0, obj);
+        console.log(state.playIndex);
+        console.log(state.playList);
+        state.playList.splice(state.playIndex + 1, 0, obj);
+        console.log(state.playList);
         state.indexList =
           createIndexList(state.playList.length, state.mode === 'random');
         setItem('indexList', state.indexList);
       } else if (index !== state.playIndex) {
+        
         state.playList = moveAfter(index, state.playIndex, state.playList);
       }
       setItem('playList', state.playList);

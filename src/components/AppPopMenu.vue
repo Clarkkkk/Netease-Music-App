@@ -10,7 +10,8 @@
           <div
             v-for="menuItem in menuArr"
             :key="menuItem.name"
-            class="menu-item"
+            :class="['menu-item', {disabled: menuItem.disabled}]"
+            @click="onItemClick(menuItem, $event)"
           >
             <div class="menu-text">
               {{ menuItem.name }}
@@ -31,8 +32,18 @@ export default {
       event.stopPropagation();
       emit('update:show', false);
     };
+
+    const onItemClick = (item, event) => {
+      event.stopPropagation();
+      if (!item.disabled) {
+        item.callback();
+        emit('update:show', false);
+      }
+    };
+
     return {
-      closeMenu
+      closeMenu,
+      onItemClick
     };
   }
 };
@@ -79,6 +90,12 @@ export default {
   align-items: center;
   justify-content: start;
   border-bottom: 1px solid #88888830;
+  cursor: pointer;
+}
+
+.menu-item.disabled {
+  color: #888;
+  cursor: not-allowed;
 }
 
 .menu-item:last-child {

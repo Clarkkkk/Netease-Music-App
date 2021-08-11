@@ -5,15 +5,15 @@
     <div class="transition-group">
       <div
         v-for="cover in recentCovers"
-        ref="covers"
-        :id="cover.key"
-        :key="cover.key"
+        :ref="setCoverRefs"
+        :id="cover.id"
+        :key="cover.id"
         class="image-container"
       >
         <img
           alt="专辑图片"
           :class="['cover', {'rolling': playing && !isPointerDown}]"
-          :src="cover.src || require('@/assets/default-cover.png')"
+          :src="cover.cover || require('@/assets/default-cover.png')"
           @dragstart.prevent
           @pointerdown="pointerDown"
           @pointerup="pointerUp"
@@ -34,6 +34,7 @@ export default {
       isPointerDown: false,
       pointerDownX: 0,
       relativeX: 0,
+      coverRefs: [],
       recentCovers: []
     };
   },
@@ -64,10 +65,12 @@ export default {
       // and slide the cover accordingly
       // in this case, sliding is passive
       // further pointer events will be canceled
-      if (this.recentCovers[2].src === this.currentSong.cover) {
+      console.log(this.recentCovers)
+      console.log(this.currentSong.id);
+      if (this.recentCovers[2].id === this.currentSong.id) {
         console.log('if left');
         this.slide('left', true);
-      } else if (this.recentCovers[0].src === this.currentSong.cover) {
+      } else if (this.recentCovers[0].id === this.currentSong.id) {
         console.log('if right');
         this.slide('right', true);
       } else {
@@ -83,23 +86,21 @@ export default {
 
   methods: {
     ...mapMutations('commonPlay', ['next', 'last']),
-    getRecentCovers() {
-      return [
-        this.lastSong.cover,
-        this.currentSong.cover,
-        this.nextSong.cover
-      ].map((cover) => this.normalizeCover(cover));
+    setCoverRefs(el) {
+      el && this.coverRefs.push(el);
     },
 
-    normalizeCover(cover) {
-      return {
-        src: cover,
-        key: Math.random()
-      };
+    getRecentCovers() {
+      return [
+        this.lastSong,
+        this.currentSong,
+        this.nextSong
+      ];
     },
 
     // when pointer is down, the covers should stay at where they were
     pointerDown(event) {
+      
       this.isPointerDown = true;
       // record the position when pointer down
       this.pointerDownX = event.clientX;
@@ -109,7 +110,7 @@ export default {
       // get the current position
       const currentLeft = event.target.getBoundingClientRect().left;
       // terminate all transitions
-      for (const cover of this.$refs.covers) {
+      for (const cover of this.coverRefs) {
         // cover.style = '' is necessary for Firefox
         // while it is not empty during transition
         cover.style = '';
@@ -119,7 +120,7 @@ export default {
       const targetLeft = event.target.getBoundingClientRect().left;
       this.relativeX = currentLeft - targetLeft;
       // move all the covers to where they were when pointer down
-      for (const cover of this.$refs.covers) {
+      for (const cover of this.coverRefs) {
         cover.style = `transform:translateX(${this.relativeX}px)`;
       }
     },
@@ -128,7 +129,7 @@ export default {
     pointerMove(event) {
       if (this.isPointerDown) {
         const currentX = event.clientX - this.pointerDownX + this.relativeX;
-        for (const cover of this.$refs.covers) {
+        for (const cover of this.coverRefs) {
           cover.style =
             `transform:translateX(${currentX}px)`;
         }
@@ -153,14 +154,14 @@ export default {
         } else if (pointerMoveX < -100) {
           this.slide('left');
         } else {
-          for (const cover of this.$refs.covers) {
+          for (const cover of this.coverRefs) {
             cover.classList.add('cover-move');
             cover.addEventListener('transitionend', function removeHandler() {
               cover.classList.remove('cover-move');
               cover.removeEventListener('transitionend', removeHandler);
             });
           }
-          for (const cover of this.$refs.covers) {
+          for (const cover of this.coverRefs) {
             cover.style = '';
           }
         }
@@ -177,7 +178,7 @@ export default {
       // use FLIP to animate(first, last, invert, play)
       const oldLeft = [];
       const newLeft = [];
-      const [...movings] = this.$refs.covers;
+      const [...movings] = this.coverRefs;
       // record the left coordinate before moving(first)
       movings.forEach((item) => {
         oldLeft.push(getLeft(item));
@@ -191,7 +192,7 @@ export default {
         // remove the last cover
         // unshift an empty cover to push the current cover to the right
         this.recentCovers.pop();
-        this.recentCovers.unshift({src: '', key: 0});
+        this.recentCovers.unshift({src: '', id: 0});
         // if not passive, call last()
         !passive && this.last();
       }
@@ -220,12 +221,11 @@ export default {
 
           if (dir === 'left') {
             // add the new next cover to the right
-            this.recentCovers.push(this.normalizeCover(this.nextSong.cover));
+            this.recentCovers.push(this.nextSong);
           } else if (dir === 'right') {
             // now it is able to get the new last cover
             // replace the empty cover with this last cover
-            const newLastCover = this.normalizeCover(this.lastSong.cover);
-            this.$set(this.recentCovers, 0, newLastCover);
+            this.recentCovers[0] = this.lastSong;
           }
 
           this.isSliding = false;

@@ -47,6 +47,8 @@ export default {
 
   methods: {
     progress(percentage) {
+      //console.log('progress')
+      //console.log(this.$refs)
       const style = this.$refs.indicator.style;
       const length = this.$refs.indicator.getTotalLength();
       const currentLength = length * percentage;

@@ -26,8 +26,8 @@ export default {
       state.transitionName = transition;
     },
 
-    push(state, routeName) {
-      state.history.push(routeName);
+    push(state, route) {
+      state.history.push(route);
     },
 
     pop(state) {

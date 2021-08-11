@@ -23,23 +23,15 @@
 <script>
 import fetchJSON from '@/functions/fetchJSON.js';
 import AppPopMenu from './AppPopMenu.vue';
+import {mapState, mapMutations} from 'vuex';
 export default {
   data() {
     return {
       lastClick: 0,
-      showMenu: false,
-      menuArr: [
-        {
-          name: '下一首播放',
-          func: () => {}
-        },
-        {
-          name: '收藏到歌单',
-          func: () => {}
-        }
-      ]
+      showMenu: false
     };
   },
+
   props: ['songName', 'songArtist', 'songAlbum', 'songId', 'songCover', 'songAlbumId', 'hasMenu'],
   
   components: {
@@ -53,12 +45,33 @@ export default {
       } else {
         return this.songArtist;
       }
+    },
+
+    isRadio() {
+      return this.$store.state.radio;
+    },
+
+    menuArr() {
+      let isNextDisabled = this.isRadio;
+      return [
+        {
+          name: '下一首播放',
+          callback: () => {
+            this.play('next');
+          },
+          disabled: isNextDisabled
+        },
+        {
+          name: '收藏到歌单',
+          callback: () => {},
+          disabled: true
+        }
+      ];
     }
   },
   methods: {
-    play(event) {
-      console.log('play')
-      console.log(event)  
+    ...mapMutations('commonPlay', ['addToPlay', 'addToPlayNext']),
+    play(when) { 
       // avoid duplicate click fired by both click and tap
       if (Date.now() - this.lastClick < 100) {
         return;
@@ -68,15 +81,21 @@ export default {
         .then((result) => {
           console.log(result);
           if (result.success) {
-            this.$store.commit('commonPlay/addToPlay', {
+            const song = {
               id: this.songId,
               name: this.songName,
               artist: this.songArtist,
               album: this.songAlbum,
               albumId: this.songAlbumId,
               cover: this.songCover.replace('http:', 'https:')
-            });
-            this.$router.push('/play');
+            };
+            if (when === 'next') {
+              console.log('add to play next')
+              this.addToPlayNext(song);
+            } else {
+              this.addToPlay(song);
+              this.$router.push('/play');
+            }
           } else {
             alert('这首歌暂无版权');
           }

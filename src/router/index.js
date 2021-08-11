@@ -184,11 +184,13 @@ router.beforeEach((to, from, next) => {
   const pop = store.commit.bind(null, 'routeHistory/pop');
   const clear = store.commit.bind(null, 'routeHistory/clear');
 
+  console.log(state.history)
+
   // When there is no route matched, route to the home page
   if (to.matched.length === 0) {
     transition('no-transition');
     clear();
-    push('discover');
+    push({name: 'discover'});
     next('/');
     return;
   } else if (to.name === from.name) {
@@ -201,12 +203,12 @@ router.beforeEach((to, from, next) => {
     console.log('dock');
     transition('no-transition');
     clear();
-    push(to.name);
+    push(to);
   // route to the play/radio page with 'expand' animation
   } else if (to.params.indicator) {
     console.log('expand');
     transition('expand');
-    push(to.name);
+    push(to);
   // route back by tapping the back button component
   } else if (to.params.back) {
     console.log('back');
@@ -228,10 +230,10 @@ router.beforeEach((to, from, next) => {
   } else if (state.history.length > 0) {
     console.log('forward');
     transition('slide-left');
-    push(to.name);
+    push(to);
   // the first route, or other exceptions
   } else {
-    push(to.name);
+    push(to);
   }
   next();
 });

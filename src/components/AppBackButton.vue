@@ -21,10 +21,12 @@ export default {
       }
       this.lastClick = Date.now();
       const lastRoute = this.$store.getters['routeHistory/lastRoute'];
+      console.log(lastRoute)
       if (lastRoute) {
         this.$router.push({
-          name: lastRoute,
+          name: lastRoute.name,
           params: {
+            ...lastRoute.params,
             back: true
           }
         });
