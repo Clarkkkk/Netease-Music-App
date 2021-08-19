@@ -96,6 +96,15 @@ export default {
     //this.loopPicsRefs.length = 0;
   },
 
+  watch: {
+    loopPics: {
+      handler() {
+        this.loopPicsRefs.length = 0;
+      },
+      deep: true
+    }
+  },
+
   methods: {
     loop() {
       this.intervalID = setInterval(() => {
@@ -105,6 +114,7 @@ export default {
 
     setLoopPicsRefs(el) {
       el && this.loopPicsRefs.push(el);
+      console.log(this.loopPicsRefs);
     },
 
     pointerDown(event) {

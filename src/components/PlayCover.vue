@@ -47,6 +47,12 @@ export default {
   },
 
   watch: {
+    loopPics: {
+      handler() {
+        this.recentCovers.length = 0;
+      },
+      deep: true
+    },
     playID(id) {
       // When playlist is cleared, recentCovers should be cleared too
       if (!id) {
