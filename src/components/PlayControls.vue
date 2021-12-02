@@ -10,7 +10,7 @@
     <app-icon
       icon="last-song"
       class="prev"
-      @click.native="last"
+      @click="last"
     />
     <div
       class="play"
@@ -21,12 +21,12 @@
     <app-icon
       icon="next-song"
       class="next"
-      @click.native="next"
+      @click="next"
     />
     <app-icon
       icon="playlist"
       class="list"
-      @click.native="$emit('update:showPlayList', true)"
+      @click="$emit('update:showPlayList', true)"
     />
   </div>
 </template>

@@ -8,7 +8,7 @@
           <app-icon
             icon="trash"
             class="clear"
-            @click.native="clear"
+            @click="clear"
           />
         </div>
         <div class="wrapper" ref="wrapper">

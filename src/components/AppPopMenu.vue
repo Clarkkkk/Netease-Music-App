@@ -7,6 +7,7 @@
         @click="closeMenu"
       >
         <div class="menu-container">
+          <slot />
           <div
             v-for="menuItem in menuArr"
             :key="menuItem.name"
@@ -23,31 +24,29 @@
   </teleport>
 </template>
 
-<script>
-export default {
-  props: ['menuArr', 'show'],
-  emits: ['update:show'],
-  setup(props, {emit}) {
-    const closeMenu = (event) => {
-      event.stopPropagation();
-      emit('update:show', false);
-    };
-
-    const onItemClick = (item, event) => {
-      event.stopPropagation();
-      if (!item.disabled) {
-        item.callback();
-        emit('update:show', false);
-      }
-    };
-
-    return {
-      closeMenu,
-      onItemClick
-    };
-  }
+<script setup>
+const props = defineProps({
+  menuArr: {
+    type: Array,
+    default() {
+      return [];
+    }
+  },
+  show: Boolean
+});
+const emit = defineEmits(['update:show']);
+const closeMenu = (event) => {
+  event.stopPropagation();
+  emit('update:show', false);
 };
 
+const onItemClick = (item, event) => {
+  event.stopPropagation();
+  if (!item.disabled) {
+    item.callback();
+    emit('update:show', false);
+  }
+};
 </script>
 
 <style scoped>
@@ -79,9 +78,11 @@ export default {
     [start title-start] minmax(3rem, min-content) [title-end]
     repeat(auto-fit, 3rem) [end];
   width: 100%;
+  max-height: 50%;
   padding: 0.5rem 1rem;
   border-radius: 0.8rem;
   background-color: #fff;
+  overflow-y: auto;
 }
 
 .menu-item {
@@ -126,5 +127,4 @@ export default {
 .blur-leave-active > .menu-container {
   transition: transform 300ms ease;
 }
-/* transition */
 </style>

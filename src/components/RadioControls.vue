@@ -3,44 +3,47 @@
     <app-icon
       icon="like-slash"
       class="dislike"
-      @click.native="dislike"
+      @click="dislike"
     />
-    <app-like-icon class="like"/>
+    <app-like-icon class="like" />
     <div
       class="play"
-      @click="playOrPause"
+      @click="onPlay"
     >
       <app-icon :icon="playing ? 'pause' : 'play'" />
     </div>
     <app-icon
       icon="next-song"
       class="next"
-      @click.native="next"
+      @click="onNext"
     />
     <app-icon
       icon="comment"
       class="comment"
-      @click.native="comment"
+      @click="comment"
     />
   </div>
 </template>
 
 <script>
-import {mapState, mapMutations, mapActions} from 'vuex';
+import {mapState, mapGetters, mapMutations, mapActions} from 'vuex';
 import fetchJSON from '@/functions/fetchJSON.js';
 import AppLikeIcon from '@/components/AppLikeIcon.vue';
 export default {
-  computed: {
-    ...mapState('playStatus', ['playing']),
-    playID() {
-      return this.$store.getters['currentSong'].id;
-    }
-  },
   components: {
     AppLikeIcon
   },
+  props: ['updateList'],
+  computed: {
+    ...mapState('playStatus', ['playing']),
+    ...mapState('radioPlay', ['radioIndex', 'radioList']),
+    ...mapGetters(['currentSong']),
+    playID() {
+      return this.currentSong.id;
+    }
+  },
   methods: {
-    ...mapMutations('radioPlay', ['next']),
+    ...mapMutations('radioPlay', ['next', 'radioListUpdate']),
     ...mapActions('playStatus', ['playOrPause']),
     dislike() {
       fetchJSON('/fm_trash', {id: this.playID})
@@ -49,6 +52,49 @@ export default {
             this.next();
           }
         });
+    },
+
+    onPlay() {
+      if (Date.now() - this.currentSong.timestamp > 20 * 60 * 1000) {
+        this.updateUrl(this.currentSong.id).then(() => {
+          this.playOrPause();
+        });
+      } else {
+        this.playOrPause();
+      }
+    },
+
+    onNext() {
+      const nextSong = this.radioList[this.radioIndex + 1];
+      if (!nextSong) {
+        this.updateList().then(() => {
+          return this.$nextTick();
+        }).then(() => {
+          this.next();
+        });
+      } else {
+        if (Date.now() - nextSong.timestamp > 20 * 60 * 1000) {
+          this.updateUrl(nextSong.id).then(() => {
+            this.next();
+          });
+        } else {
+          this.next();
+        }
+      }
+    },
+
+    updateUrl(id) {
+      const newList = this.radioList.slice();
+      const targetIndex = this.radioList.findIndex((item) => item.id === id);
+      if (targetIndex === -1) return;
+      return fetchJSON('/song/url', {id: [id]}).then((res) => {
+        const [song] = res.data;
+        if (song && song.id === id) {
+          newList[targetIndex].url = song.url;
+          this.radioListUpdate(newList);
+        }
+        return this.$nextTick();
+      });
     },
 
     comment() {

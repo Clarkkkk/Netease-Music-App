@@ -1,21 +1,20 @@
 <template>
   <div id="radio" @scroll="onScroll">
-
     <img alt="背景图片" class="background fade-in" :src="picUrl">
 
     <div class="content">
       <div class="header">
-        <app-back-button/>
+        <app-back-button />
         <span class="title">私人FM</span>
       </div>
 
       <radio-cover class="cover" />
 
-      <app-loop-text :text="currentSong.name" class="song-name"/>
+      <app-loop-text :text="currentSong.name" class="song-name" />
       <div class="song-artist">{{ currentSong.artist }}</div>
 
-      <play-progress-bar/>
-      <radio-controls/>
+      <play-progress-bar :update-list="updateList" />
+      <radio-controls />
     </div>
   </div>
 </template>
@@ -75,7 +74,7 @@ export default {
   methods: {
     ...mapMutations('radioPlay', ['radioListUpdate']),
     updateList() {
-      fetchJSON('/personal_fm')
+      return fetchJSON('/personal_fm')
         .then((res) => {
           console.log(res);
           this.tempList = res.data.map((song) => {
@@ -87,7 +86,8 @@ export default {
               name: song.name,
               artist: arString,
               album: song.album.name,
-              cover: cover
+              cover: cover,
+              timestamp: Date.now()
             };
           });
           const ids = this.tempList.map((song) => song.id).join(',');

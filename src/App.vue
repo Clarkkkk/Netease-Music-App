@@ -79,52 +79,75 @@ export default {
 </script>
 
 <style>
-html {
+::-webkit-scrollbar {
+  width: 9px;               /* width of the entire scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;        /* color of the tracking area */
+}
+
+::-webkit-scrollbar-thumb {
+  border: none;  /* creates padding around scroll thumb */
+  border-radius: 20px;       /* roundness of the scroll thumb */
+  background-color: #ddd;    /* color of the scroll thumb */
+}
+
+* {
+  scrollbar-width: thin;          /* "auto" or "thin" */
+  scrollbar-color: #ddd #fff;   /* scroll thumb and track */
+}
+
+html,
+body,
+#app {
   scrollbar-width: none;
 }
 
 html::-webkit-scrollbar {
   width: 0;
 }
+
 body {
   height: 100vh;
   margin: 0;
-  font-size: 14px;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  letter-spacing: 0.03em;
   background-color: black;
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-size: 14px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  -webkit-tap-highlight-color:rgba(0,0,0,0);
+  letter-spacing: 0.03em;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
   --app-color: #ff3932;
-  --app-color-rgb: 255, 57 ,50;
+  --app-color-rgb: 255, 57, 50;
 }
 
 #app {
-  height: 100vh;
-  width: 100vw;
-  background-color: black;
   position: fixed;
-  top: 0;
   z-index: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: black;
 }
 
 .loading {
-  height: 100vh !important;
-  width: 100vw !important;
-  background-color: white;
   position: fixed;
   top: 0;
+  width: 100vw !important;
+  height: 100vh !important;
+  background-color: white;
 }
 
 .hidden-bar {
   position: absolute;
+  z-index: 10000;
   top: 7vh;
   left: 0;
   width: 15px;
   height: 90vh;
   background-color: transparent;
-  z-index: 10000;
 }
 
 .fade-in {
@@ -141,12 +164,14 @@ body {
   }
 }
 
-.fade-enter-active, .fade-leave-active {
-  opacity: 1;
+.fade-enter-active,
+.fade-leave-active {
   transition: opacity 300ms;
+  opacity: 1;
 }
 
-.fade-enter-from, .fade-leave-to {
+.fade-enter-from,
+.fade-leave-to {
   opacity: 0.5;
 }
 
@@ -160,17 +185,18 @@ body {
 }
 
 .slide-left-leave-active {
-  transition: transform 360ms ease;
   z-index: 0;
+  transition: transform 360ms ease;
 }
 
 .slide-left-enter-active {
-  transition: transform 360ms ease;
   position: fixed !important;
-  left: 0;
-  top: 0;
   z-index: 12000 !important;
+  top: 0;
+  left: 0;
+  transition: transform 360ms ease;
 }
+
 /* slide-left */
 
 /* slide-right */
@@ -183,30 +209,31 @@ body {
 }
 
 .slide-right-enter-active {
-  transition: transform 360ms ease;
   z-index: 0;
+  transition: transform 360ms ease;
 }
 
 .slide-right-leave-active {
-  transition: transform 360ms ease;
   position: fixed !important;
-  left: 0;
-  top: 0;
   z-index: 12000 !important;
+  top: 0;
+  left: 0;
+  transition: transform 360ms ease;
 }
+
 /* slide-right */
 
 /* expand */
 .expand-leave-active {
-  animation: shrink 360ms;
   z-index: 0;
+  animation: shrink 360ms;
 }
 
 .expand-enter-active {
-  z-index: 13000 !important;
   position: fixed;
-  left: 0;
+  z-index: 13000 !important;
   top: 0;
+  left: 0;
   animation: expand 560ms ease;
 }
 
@@ -234,10 +261,13 @@ body {
     transform: scale(0.8);
   }
 }
+
 /* expand */
 
-.no-transition-enter-active, no-transition-leave-active {
+.no-transition-enter-active,
+no-transition-leave-active {
   transition: none !important;
   opacity: 1;
 }
+
 </style>

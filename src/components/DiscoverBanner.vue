@@ -114,7 +114,6 @@ export default {
 
     setLoopPicsRefs(el) {
       el && this.loopPicsRefs.push(el);
-      console.log(this.loopPicsRefs);
     },
 
     pointerDown(event) {
@@ -273,29 +272,29 @@ export default {
 
 <style scoped>
 #discover-banner {
-  width: 100%;
-  max-width: 45rem;
-  overflow: hidden;
-  height: 40vw;
-  max-height: 18rem;
-  grid-row: banner;
-  place-self: center;
   display: grid;
+  grid-row: banner;
   grid-template-columns: [start] 1fr [end];
   grid-template-rows: [start] 1fr [dot-start] 2rem [dot-end end];
-  justify-items: center;
   align-items: center;
   justify-content: space-around;
+  width: 100%;
+  max-width: 45rem;
+  height: 40vw;
+  max-height: 18rem;
+  overflow: hidden;
   user-select: none;
+  place-self: center;
+  justify-items: center;
 }
 
 .default-pic {
-  grid-row: start / end;
   grid-column: start / end;
-  height: 90%;
+  grid-row: start / end;
   width: 90%;
-  border-radius: 1rem;
+  height: 90%;
   overflow: hidden;
+  border-radius: 1rem;
 }
 
 .default-pic > img {
@@ -304,29 +303,29 @@ export default {
 }
 
 .transition-group {
-  grid-row: start / end;
-  grid-column: start / end;
-  width: 300%;
-  height: 100%;
   display: grid;
+  grid-column: start / end;
+  grid-row: start / end;
   grid-template-columns: repeat(3, 1fr);
   align-items: center;
+  width: 300%;
+  height: 100%;
   justify-items: center;
 }
 
 .pic-container {
-  height: 90%;
-  width: 90%;
-  border-radius: 1rem;
   display: grid;
-  overflow: hidden;
-  grid-template-rows: [start] 1fr [title-start] max-content [title-end end];
   grid-template-columns: [start] 1fr [title-start] max-content [title-end end];
+  grid-template-rows: [start] 1fr [title-start] max-content [title-end end];
+  width: 90%;
+  height: 90%;
+  overflow: hidden;
+  border-radius: 1rem;
 }
 
 .pic-container img {
-  grid-row: start / end;
   grid-column: start / end;
+  grid-row: start / end;
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -334,13 +333,13 @@ export default {
 }
 
 .type-title {
-  grid-row: title;
   grid-column: title;
+  grid-row: title;
+  padding: 0.2rem 0.6rem;
+  border-radius: 1rem 0 1rem 0;
   background-color: #fc5244;
   color: white;
   font-size: 0.8rem;
-  padding: 0.2rem 0.6rem;
-  border-radius: 1rem 0 1rem 0;
   user-select: none;
 }
 
@@ -353,23 +352,23 @@ export default {
 }
 
 .dot-container {
-  grid-row: dot;
+  display: grid;
   grid-column: start / end;
+  grid-row: dot;
+  grid-template-columns: repeat(auto-fit, 1rem);
+  grid-template-rows: 1fr;
+  justify-content: space-around;
   width: 30%;
   min-width: 12rem;
-  display: grid;
-  grid-template-rows: 1fr;
-  grid-template-columns: repeat(auto-fit, 1rem);
-  justify-content: space-around;
 }
 
 .dot {
-  height: 0.5rem;
-  width: 0.5rem;
-  background-color: #88888880;
-  border-radius: 50%;
   z-index: 10;
+  width: 0.5rem;
+  height: 0.5rem;
   transition: background-color, 200ms;
+  border-radius: 50%;
+  background-color: #88888880;
 }
 
 .current-dot {

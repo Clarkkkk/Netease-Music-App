@@ -71,8 +71,6 @@ export default {
       // and slide the cover accordingly
       // in this case, sliding is passive
       // further pointer events will be canceled
-      console.log(this.recentCovers)
-      console.log(this.currentSong.id);
       if (this.recentCovers[2].id === this.currentSong.id) {
         console.log('if left');
         this.slide('left', true);
