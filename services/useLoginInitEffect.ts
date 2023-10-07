@@ -10,7 +10,18 @@ export const useLoginInitEffect = () => {
     const { loginInfo } = storeToRefs(useAuthStore())
     const { updateProfile } = useProfileStore()
 
+    console.log(loginInfo.value.expires)
+
+    const cookies = useCookie('MUSIC_U')
+    // console.log(cookies.value)
+    // const event = useRequestEvent()
+    // console.log(event)
+    // const headers = useRequestHeaders()
+    // console.log(headers)
+
     onBeforeMount(async () => {
+        console.log('onBeforeMount')
+        console.log(loginInfo.value)
         if (Date.now() + 2 * ONE_HOUR < loginInfo.value.expires) {
             // cookie未过期，则直接更新store中的登录态
             if (loginInfo.value.userId) {
@@ -20,6 +31,7 @@ export const useLoginInitEffect = () => {
                 // 刚完成登录后，本地loginInfo的userId暂不存在，需要请求接口获取
                 try {
                     const { data } = await post<ApiLoginStatus>('/login/status')
+                    console.log(data)
                     if (data.profile) {
                         login(data.profile.userId)
                         storeLoginInfo({ userId: data.profile.userId })

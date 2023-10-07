@@ -6,15 +6,17 @@ type Decorate<T extends Record<string, any>> = { [K in keyof T as K extends stri
 type InjectionType<A extends Plugin> = A extends Plugin<infer T> ? Decorate<T> : unknown
 
 type NuxtAppInjections = 
+  InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.7.4_@types+node@20.7.0_eslint@8.42.0_rollup@2.79.1_sass@1.62.1_typescript@5.1.6_vue-tsc@1.8.11/node_modules/nuxt/dist/app/plugins/payload.client").default> &
   InjectionType<typeof import("../../node_modules/.pnpm/@pinia+nuxt@0.4.11_rollup@2.79.1_typescript@5.1.6_vue@3.3.4/node_modules/@pinia/nuxt/dist/runtime/plugin.vue3").default> &
   InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.7.4_@types+node@20.7.0_eslint@8.42.0_rollup@2.79.1_sass@1.62.1_typescript@5.1.6_vue-tsc@1.8.11/node_modules/nuxt/dist/app/plugins/revive-payload.server").default> &
   InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.7.4_@types+node@20.7.0_eslint@8.42.0_rollup@2.79.1_sass@1.62.1_typescript@5.1.6_vue-tsc@1.8.11/node_modules/nuxt/dist/app/plugins/revive-payload.client").default> &
   InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.7.4_@types+node@20.7.0_eslint@8.42.0_rollup@2.79.1_sass@1.62.1_typescript@5.1.6_vue-tsc@1.8.11/node_modules/nuxt/dist/head/runtime/plugins/unhead").default> &
   InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.7.4_@types+node@20.7.0_eslint@8.42.0_rollup@2.79.1_sass@1.62.1_typescript@5.1.6_vue-tsc@1.8.11/node_modules/nuxt/dist/pages/runtime/plugins/router").default> &
   InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.7.4_@types+node@20.7.0_eslint@8.42.0_rollup@2.79.1_sass@1.62.1_typescript@5.1.6_vue-tsc@1.8.11/node_modules/nuxt/dist/pages/runtime/plugins/prefetch.client").default> &
-  InjectionType<typeof import("../../node_modules/.pnpm/@nuxt+devtools@0.8.5_nuxt@3.7.4_rollup@2.79.1_vite@4.4.9/node_modules/@nuxt/devtools/dist/runtime/plugins/devtools.server").default> &
-  InjectionType<typeof import("../../node_modules/.pnpm/@nuxt+devtools@0.8.5_nuxt@3.7.4_rollup@2.79.1_vite@4.4.9/node_modules/@nuxt/devtools/dist/runtime/plugins/devtools.client").default> &
-  InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.7.4_@types+node@20.7.0_eslint@8.42.0_rollup@2.79.1_sass@1.62.1_typescript@5.1.6_vue-tsc@1.8.11/node_modules/nuxt/dist/app/plugins/chunk-reload.client").default>
+  InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.7.4_@types+node@20.7.0_eslint@8.42.0_rollup@2.79.1_sass@1.62.1_typescript@5.1.6_vue-tsc@1.8.11/node_modules/nuxt/dist/app/plugins/view-transitions.client").default> &
+  InjectionType<typeof import("../../node_modules/.pnpm/nuxt@3.7.4_@types+node@20.7.0_eslint@8.42.0_rollup@2.79.1_sass@1.62.1_typescript@5.1.6_vue-tsc@1.8.11/node_modules/nuxt/dist/app/plugins/chunk-reload.client").default> &
+  InjectionType<typeof import("../../plugins/view-transitions.client").default> &
+  InjectionType<typeof import("../../plugins/view-transitions.server").default>
 
 declare module '#app' {
   interface NuxtApp extends NuxtAppInjections { }

@@ -103,7 +103,6 @@ const { data } = await usePageData<ApiBanner>({
 
 onMounted(() => {
     if (!data.value) return
-    console.log(data)
     pics.value = data.value.banners
     intervalId.value = window.setInterval(() => {
         moveCurrentIndex()

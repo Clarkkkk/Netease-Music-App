@@ -1,5 +1,36 @@
+<script setup lang="ts">
+import { Audio, LoginModal, MiniMusicControl, Nav } from '#components'
+import {
+    useLoginInitEffect,
+    useLyricsEffect,
+    useMediaSessionEffect,
+    usePlayStatusEffect
+} from './services'
+import { useAuthStore } from './stores'
+
+useLoginInitEffect()
+const store = useAuthStore()
+console.log(store)
+const app = useNuxtApp()
+console.log(app)
+const route = useRoute()
+
+watchEffect(() => {
+    console.log(route.path)
+})
+// usePlayStatusEffect()
+// useMediaSessionEffect()
+// useLyricsEffect()
+</script>
+
 <template>
     <div>
+        <ClientOnly>
+            <Nav />
+            <component :is="route.path.includes('/playing') ? '' : MiniMusicControl" />
+        </ClientOnly>
+
+        <LoginModal />
         <NuxtPage />
     </div>
 </template>

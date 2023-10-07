@@ -4,7 +4,7 @@ import { storeToRefs } from 'pinia'
 import { useAudioStore } from 'stores'
 import { prependZero } from 'utils'
 import { useHeadlessMusicBar } from './useHeadlessMusicBar'
-
+console.log('setup')
 const container = ref<HTMLElement>(document.body)
 const { currentTime, duration } = storeToRefs(useAudioStore())
 const { seek } = useAudioStore()

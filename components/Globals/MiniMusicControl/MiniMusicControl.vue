@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { Controls, Cover, Info, MusicBar, Playlist } from './components'
+import { Controls, Cover, Info, Playlist } from './components'
 </script>
 
 <template>
@@ -13,7 +13,7 @@ import { Controls, Cover, Info, MusicBar, Playlist } from './components'
         >
             <Cover />
             <Info />
-            <MusicBar />
+            <!-- <MiniMusicBar /> -->
             <Controls />
             <Playlist />
         </div>

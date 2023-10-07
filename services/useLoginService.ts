@@ -5,6 +5,8 @@ import { useAuthStore, useProfileStore } from 'stores'
 export function useLoginService() {
     const { profile } = storeToRefs(useProfileStore())
     const { loggedIn } = storeToRefs(useAuthStore())
+    const cookies = useCookie('MUSIC_U')
+    console.log(cookies.value)
 
     function onLoggedIn(callback: () => void) {
         watch(

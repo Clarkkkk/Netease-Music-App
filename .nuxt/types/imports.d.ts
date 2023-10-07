@@ -113,7 +113,6 @@ declare global {
   const useModel: typeof import('../../node_modules/.pnpm/vue@3.3.4/node_modules/vue')['useModel']
   const useNuxtApp: typeof import('../../node_modules/.pnpm/nuxt@3.7.4_@types+node@20.7.0_eslint@8.42.0_rollup@2.79.1_sass@1.62.1_typescript@5.1.6_vue-tsc@1.8.11/node_modules/nuxt/dist/app')['useNuxtApp']
   const useNuxtData: typeof import('../../node_modules/.pnpm/nuxt@3.7.4_@types+node@20.7.0_eslint@8.42.0_rollup@2.79.1_sass@1.62.1_typescript@5.1.6_vue-tsc@1.8.11/node_modules/nuxt/dist/app')['useNuxtData']
-  const useNuxtDevTools: typeof import('../../node_modules/.pnpm/@nuxt+devtools@0.8.5_nuxt@3.7.4_rollup@2.79.1_vite@4.4.9/node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools')['useNuxtDevTools']
   const usePageData: typeof import('../../utils/request')['usePageData']
   const usePinia: typeof import('../../node_modules/.pnpm/@pinia+nuxt@0.4.11_rollup@2.79.1_typescript@5.1.6_vue@3.3.4/node_modules/@pinia/nuxt/dist/runtime/composables')['usePinia']
   const useRequestEvent: typeof import('../../node_modules/.pnpm/nuxt@3.7.4_@types+node@20.7.0_eslint@8.42.0_rollup@2.79.1_sass@1.62.1_typescript@5.1.6_vue-tsc@1.8.11/node_modules/nuxt/dist/app')['useRequestEvent']
@@ -263,7 +262,6 @@ declare module 'vue' {
     readonly useModel: UnwrapRef<typeof import('../../node_modules/.pnpm/vue@3.3.4/node_modules/vue')['useModel']>
     readonly useNuxtApp: UnwrapRef<typeof import('../../node_modules/.pnpm/nuxt@3.7.4_@types+node@20.7.0_eslint@8.42.0_rollup@2.79.1_sass@1.62.1_typescript@5.1.6_vue-tsc@1.8.11/node_modules/nuxt/dist/app')['useNuxtApp']>
     readonly useNuxtData: UnwrapRef<typeof import('../../node_modules/.pnpm/nuxt@3.7.4_@types+node@20.7.0_eslint@8.42.0_rollup@2.79.1_sass@1.62.1_typescript@5.1.6_vue-tsc@1.8.11/node_modules/nuxt/dist/app')['useNuxtData']>
-    readonly useNuxtDevTools: UnwrapRef<typeof import('../../node_modules/.pnpm/@nuxt+devtools@0.8.5_nuxt@3.7.4_rollup@2.79.1_vite@4.4.9/node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools')['useNuxtDevTools']>
     readonly usePageData: UnwrapRef<typeof import('../../utils/request')['usePageData']>
     readonly usePinia: UnwrapRef<typeof import('../../node_modules/.pnpm/@pinia+nuxt@0.4.11_rollup@2.79.1_typescript@5.1.6_vue@3.3.4/node_modules/@pinia/nuxt/dist/runtime/composables')['usePinia']>
     readonly useRequestEvent: UnwrapRef<typeof import('../../node_modules/.pnpm/nuxt@3.7.4_@types+node@20.7.0_eslint@8.42.0_rollup@2.79.1_sass@1.62.1_typescript@5.1.6_vue-tsc@1.8.11/node_modules/nuxt/dist/app')['useRequestEvent']>
@@ -407,7 +405,6 @@ declare module '@vue/runtime-core' {
     readonly useModel: UnwrapRef<typeof import('../../node_modules/.pnpm/vue@3.3.4/node_modules/vue')['useModel']>
     readonly useNuxtApp: UnwrapRef<typeof import('../../node_modules/.pnpm/nuxt@3.7.4_@types+node@20.7.0_eslint@8.42.0_rollup@2.79.1_sass@1.62.1_typescript@5.1.6_vue-tsc@1.8.11/node_modules/nuxt/dist/app')['useNuxtApp']>
     readonly useNuxtData: UnwrapRef<typeof import('../../node_modules/.pnpm/nuxt@3.7.4_@types+node@20.7.0_eslint@8.42.0_rollup@2.79.1_sass@1.62.1_typescript@5.1.6_vue-tsc@1.8.11/node_modules/nuxt/dist/app')['useNuxtData']>
-    readonly useNuxtDevTools: UnwrapRef<typeof import('../../node_modules/.pnpm/@nuxt+devtools@0.8.5_nuxt@3.7.4_rollup@2.79.1_vite@4.4.9/node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools')['useNuxtDevTools']>
     readonly usePageData: UnwrapRef<typeof import('../../utils/request')['usePageData']>
     readonly usePinia: UnwrapRef<typeof import('../../node_modules/.pnpm/@pinia+nuxt@0.4.11_rollup@2.79.1_typescript@5.1.6_vue@3.3.4/node_modules/@pinia/nuxt/dist/runtime/composables')['usePinia']>
     readonly useRequestEvent: UnwrapRef<typeof import('../../node_modules/.pnpm/nuxt@3.7.4_@types+node@20.7.0_eslint@8.42.0_rollup@2.79.1_sass@1.62.1_typescript@5.1.6_vue-tsc@1.8.11/node_modules/nuxt/dist/app')['useRequestEvent']>

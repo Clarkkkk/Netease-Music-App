@@ -76,7 +76,7 @@ const { data } = await usePageData<ApiTopSong>({
         } as ApiTopSong['return']
     }
 })
-
+console.log(data.value.data.length)
 list.value[AREA.ALL] = parseData(data.value)
 
 async function onPlayAll() {
@@ -161,26 +161,30 @@ function parseData(data: ApiTopSong['return']): Song[] {
                         { 'is-empty': !list[tabItem.value as AreaValue].length }
                     ]"
                 >
-                    <SongItem
-                        v-for="song in list[tabItem.value as AreaValue].slice(
-                            0,
-                            showAll || !lessThan768 ? Infinity : 10
-                        )"
-                        :key="song.id"
-                        :song="song"
-                    />
+                    <ClientOnly>
+                        <SongItem
+                            v-for="song in list[tabItem.value as AreaValue].slice(
+                                0,
+                                showAll || !lessThan768 ? Infinity : 10
+                            )"
+                            :key="song.id"
+                            :song="song"
+                        />
+                    </ClientOnly>
                 </ul>
-                <div
-                    v-if="!showAll && lessThan768"
-                    class="flex w-full justify-center"
-                >
-                    <Button
-                        class="btn-ghost btn-sm"
-                        @click="showAll = true"
+                <ClientOnly>
+                    <div
+                        v-if="!showAll && lessThan768"
+                        class="flex w-full justify-center"
                     >
-                        查看更多
-                    </Button>
-                </div>
+                        <Button
+                            class="btn-ghost btn-sm"
+                            @click="showAll = true"
+                        >
+                            查看更多
+                        </Button>
+                    </div>
+                </ClientOnly>
             </template>
         </Tabs>
     </div>

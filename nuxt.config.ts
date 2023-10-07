@@ -1,7 +1,9 @@
+import vue from '@vitejs/plugin-vue'
 import IconsResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
 import Components from 'unplugin-vue-components/vite'
 import { fileURLToPath } from 'url'
+import svgLoader from 'vite-svg-loader'
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
@@ -17,6 +19,11 @@ export default defineNuxtConfig({
     },
     vite: {
         plugins: [
+            // vue(),
+            svgLoader({
+                defaultImport: 'component',
+                svgo: false
+            }),
             Components({
                 resolvers: [IconsResolver()]
             }),
@@ -42,6 +49,10 @@ export default defineNuxtConfig({
                     referer: 'https://carllllo.work'
                 }
             }
-        }
+        },
+        plugins: [fileURLToPath(new URL('./nitro.ts', import.meta.url))]
+    },
+    experimental: {
+        viewTransition: true
     }
 })

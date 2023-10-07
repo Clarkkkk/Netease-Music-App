@@ -1,6 +1,6 @@
 
 import { updateAppConfig } from '#app'
-import { defuFn } from 'C:/Users/iouio/Workspace/Netease-Music-App-Nuxt/node_modules/.pnpm/defu@6.1.2/node_modules/defu/dist/defu.mjs'
+import { defuFn } from 'D:/Workspace/neteasemusic/node_modules/.pnpm/defu@6.1.2/node_modules/defu/dist/defu.mjs'
 
 const inlineConfig = {
   "nuxt": {}

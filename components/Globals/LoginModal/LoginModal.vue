@@ -43,7 +43,7 @@ watch(showLoginModal, (val) => {
 watch(qrcodeLoginStatus, (val) => {
     if (val === 'logged-in') {
         window.setTimeout(() => {
-            window.location.reload()
+            // window.location.reload()
         }, 800)
     }
 })

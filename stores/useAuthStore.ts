@@ -14,12 +14,15 @@ export const useAuthStore = defineStore('auth', () => {
         expires: 0
     })
 
+    console.log(loginStorage.value.expires)
+
     function resetStoredLoginInfo() {
         loginStorage.value.userId = 0
         loginStorage.value.expires = 0
     }
 
     function storeLoginInfo(data: { userId?: number; expires?: number }) {
+        console.log('store')
         if (data.expires) {
             loginStorage.value.expires = data.expires
         }
@@ -35,12 +38,12 @@ export const useAuthStore = defineStore('auth', () => {
     }
 
     async function logout() {
-        if (loginStorage.value.userId) {
-            await post<ApiLogout>('/logout')
-        }
-        loggedIn.value = false
-        userId.value = 0
-        resetStoredLoginInfo()
+        // if (loginStorage.value.userId) {
+        //     await post<ApiLogout>('/logout')
+        // }
+        // loggedIn.value = false
+        // userId.value = 0
+        // resetStoredLoginInfo()
     }
 
     function openLogin() {

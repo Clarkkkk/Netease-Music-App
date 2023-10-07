@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { Banner, NewAlbums, NewSongs } from './components'
+
+definePageMeta({
+    keepalive: true
+})
 </script>
 
 <template>

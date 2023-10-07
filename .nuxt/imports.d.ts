@@ -11,5 +11,4 @@ export { get, post, usePageData } from '../utils/request';
 export { toHttps } from '../utils/toHttps';
 export { wait } from '../utils/wait';
 export { usePinia } from '../node_modules/.pnpm/@pinia+nuxt@0.4.11_rollup@2.79.1_typescript@5.1.6_vue@3.3.4/node_modules/@pinia/nuxt/dist/runtime/composables';
-export { useNuxtDevTools } from '../node_modules/.pnpm/@nuxt+devtools@0.8.5_nuxt@3.7.4_rollup@2.79.1_vite@4.4.9/node_modules/@nuxt/devtools/dist/runtime/use-nuxt-devtools';
 export { definePageMeta } from '../node_modules/.pnpm/nuxt@3.7.4_@types+node@20.7.0_eslint@8.42.0_rollup@2.79.1_sass@1.62.1_typescript@5.1.6_vue-tsc@1.8.11/node_modules/nuxt/dist/pages/runtime/composables';

@@ -51,6 +51,9 @@ export function useQrcodeLogin() {
                     clearInterval(intervalId.value)
                     const cookies = parseCookie(cookie || '')
                     const expires = getCookieExpires(cookies)
+                    console.log(cookies)
+                    console.log(cookie)
+                    console.log(expires)
                     storeLoginInfo({ expires: Math.max(expires, Date.now() + 7 * ONE_DAY) })
                 } else if (qrcodeLoginStatus.value !== 'logged-in') {
                     qrcodeLoginStatus.value = 'expired'
