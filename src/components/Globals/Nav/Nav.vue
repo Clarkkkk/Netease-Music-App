@@ -202,7 +202,6 @@ nav.navbar {
     transition: background 200ms;
 
     .link {
-        // transition: background 200ms;
         text-decoration: none;
     }
 }
