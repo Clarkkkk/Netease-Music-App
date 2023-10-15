@@ -53,6 +53,7 @@ export default defineConfig(() => {
                     description: 'A Music web app',
                     theme_color: '#5f19f7',
                     start_url: 'index.html',
+                    id: 'carllllo-music',
                     scope: '/',
                     icons: [
                         {
