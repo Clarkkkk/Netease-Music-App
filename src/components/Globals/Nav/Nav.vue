@@ -107,16 +107,33 @@ async function onRadioClick() {
                         'flex',
                         'items-center',
                         'rounded',
-                        {
-                            'link-primary': isActiveRoute(item.to),
-                            'bg-primary/5': isActiveRoute(item.to),
-                            'font-bold': isActiveRoute(item.to),
-                            'dark:bg-primary/20': isActiveRoute(item.to)
-                        }
+                        'relative'
                     ]"
                     :to="item.to"
                 >
-                    <span>{{ item.name }}</span>
+                    <div
+                        v-trans="{ 'nav-link': isActiveRoute(item.to) }"
+                        :class="[
+                            'absolute',
+                            'w-full',
+                            'h-full',
+                            'top-0',
+                            'left-0',
+                            'rounded',
+                            {
+                                'bg-primary/5': isActiveRoute(item.to),
+                                'dark:bg-primary/20': isActiveRoute(item.to)
+                            }
+                        ]"
+                    />
+                    <span
+                        :class="{
+                            'font-bold': isActiveRoute(item.to),
+                            'link-primary': isActiveRoute(item.to)
+                        }"
+                    >
+                        {{ item.name }}
+                    </span>
                 </RouterLink>
             </template>
         </div>
