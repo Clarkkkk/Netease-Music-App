@@ -31,7 +31,7 @@ const isTop = ref(window.scrollY === 0)
 const searchTransition = ref(false)
 const lessThan1024 = useMediaQuery('(max-width: 1023px)')
 const lessThan768 = useMediaQuery('(max-width: 767px)')
-const { perfetchRoute } = usePrefetch()
+const { prefetchRoute } = usePrefetch()
 
 watch(
     route,
@@ -151,7 +151,7 @@ async function onRadioClick() {
                     v-view-transition-name="{ 'search-input': searchTransition }"
                     class="flex h-8 items-center justify-between rounded-full bg-primary/10 px-4 dark:bg-secondary/20"
                     @click="onSearchClick"
-                    @mouseenter="perfetchRoute('/search')"
+                    @mouseenter="prefetchRoute('/search')"
                 >
                     <i-solar-magnifer-line-duotone
                         v-view-transition-name="{ 'search-icon': searchTransition }"

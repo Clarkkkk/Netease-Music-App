@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { usePrefetch } from 'vue-route-prefetch'
 import { useRouter } from 'vue-router'
 import { useAlbum, useDeviceType, useIsHovering, useSonglist } from 'services'
 import { usePlaylistStore } from 'stores'
@@ -18,6 +19,12 @@ const { switchToThisList } = usePlaylistStore()
 const { initSonglist, songlist, onFullLoad } = useSonglist()
 const { album, initAlbum } = useAlbum()
 const router = useRouter()
+const { prefetchRoute } = usePrefetch()
+
+function mouseenterHandler() {
+    onMouseEnter()
+    prefetchRoute(`/${props.type}/:id`)
+}
 
 async function onPlayList(id: number) {
     if (props.type === 'songlist') {
@@ -38,7 +45,7 @@ function onItemClick(id: number) {
 <template>
     <div
         class="my-2 flex w-full cursor-pointer items-center rounded-lg p-2 transition-all duration-500 @container hover:bg-base-200/50"
-        @mouseenter="onMouseEnter"
+        @mouseenter="mouseenterHandler"
         @mouseleave="onMouseLeave"
         @click="onItemClick(listItem.id)"
     >

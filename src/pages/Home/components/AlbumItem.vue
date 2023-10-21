@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { usePrefetch } from 'vue-route-prefetch'
 import { useRouter } from 'vue-router'
 import { useIsHovering } from 'services'
 import { Image } from 'components'
@@ -16,7 +17,13 @@ interface AlbumItemProps {
 defineProps<AlbumItemProps>()
 
 const { isHovering, onMouseEnter, onMouseLeave } = useIsHovering()
+const { prefetchRoute } = usePrefetch()
 const router = useRouter()
+
+function mouseenterHandler() {
+    onMouseEnter()
+    prefetchRoute('/album/:id')
+}
 </script>
 
 <template>
@@ -31,7 +38,7 @@ const router = useRouter()
             'contain-[layout_style]',
             { '-translate-y-1': isHovering }
         ]"
-        @mouseenter="onMouseEnter"
+        @mouseenter="mouseenterHandler"
         @mouseleave="onMouseLeave"
         @click="router.push(`/album/${id}`)"
     >

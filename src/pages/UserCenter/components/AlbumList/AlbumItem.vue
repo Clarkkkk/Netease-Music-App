@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import type { ComputedRef, StyleValue } from 'vue'
 import { computed, ref } from 'vue'
+import { usePrefetch } from 'vue-route-prefetch'
 import { useRouter } from 'vue-router'
 import { Image } from 'components'
 import { minmax, toHttps } from 'utils'
@@ -8,6 +9,8 @@ import { minmax, toHttps } from 'utils'
 const props = defineProps<{ img: string; position: number; id: number }>()
 
 const router = useRouter()
+const { prefetchRoute } = usePrefetch()
+
 const elementRef = ref<HTMLDivElement | null>(null)
 const positionPercentage = computed(() => {
     if (!elementRef.value) return 0
@@ -54,6 +57,7 @@ function onClick() {
         ref="elementRef"
         class="album-container h-16 w-16"
         @click="onClick"
+        @mouseenter="prefetchRoute('/album/:id')"
     >
         <!-- use nested container to avoid quirk behaviours in chromium: https://stackoverflow.com/questions/75104680/css-scroll-snap-children-with-transform-on-hover-causes-janky-effect-in-chromi -->
         <div

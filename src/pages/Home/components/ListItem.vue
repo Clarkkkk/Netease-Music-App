@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { usePrefetch } from 'vue-route-prefetch'
 import { useRouter } from 'vue-router'
 import { useIsHovering } from 'services'
 import { Image } from 'components'
@@ -16,6 +17,12 @@ defineProps<ListCoverProps>()
 
 const { isHovering, onMouseEnter, onMouseLeave } = useIsHovering()
 const router = useRouter()
+const { prefetchRoute } = usePrefetch()
+
+function mouseenterHandler() {
+    onMouseEnter()
+    prefetchRoute('/songlist/:id')
+}
 
 async function onClick(id: number) {
     await router.push(`/songlist/${id}`)
@@ -39,7 +46,7 @@ async function onClick(id: number) {
             'contain-[layout_style]',
             { '-translate-y-1': isHovering }
         ]"
-        @mouseenter="onMouseEnter"
+        @mouseenter="mouseenterHandler"
         @mouseleave="onMouseLeave"
         @click="onClick(id)"
     >
