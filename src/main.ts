@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import PrefetchPlugin from 'vue-route-prefetch'
 import { createRouter, createWebHistory } from 'vue-router'
 import { startViewTransition, ViewTransitionsPlugin } from 'vue-view-transitions'
 import { createPinia } from 'pinia'
@@ -41,4 +42,9 @@ router.beforeResolve(async () => {
     await viewTransition.captured
 })
 
-createApp(App).use(router).use(createPinia()).use(ViewTransitionsPlugin()).mount('#app')
+createApp(App)
+    .use(router)
+    .use(PrefetchPlugin)
+    .use(createPinia())
+    .use(ViewTransitionsPlugin())
+    .mount('#app')
