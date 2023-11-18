@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { onActivated, onMounted, ref, watch } from 'vue'
+import { RouterLink } from 'vue-router'
 import type { ApiArtistDetail } from 'api'
 import { storeToRefs } from 'pinia'
 import { useAlbum } from 'services'
@@ -46,6 +47,13 @@ watch(currentSong, async (song) => {
             <h2 class="mt-4 text-base font-bold text-base-content">关于专辑</h2>
             <p class="mt-2 text-xs text-base-content/70">
                 {{ `《${albumInfo.name}》` }}
+                <RouterLink
+                    class="link"
+                    :to="`/album/${albumInfo.id}`"
+                    @click.stop="() => {}"
+                >
+                    查看详情 >
+                </RouterLink>
             </p>
             <p class="mt-2 text-xs text-base-content/70">
                 {{ albumInfo.briefDesc || albumInfo.description }}
