@@ -56,9 +56,23 @@ const lessThan1280 = useMediaQuery('(max-width: 1279px)')
                 >
                     {{ '已有' }}
                     <span class="mx-1 font-bold text-primary">
-                        {{ info.info.likedCount }}
+                        {{ info.info.shareCount }}
                     </span>
-                    {{ '人喜欢' }}
+                    {{ '人分享' }}
+                </div>
+                <div
+                    v-if="info"
+                    class="badge badge-ghost badge-sm ml-2"
+                >
+                    {{
+                        `发行于${new Date(info.publishTime)
+                            .toLocaleDateString('zh-CN', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            })
+                            .replaceAll('/', '-')}`
+                    }}
                 </div>
             </div>
             <div class="mt-4 flex items-center justify-center md:justify-start">

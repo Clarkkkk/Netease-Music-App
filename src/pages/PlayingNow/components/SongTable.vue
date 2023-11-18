@@ -53,7 +53,11 @@ watch(currentSong, async (song) => {
             <p class="mt-2 text-xs text-base-content/70">
                 {{
                     `发行于${new Date(albumInfo.publishTime)
-                        .toLocaleDateString('cn')
+                        .toLocaleDateString('zh-CN', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric'
+                        })
                         .replaceAll('/', '-')}`
                 }}
             </p>

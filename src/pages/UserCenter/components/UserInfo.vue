@@ -37,7 +37,13 @@ const { profile } = storeToRefs(useProfileStore())
                 <div class="text-xs md:text-sm">
                     注册于
                     <span class="font-bold text-secondary">
-                        {{ new Date(profile.createTime).toLocaleDateString() }}
+                        {{
+                            new Date(profile.createTime).toLocaleDateString('zh-CN', {
+                                year: 'numeric',
+                                month: 'long',
+                                day: 'numeric'
+                            })
+                        }}
                     </span>
                     ，距今
                     <span class="font-bold text-secondary">
