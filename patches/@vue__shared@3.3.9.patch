@@ -1,7 +1,18 @@
 diff --git a/dist/shared.cjs.js b/dist/shared.cjs.js
-index 55bf448b3b88c0e1c7de45492ef316d4afca8bfd..a9c869466bcc72dd05130c993a1640fd4b4a561f 100644
+index 66a7b398cab95cedab1f673273f883cb00b436a3..b497b0dd60a7f95a58da8e95f1b765b077e2cfc1 100644
 --- a/dist/shared.cjs.js
 +++ b/dist/shared.cjs.js
+@@ -11,8 +11,8 @@ function makeMap(str, expectsLowerCase) {
+   return expectsLowerCase ? (val) => !!map[val.toLowerCase()] : (val) => !!map[val];
+ }
+ 
+-const EMPTY_OBJ = Object.freeze({}) ;
+-const EMPTY_ARR = Object.freeze([]) ;
++const EMPTY_OBJ = Object.freeze({});
++const EMPTY_ARR = Object.freeze([]);
+ const NOOP = () => {
+ };
+ const NO = () => false;
 @@ -250,7 +250,7 @@ function normalizeProps(props) {
    return props;
  }
@@ -12,7 +23,7 @@ index 55bf448b3b88c0e1c7de45492ef316d4afca8bfd..a9c869466bcc72dd05130c993a1640fd
  const VOID_TAGS = "area,base,br,col,embed,hr,img,input,link,meta,param,source,track,wbr";
  const isHTMLTag = /* @__PURE__ */ makeMap(HTML_TAGS);
 diff --git a/dist/shared.cjs.prod.js b/dist/shared.cjs.prod.js
-index 31197203fc885cbf38abfd9b81f1f47ffa148794..7da8b12ea6e961a35b4f1387fdcce8cd4b2d7d45 100644
+index 3f0e390b65d4a4ba443902687bdccab299af0ec4..a6e3ffe234b329c856f1cdd348033751203bc516 100644
 --- a/dist/shared.cjs.prod.js
 +++ b/dist/shared.cjs.prod.js
 @@ -250,7 +250,7 @@ function normalizeProps(props) {
@@ -25,7 +36,7 @@ index 31197203fc885cbf38abfd9b81f1f47ffa148794..7da8b12ea6e961a35b4f1387fdcce8cd
  const VOID_TAGS = "area,base,br,col,embed,hr,img,input,link,meta,param,source,track,wbr";
  const isHTMLTag = /* @__PURE__ */ makeMap(HTML_TAGS);
 diff --git a/dist/shared.esm-bundler.js b/dist/shared.esm-bundler.js
-index ecf3d06a289252fe424938b558177cbaeee6bde4..649a11aa7f3e0b4e7b0d2bcb3ddad44cd14541eb 100644
+index 02e031cbeea3216035a2d32a1dd7015aa8f7746c..b7ae1f0531e39970dc4192a1cbbd8c372e3b86a2 100644
 --- a/dist/shared.esm-bundler.js
 +++ b/dist/shared.esm-bundler.js
 @@ -246,7 +246,7 @@ function normalizeProps(props) {
