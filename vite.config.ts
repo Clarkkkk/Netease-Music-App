@@ -2,6 +2,7 @@ import vue from '@vitejs/plugin-vue'
 import * as path from 'path'
 import IconsResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
+import turboConsole from 'unplugin-turbo-console/vite'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 // import checker from 'vite-plugin-checker'
@@ -30,6 +31,7 @@ export default defineConfig(() => {
             //         initialIsOpen: false
             //     }
             // }),
+            turboConsole(),
             svgLoader({
                 defaultImport: 'component',
                 svgo: false
