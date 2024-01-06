@@ -76,7 +76,7 @@ watch(qrcodeLoginStatus, (val) => {
                             class="absolute left-0 top-0 flex h-full w-full items-center justify-center bg-base-300"
                         >
                             <button
-                                class="btn-sm btn"
+                                class="btn btn-sm"
                                 @click="refresh"
                             >
                                 点击刷新
@@ -98,7 +98,7 @@ watch(qrcodeLoginStatus, (val) => {
                         {{ message }}
                     </div>
                     <DialogCloseTrigger class="absolute right-1 top-1">
-                        <button class="btn-ghost btn-square btn">
+                        <button class="btn btn-square btn-ghost">
                             <i-fluent-dismiss-32-regular />
                         </button>
                     </DialogCloseTrigger>

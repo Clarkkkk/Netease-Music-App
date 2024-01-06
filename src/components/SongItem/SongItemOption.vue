@@ -31,7 +31,7 @@ async function onClick() {
 <template>
     <ContextMenu>
         <template #default>
-            <Button class="btn-ghost btn-square btn-sm">
+            <Button class="btn-square btn-ghost btn-sm">
                 <template #icon>
                     <i-solar-menu-dots-bold />
                 </template>

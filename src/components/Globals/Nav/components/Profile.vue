@@ -20,7 +20,7 @@ async function onLogout() {
             interactive
             :delay="[0, 300]"
         >
-            <Button class="btn-ghost btn">
+            <Button class="btn btn-ghost">
                 <Image
                     v-if="!!profile"
                     :src="profile.profile.avatarUrl"
@@ -65,7 +65,7 @@ async function onLogout() {
                             {{ profile?.profile.nickname || '' }}
                         </div>
                         <Button
-                            class="btn-primary btn-outline btn mt-8 w-full"
+                            class="btn btn-primary btn-outline mt-8 w-full"
                             @click="onLogout"
                         >
                             退出登录

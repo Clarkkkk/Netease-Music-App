@@ -66,7 +66,7 @@ async function onRouteClick(to: string, close: () => void) {
 <template>
     <Drawer>
         <template #default="drawerProps">
-            <DrawerTrigger class="btn-ghost btn-square">
+            <DrawerTrigger class="btn-square btn-ghost">
                 <i-solar-hamburger-menu-line-duotone class="h-6 w-6" />
             </DrawerTrigger>
 
@@ -75,7 +75,7 @@ async function onRouteClick(to: string, close: () => void) {
                     <div class="flex justify-between p-2">
                         <div></div>
                         <Button
-                            class="btn-ghost btn-square"
+                            class="btn-square btn-ghost"
                             @click="drawerProps.close()"
                         >
                             <i-fluent-dismiss-32-regular />

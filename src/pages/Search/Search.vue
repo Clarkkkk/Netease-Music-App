@@ -74,7 +74,7 @@ watch(
                 v-view-transition-name="{ 'search-input': !viewTransitionEnded }"
                 type="search"
                 autofocus
-                class="input-primary input input-sm w-full rounded-full bg-transparent pl-10 md:input-md md:w-128 md:pl-14 md:text-lg"
+                class="input input-primary input-sm w-full rounded-full bg-transparent pl-10 md:input-md md:w-128 md:pl-14 md:text-lg"
                 @keydown.enter="(e) => onSearch((e.target as HTMLInputElement).value)"
             />
         </form>

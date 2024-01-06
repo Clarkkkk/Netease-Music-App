@@ -18,7 +18,7 @@ const { switchToThisSong, removeSong } = usePlaylistStore()
             <template #default>
                 <Button
                     v-view-transition-name="'playing-playlist-btn'"
-                    class="btn-ghost btn-square btn-sm ml-3 p-0"
+                    class="btn-square btn-ghost btn-sm ml-3 p-0"
                 >
                     <i-solar-plaaylist-minimalistic-bold-duotone class="h-5 w-5" />
                 </Button>
@@ -50,7 +50,7 @@ const { switchToThisSong, removeSong } = usePlaylistStore()
                             {{ song.artist }}
                         </span>
                         <Button
-                            class="btn-ghost btn-square btn-sm"
+                            class="btn-square btn-ghost btn-sm"
                             @click.stop="removeSong(song)"
                         >
                             <template #icon>

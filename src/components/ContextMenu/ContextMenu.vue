@@ -100,7 +100,7 @@ provide('ContextMenu', { hideMenu, visible })
                     >
                         <div class="sticky top-0 z-10 h-12 w-full bg-base-100 pt-4">
                             <Button
-                                class="btn-ghost btn-square btn-sm absolute right-0 top-2"
+                                class="btn-square btn-ghost btn-sm absolute right-0 top-2"
                                 @click="visible = false"
                             >
                                 <i-fluent-dismiss-32-regular />
