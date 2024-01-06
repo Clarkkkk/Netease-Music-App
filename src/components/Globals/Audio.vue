@@ -9,7 +9,8 @@ const { updateAudioStatus, updateCurrentTime, updateDuration } = useAudioStore()
 const { currentSong } = storeToRefs(usePlaylistStore())
 
 let reloadCount = 0
-async function onError() {
+async function onError(e: any) {
+    console.error(e)
     if (currentSong.value && currentSong.value.timestamp + 15 * ONE_MINUTE < Date.now()) {
         updateAudioStatus('error')
     } else {
