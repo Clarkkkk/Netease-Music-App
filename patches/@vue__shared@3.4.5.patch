@@ -1,9 +1,9 @@
 diff --git a/dist/shared.cjs.js b/dist/shared.cjs.js
-index 66a7b398cab95cedab1f673273f883cb00b436a3..b497b0dd60a7f95a58da8e95f1b765b077e2cfc1 100644
+index 2ca06aca78675ca08ba9a25b284494a50a716512..fc897bad2cf1ff27750ae8141b815f6cfaf73744 100644
 --- a/dist/shared.cjs.js
 +++ b/dist/shared.cjs.js
-@@ -11,8 +11,8 @@ function makeMap(str, expectsLowerCase) {
-   return expectsLowerCase ? (val) => !!map[val.toLowerCase()] : (val) => !!map[val];
+@@ -7,13 +7,13 @@ function makeMap(str, expectsLowerCase) {
+   return expectsLowerCase ? (val) => set.has(val.toLowerCase()) : (val) => set.has(val);
  }
  
 -const EMPTY_OBJ = Object.freeze({}) ;
@@ -13,38 +13,62 @@ index 66a7b398cab95cedab1f673273f883cb00b436a3..b497b0dd60a7f95a58da8e95f1b765b0
  const NOOP = () => {
  };
  const NO = () => false;
-@@ -250,7 +250,7 @@ function normalizeProps(props) {
+ const isOn = (key) => key.charCodeAt(0) === 111 && key.charCodeAt(1) === 110 && // uppercase letter
+-(key.charCodeAt(2) > 122 || key.charCodeAt(2) < 97);
++  (key.charCodeAt(2) > 122 || key.charCodeAt(2) < 97);
+ const isModelListener = (key) => key.startsWith("onUpdate:");
+ const extend = Object.assign;
+ const remove = (arr, el) => {
+@@ -309,7 +309,7 @@ function normalizeProps(props) {
    return props;
  }
  
 -const HTML_TAGS = "html,body,base,head,link,meta,style,title,address,article,aside,footer,header,hgroup,h1,h2,h3,h4,h5,h6,nav,section,div,dd,dl,dt,figcaption,figure,picture,hr,img,li,main,ol,p,pre,ul,a,b,abbr,bdi,bdo,br,cite,code,data,dfn,em,i,kbd,mark,q,rp,rt,ruby,s,samp,small,span,strong,sub,sup,time,u,var,wbr,area,audio,map,track,video,embed,object,param,source,canvas,script,noscript,del,ins,caption,col,colgroup,table,thead,tbody,td,th,tr,button,datalist,fieldset,form,input,label,legend,meter,optgroup,option,output,progress,select,textarea,details,dialog,menu,summary,template,blockquote,iframe,tfoot";
 +const HTML_TAGS = "html,body,base,head,link,meta,style,title,address,article,aside,footer,header,hgroup,h1,h2,h3,h4,h5,h6,nav,section,search,div,dd,dl,dt,figcaption,figure,picture,hr,img,li,main,ol,p,pre,ul,a,b,abbr,bdi,bdo,br,cite,code,data,dfn,em,i,kbd,mark,q,rp,rt,ruby,s,samp,small,span,strong,sub,sup,time,u,var,wbr,area,audio,map,track,video,embed,object,param,source,canvas,script,noscript,del,ins,caption,col,colgroup,table,thead,tbody,td,th,tr,button,datalist,fieldset,form,input,label,legend,meter,optgroup,option,output,progress,select,textarea,details,dialog,menu,summary,template,blockquote,iframe,tfoot";
  const SVG_TAGS = "svg,animate,animateMotion,animateTransform,circle,clipPath,color-profile,defs,desc,discard,ellipse,feBlend,feColorMatrix,feComponentTransfer,feComposite,feConvolveMatrix,feDiffuseLighting,feDisplacementMap,feDistantLight,feDropShadow,feFlood,feFuncA,feFuncB,feFuncG,feFuncR,feGaussianBlur,feImage,feMerge,feMergeNode,feMorphology,feOffset,fePointLight,feSpecularLighting,feSpotLight,feTile,feTurbulence,filter,foreignObject,g,hatch,hatchpath,image,line,linearGradient,marker,mask,mesh,meshgradient,meshpatch,meshrow,metadata,mpath,path,pattern,polygon,polyline,radialGradient,rect,set,solidcolor,stop,switch,symbol,text,textPath,title,tspan,unknown,use,view";
+ const MATH_TAGS = "annotation,annotation-xml,maction,maligngroup,malignmark,math,menclose,merror,mfenced,mfrac,mfraction,mglyph,mi,mlabeledtr,mlongdiv,mmultiscripts,mn,mo,mover,mpadded,mphantom,mprescripts,mroot,mrow,ms,mscarries,mscarry,msgroup,msline,mspace,msqrt,msrow,mstack,mstyle,msub,msubsup,msup,mtable,mtd,mtext,mtr,munder,munderover,none,semantics";
  const VOID_TAGS = "area,base,br,col,embed,hr,img,input,link,meta,param,source,track,wbr";
- const isHTMLTag = /* @__PURE__ */ makeMap(HTML_TAGS);
 diff --git a/dist/shared.cjs.prod.js b/dist/shared.cjs.prod.js
-index 3f0e390b65d4a4ba443902687bdccab299af0ec4..a6e3ffe234b329c856f1cdd348033751203bc516 100644
+index fac6f5540c3dbe5dffb4b876fce64a74e3db7b38..42e972255ebcabdb7dff5e8b5b6c197e4bb61067 100644
 --- a/dist/shared.cjs.prod.js
 +++ b/dist/shared.cjs.prod.js
-@@ -250,7 +250,7 @@ function normalizeProps(props) {
+@@ -13,7 +13,7 @@ const NOOP = () => {
+ };
+ const NO = () => false;
+ const isOn = (key) => key.charCodeAt(0) === 111 && key.charCodeAt(1) === 110 && // uppercase letter
+-(key.charCodeAt(2) > 122 || key.charCodeAt(2) < 97);
++  (key.charCodeAt(2) > 122 || key.charCodeAt(2) < 97);
+ const isModelListener = (key) => key.startsWith("onUpdate:");
+ const extend = Object.assign;
+ const remove = (arr, el) => {
+@@ -309,7 +309,7 @@ function normalizeProps(props) {
    return props;
  }
  
 -const HTML_TAGS = "html,body,base,head,link,meta,style,title,address,article,aside,footer,header,hgroup,h1,h2,h3,h4,h5,h6,nav,section,div,dd,dl,dt,figcaption,figure,picture,hr,img,li,main,ol,p,pre,ul,a,b,abbr,bdi,bdo,br,cite,code,data,dfn,em,i,kbd,mark,q,rp,rt,ruby,s,samp,small,span,strong,sub,sup,time,u,var,wbr,area,audio,map,track,video,embed,object,param,source,canvas,script,noscript,del,ins,caption,col,colgroup,table,thead,tbody,td,th,tr,button,datalist,fieldset,form,input,label,legend,meter,optgroup,option,output,progress,select,textarea,details,dialog,menu,summary,template,blockquote,iframe,tfoot";
 +const HTML_TAGS = "html,body,base,head,link,meta,style,title,address,article,aside,footer,header,hgroup,h1,h2,h3,h4,h5,h6,nav,section,search,div,dd,dl,dt,figcaption,figure,picture,hr,img,li,main,ol,p,pre,ul,a,b,abbr,bdi,bdo,br,cite,code,data,dfn,em,i,kbd,mark,q,rp,rt,ruby,s,samp,small,span,strong,sub,sup,time,u,var,wbr,area,audio,map,track,video,embed,object,param,source,canvas,script,noscript,del,ins,caption,col,colgroup,table,thead,tbody,td,th,tr,button,datalist,fieldset,form,input,label,legend,meter,optgroup,option,output,progress,select,textarea,details,dialog,menu,summary,template,blockquote,iframe,tfoot";
  const SVG_TAGS = "svg,animate,animateMotion,animateTransform,circle,clipPath,color-profile,defs,desc,discard,ellipse,feBlend,feColorMatrix,feComponentTransfer,feComposite,feConvolveMatrix,feDiffuseLighting,feDisplacementMap,feDistantLight,feDropShadow,feFlood,feFuncA,feFuncB,feFuncG,feFuncR,feGaussianBlur,feImage,feMerge,feMergeNode,feMorphology,feOffset,fePointLight,feSpecularLighting,feSpotLight,feTile,feTurbulence,filter,foreignObject,g,hatch,hatchpath,image,line,linearGradient,marker,mask,mesh,meshgradient,meshpatch,meshrow,metadata,mpath,path,pattern,polygon,polyline,radialGradient,rect,set,solidcolor,stop,switch,symbol,text,textPath,title,tspan,unknown,use,view";
+ const MATH_TAGS = "annotation,annotation-xml,maction,maligngroup,malignmark,math,menclose,merror,mfenced,mfrac,mfraction,mglyph,mi,mlabeledtr,mlongdiv,mmultiscripts,mn,mo,mover,mpadded,mphantom,mprescripts,mroot,mrow,ms,mscarries,mscarry,msgroup,msline,mspace,msqrt,msrow,mstack,mstyle,msub,msubsup,msup,mtable,mtd,mtext,mtr,munder,munderover,none,semantics";
  const VOID_TAGS = "area,base,br,col,embed,hr,img,input,link,meta,param,source,track,wbr";
- const isHTMLTag = /* @__PURE__ */ makeMap(HTML_TAGS);
 diff --git a/dist/shared.esm-bundler.js b/dist/shared.esm-bundler.js
-index 02e031cbeea3216035a2d32a1dd7015aa8f7746c..b7ae1f0531e39970dc4192a1cbbd8c372e3b86a2 100644
+index c4cdeeac5cee2dcc487c356cded29275210a4d8f..4915f32ec56dd6ea4029f5c71314a4cee532ebea 100644
 --- a/dist/shared.esm-bundler.js
 +++ b/dist/shared.esm-bundler.js
-@@ -246,7 +246,7 @@ function normalizeProps(props) {
+@@ -9,7 +9,7 @@ const NOOP = () => {
+ };
+ const NO = () => false;
+ const isOn = (key) => key.charCodeAt(0) === 111 && key.charCodeAt(1) === 110 && // uppercase letter
+-(key.charCodeAt(2) > 122 || key.charCodeAt(2) < 97);
++  (key.charCodeAt(2) > 122 || key.charCodeAt(2) < 97);
+ const isModelListener = (key) => key.startsWith("onUpdate:");
+ const extend = Object.assign;
+ const remove = (arr, el) => {
+@@ -305,7 +305,7 @@ function normalizeProps(props) {
    return props;
  }
  
 -const HTML_TAGS = "html,body,base,head,link,meta,style,title,address,article,aside,footer,header,hgroup,h1,h2,h3,h4,h5,h6,nav,section,div,dd,dl,dt,figcaption,figure,picture,hr,img,li,main,ol,p,pre,ul,a,b,abbr,bdi,bdo,br,cite,code,data,dfn,em,i,kbd,mark,q,rp,rt,ruby,s,samp,small,span,strong,sub,sup,time,u,var,wbr,area,audio,map,track,video,embed,object,param,source,canvas,script,noscript,del,ins,caption,col,colgroup,table,thead,tbody,td,th,tr,button,datalist,fieldset,form,input,label,legend,meter,optgroup,option,output,progress,select,textarea,details,dialog,menu,summary,template,blockquote,iframe,tfoot";
 +const HTML_TAGS = "html,body,base,head,link,meta,style,title,address,article,aside,footer,header,hgroup,h1,h2,h3,h4,h5,h6,nav,section,search,div,dd,dl,dt,figcaption,figure,picture,hr,img,li,main,ol,p,pre,ul,a,b,abbr,bdi,bdo,br,cite,code,data,dfn,em,i,kbd,mark,q,rp,rt,ruby,s,samp,small,span,strong,sub,sup,time,u,var,wbr,area,audio,map,track,video,embed,object,param,source,canvas,script,noscript,del,ins,caption,col,colgroup,table,thead,tbody,td,th,tr,button,datalist,fieldset,form,input,label,legend,meter,optgroup,option,output,progress,select,textarea,details,dialog,menu,summary,template,blockquote,iframe,tfoot";
  const SVG_TAGS = "svg,animate,animateMotion,animateTransform,circle,clipPath,color-profile,defs,desc,discard,ellipse,feBlend,feColorMatrix,feComponentTransfer,feComposite,feConvolveMatrix,feDiffuseLighting,feDisplacementMap,feDistantLight,feDropShadow,feFlood,feFuncA,feFuncB,feFuncG,feFuncR,feGaussianBlur,feImage,feMerge,feMergeNode,feMorphology,feOffset,fePointLight,feSpecularLighting,feSpotLight,feTile,feTurbulence,filter,foreignObject,g,hatch,hatchpath,image,line,linearGradient,marker,mask,mesh,meshgradient,meshpatch,meshrow,metadata,mpath,path,pattern,polygon,polyline,radialGradient,rect,set,solidcolor,stop,switch,symbol,text,textPath,title,tspan,unknown,use,view";
+ const MATH_TAGS = "annotation,annotation-xml,maction,maligngroup,malignmark,math,menclose,merror,mfenced,mfrac,mfraction,mglyph,mi,mlabeledtr,mlongdiv,mmultiscripts,mn,mo,mover,mpadded,mphantom,mprescripts,mroot,mrow,ms,mscarries,mscarry,msgroup,msline,mspace,msqrt,msrow,mstack,mstyle,msub,msubsup,msup,mtable,mtd,mtext,mtr,munder,munderover,none,semantics";
  const VOID_TAGS = "area,base,br,col,embed,hr,img,input,link,meta,param,source,track,wbr";
- const isHTMLTag = /* @__PURE__ */ makeMap(HTML_TAGS);
