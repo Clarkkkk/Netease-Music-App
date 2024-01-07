@@ -4,7 +4,13 @@ import { inject, ref, watch } from 'vue'
 import Button from '../Button.vue'
 
 interface Props extends /* @vue-ignore */ ButtonHTMLAttributes {
+    /**
+     * 点击菜单项时触发，执行回调后菜单关闭
+     *
+     * 若回调返回一个promise，菜单会等待promise resolve后再关闭
+     */
     onClick: (e: MouseEvent) => void | Promise<void>
+    /** 当菜单很长，需要滚动时，将`active`设为`true`会使菜单在打开后自动滚动到这个item */
     active?: boolean
 }
 

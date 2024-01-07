@@ -6,11 +6,20 @@ import type { Instance, Placement } from 'tippy.js'
 import Button from '../Button.vue'
 
 interface ContextMenuProps {
+    /** 菜单弹出位置 */
     placement?: Placement
+    /** 菜单宽度 */
     size?: 'large' | 'normal'
 }
 
 defineProps<ContextMenuProps>()
+
+defineSlots<{
+    /** 菜单的触发按钮插槽 */
+    default: () => void
+    /** 菜单插槽，用于渲染菜单内容 */
+    menu: () => void
+}>()
 
 const { isPc } = useDeviceType()
 const tippy = ref<Instance | null>(null)

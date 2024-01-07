@@ -20,7 +20,9 @@
     "lint-staged": "lint-staged",
     "preview": "vite preview",
     "prepare": "husky install",
-    "release": "commit-and-tag-version --preset=aaron-preset"
+    "release": "commit-and-tag-version --preset=aaron-preset",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@ark-ui/vue": "^0.5.3",
@@ -44,6 +46,14 @@
   "devDependencies": {
     "@iconify-json/fluent": "^1.1.43",
     "@iconify-json/solar": "^1.1.1",
+    "@storybook/addon-actions": "^7.6.7",
+    "@storybook/addon-essentials": "7.6.7",
+    "@storybook/addon-interactions": "7.6.7",
+    "@storybook/addon-links": "7.6.7",
+    "@storybook/blocks": "7.6.7",
+    "@storybook/test": "7.6.7",
+    "@storybook/vue3": "7.6.7",
+    "@storybook/vue3-vite": "7.6.7",
     "@tailwindcss/container-queries": "^0.1.1",
     "@types/lodash": "^4.14.202",
     "@types/node": "^20.10.2",
@@ -68,6 +78,7 @@
     "eslint-config-standard": "^17.1.0",
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-simple-import-sort": "^10.0.0",
+    "eslint-plugin-storybook": "^0.6.15",
     "eslint-plugin-vue": "^9.19.2",
     "globby": "^13.2.2",
     "husky": "^8.0.3",
@@ -83,8 +94,12 @@
     "prettier-plugin-tailwindcss": "^0.3.0",
     "proxy-agent": "^6.3.1",
     "pwa-asset-generator": "^6.3.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "sass": "^1.69.5",
     "simple-git": "^3.21.0",
+    "storybook": "7.6.7",
+    "storybook-addon-vue-slots": "^0.9.29",
     "tailwindcss": "^3.3.5",
     "tailwindcss-containment": "^0.2.0",
     "typescript": "^5.3.2",
@@ -103,7 +118,8 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "@vue/shared@3.4.5": "patches/@vue__shared@3.4.5.patch"
+      "@vue/shared@3.4.5": "patches/@vue__shared@3.4.5.patch",
+      "@storybook/vue3@7.6.7": "patches/@storybook__vue3@7.6.7.patch"
     }
   }
 }

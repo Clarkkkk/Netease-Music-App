@@ -8,7 +8,8 @@ module.exports = {
         'standard',
         'eslint:recommended',
         'plugin:vue/vue3-recommended',
-        'plugin:prettier/recommended'
+        'plugin:prettier/recommended',
+        'plugin:storybook/recommended'
     ],
     parser: 'vue-eslint-parser',
     parserOptions: {
