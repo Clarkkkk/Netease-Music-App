@@ -129,19 +129,19 @@ export const usePlaylistStore = defineStore('playlist', () => {
     }
 
     async function switchToThisList(list: Song[], shouldPlay?: Song) {
-        updatePlayMode('list-sequent')
         historyPlaylist.value = playlist.value
         playlist.value = list
         await updateCurrentSong(shouldPlay || list[0] || null)
+        updatePlayMode('list-sequent')
     }
 
     async function switchToRadio() {
         if (playMode.value === 'radio') return
-        updatePlayMode('radio')
         const list = await fetchRadioList()
         historyPlaylist.value = playlist.value
         playlist.value = list
         await updateCurrentSong(list[0] || null)
+        updatePlayMode('radio')
     }
 
     async function appendSongs(payload: Song | Song[]) {
