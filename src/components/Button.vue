@@ -41,10 +41,10 @@ defineExpose({ el })
         >
             <span
                 :class="[
-                    'loading', 
-                    'loading-spinner', 
-                    'text-primary/70', 
-                    { 'loading-sm': ($attrs.class as string).includes('btn-sm') }, 
+                    'loading',
+                    'loading-spinner',
+                    'text-primary/70',
+                    { 'loading-sm': ($attrs.class as string).includes('btn-sm') },
                     { 'loading-xs': ($attrs.class as string).includes('btn-xs') }
                 ]"
             />

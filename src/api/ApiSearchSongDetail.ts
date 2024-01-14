@@ -41,18 +41,18 @@ export type ApiSearchSongDetail<T extends 1 | 1006 = 1> = {
                   songCount: number
               }
             : T extends 1006
-            ? {
-                  songs: {
-                      id: number
-                      name: string
-                      ar: Artist[]
-                      alia: string[]
-                      tns?: string[]
-                      al: Album
-                      lyrics: string[]
-                  }[]
-                  songCount: number
-              }
-            : never
+              ? {
+                    songs: {
+                        id: number
+                        name: string
+                        ar: Artist[]
+                        alia: string[]
+                        tns?: string[]
+                        al: Album
+                        lyrics: string[]
+                    }[]
+                    songCount: number
+                }
+              : never
     }
 }

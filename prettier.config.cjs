@@ -6,6 +6,6 @@ module.exports = {
     singleQuote: true,
     proseWrap: 'always',
     singleAttributePerLine: true,
-    plugins: [require('prettier-plugin-tailwindcss')],
+    plugins: [import('prettier-plugin-tailwindcss')],
     trailingComma: 'none'
 }

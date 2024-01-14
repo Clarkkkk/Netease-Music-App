@@ -46,56 +46,56 @@ export type ApiSearchDetail<T extends 1 | 1006 | 10 | 1000> = {
                   songCount: number
               }
             : T extends 1006
-            ? {
-                  songs: {
-                      id: number
-                      name: string
-                      artists: Artist[]
-                      album: Album
-                      alias: any[]
-                      lyrics: {
-                          txt: string
-                          range: {
-                              first: number
-                              second: number
-                          }
-                      }
-                      alg: string
-                      mark: number
-                  }[]
-                  songCount: number
-              }
-            : T extends 10
-            ? {
-                  hlWords: string[]
-                  albums: Album[]
-                  albumCount: number
-              }
-            : T extends 1000
-            ? {
-                  playlists: {
-                      id: number
-                      name: string
-                      coverImgUrl: string
-                      creator: {
-                          nickname: string
-                          userId: number
-                          avatarUrl: string
-                      }
-                      subscribed: boolean
-                      trackCount: number
-                      userId: number
-                      playCount: number
-                      bookCount: number
-                      specialType: number
-                      officialTags: string[] | null
-                      description: null | string
-                  }[]
-                  hasMore: boolean
-                  hlWords: string[]
-                  playlistCount: number
-                  searchQcReminder: null
-              }
-            : never
+              ? {
+                    songs: {
+                        id: number
+                        name: string
+                        artists: Artist[]
+                        album: Album
+                        alias: any[]
+                        lyrics: {
+                            txt: string
+                            range: {
+                                first: number
+                                second: number
+                            }
+                        }
+                        alg: string
+                        mark: number
+                    }[]
+                    songCount: number
+                }
+              : T extends 10
+                ? {
+                      hlWords: string[]
+                      albums: Album[]
+                      albumCount: number
+                  }
+                : T extends 1000
+                  ? {
+                        playlists: {
+                            id: number
+                            name: string
+                            coverImgUrl: string
+                            creator: {
+                                nickname: string
+                                userId: number
+                                avatarUrl: string
+                            }
+                            subscribed: boolean
+                            trackCount: number
+                            userId: number
+                            playCount: number
+                            bookCount: number
+                            specialType: number
+                            officialTags: string[] | null
+                            description: null | string
+                        }[]
+                        hasMore: boolean
+                        hlWords: string[]
+                        playlistCount: number
+                        searchQcReminder: null
+                    }
+                  : never
     }
 }

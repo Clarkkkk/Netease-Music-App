@@ -171,21 +171,25 @@ onBeforeRouteLeave(async () => {
         }
 
         &.inverse-animate {
-            animation: flip-z 750ms var(--ease-function),
+            animation:
+                flip-z 750ms var(--ease-function),
                 flip-z 750ms var(--ease-function) reverse 750ms;
 
             .cover-container-inner {
-                animation: flip 1500ms var(--ease-function),
+                animation:
+                    flip 1500ms var(--ease-function),
                     scale 750ms var(--ease-function) alternate 2;
             }
         }
 
         &.restore-animate {
-            animation: flip-z 750ms var(--ease-function),
+            animation:
+                flip-z 750ms var(--ease-function),
                 flip-z 750ms var(--ease-function) reverse 750ms;
 
             .cover-container-inner {
-                animation: flip-reverse 1500ms var(--ease-function),
+                animation:
+                    flip-reverse 1500ms var(--ease-function),
                     scale 750ms var(--ease-function) alternate 2;
             }
         }

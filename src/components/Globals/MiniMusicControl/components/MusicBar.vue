@@ -93,7 +93,10 @@ function formatTime(time: number) {
 }
 
 #music-bar .thumb {
-    transition: width 300ms, height 300ms, box-shadow 300ms;
+    transition:
+        width 300ms,
+        height 300ms,
+        box-shadow 300ms;
 }
 
 #music-bar:hover .thumb {

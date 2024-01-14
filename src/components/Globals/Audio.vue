@@ -34,10 +34,12 @@ async function onError(e: any) {
         :loop="loop"
         @error="onError"
         @loadeddata="updateAudioStatus('not-ready')"
-        @canplay="(e) => {
-            updateDuration((e.target as HTMLAudioElement).duration)
-            updateAudioStatus('can-play')
-        }"
+        @canplay="
+            (e) => {
+                updateDuration((e.target as HTMLAudioElement).duration)
+                updateAudioStatus('can-play')
+            }
+        "
         @durationchange="(e) => updateDuration((e.target as HTMLAudioElement).duration)"
         @timeupdate="(e) => updateCurrentTime((e.target as HTMLAudioElement).currentTime)"
         @play="updateAudioStatus('playing')"

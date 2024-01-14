@@ -32,10 +32,10 @@ function onCommentClick() {
 <template>
     <div
         id="playing-operations"
-        class="flex items-center w-80 justify-around text-slate-500"
+        class="flex w-80 items-center justify-around text-slate-500"
     >
         <Button
-            class="min-h-10 btn btn-square btn-ghost h-10 w-10"
+            class="btn btn-square btn-ghost h-10 min-h-10 w-10"
             @click="onLikeClick"
         >
             <template #icon>
@@ -61,7 +61,7 @@ function onCommentClick() {
             </template>
         </Button>
         <Button
-            class="min-h-10 btn btn-square btn-ghost h-10 w-10"
+            class="btn btn-square btn-ghost h-10 min-h-10 w-10"
             @click="onDislikeClick"
         >
             <template #icon>
@@ -69,7 +69,7 @@ function onCommentClick() {
             </template>
         </Button>
         <Button
-            class="min-h-10 btn btn-square btn-ghost h-10 w-10"
+            class="btn btn-square btn-ghost h-10 min-h-10 w-10"
             @click="onCommentClick"
         >
             <template #icon>
@@ -81,7 +81,7 @@ function onCommentClick() {
             icon-class="h-6 w-6"
             placement="right"
         />
-        <Button class="min-h-10 btn btn-square btn-ghost h-10 w-10">
+        <Button class="btn btn-square btn-ghost h-10 min-h-10 w-10">
             <template #icon>
                 <i-solar-menu-dots-line-duotone class="h-6 w-6" />
             </template>
