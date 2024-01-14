@@ -16,10 +16,10 @@ const showLyrics = useMediaQuery('(min-width: 1024px)')
             class="flex h-full w-full flex-col items-center justify-center bg-base-100 lg:w-1/2"
         >
             <Cover />
-            <Info class="mt-6 xl:mt-12" />
-            <Operations class="mt-4 xl:mt-8" />
-            <MusicBar class="mt-4 xl:mt-8" />
-            <Controls class="mt-4 xl:mt-8" />
+            <Info class="mt-6 xl:mt-8" />
+            <Operations class="mt-4 xl:mt-6" />
+            <MusicBar class="mt-4" />
+            <Controls class="mt-4" />
         </div>
         <div
             v-if="showLyrics"

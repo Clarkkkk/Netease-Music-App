@@ -1,5 +1,6 @@
 export { default as Button } from './Button.vue'
 export { default as Collapsible } from './Collapsible.vue'
+export * from './ContextMenu'
 export { default as DefaultCover } from './DefaultCover.vue'
 export * from './Drawer'
 export * from './Globals'

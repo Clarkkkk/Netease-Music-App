@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useAnimation } from 'services'
 import { useLikeStore, usePlaylistStore } from 'stores'
-import { Button, Playlist } from 'components'
+import { Button, ContextMenu, ContextMenuItem, Playlist } from 'components'
 
+const router = useRouter()
 const { animating, onAnimationEnd, startAnimation } = useAnimation()
 const { getLikeStatus, switchLikeStatus, dislikeThisSong } = useLikeStore()
 const { currentSong } = storeToRefs(usePlaylistStore())
@@ -26,6 +28,11 @@ async function onDislikeClick() {
 
 function onCommentClick() {
     alert('敬请期待')
+}
+
+async function onAlbumJumpClick() {
+    if (!currentSong.value) return
+    await router.push(`/album/${currentSong.value.albumId}`)
 }
 </script>
 
@@ -81,11 +88,17 @@ function onCommentClick() {
             icon-class="h-6 w-6"
             placement="right"
         />
-        <Button class="btn btn-square btn-ghost h-10 min-h-10 w-10">
-            <template #icon>
-                <i-solar-menu-dots-line-duotone class="h-6 w-6" />
+        <ContextMenu>
+            <Button class="btn btn-square btn-ghost h-10 min-h-10 w-10">
+                <template #icon>
+                    <i-solar-menu-dots-line-duotone class="h-6 w-6" />
+                </template>
+            </Button>
+
+            <template #menu>
+                <ContextMenuItem @click="onAlbumJumpClick">查看专辑</ContextMenuItem>
             </template>
-        </Button>
+        </ContextMenu>
     </div>
 </template>
 
