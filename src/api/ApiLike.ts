@@ -1,7 +1,7 @@
 /** 喜欢音乐 */
 export interface ApiLike {
     api: '/like'
-    method: 'post'
+    method: 'get'
     params: {
         /** 歌曲 id */
         id: any

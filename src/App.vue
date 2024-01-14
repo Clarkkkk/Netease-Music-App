@@ -2,6 +2,7 @@
 import { RouterView, useRoute } from 'vue-router'
 import { Audio, LoginModal, MiniMusicControl, Nav } from 'components'
 import {
+    useLikeEffect,
     useLoginInitEffect,
     useLyricsEffect,
     useMediaSessionEffect,
@@ -13,6 +14,7 @@ useLoginInitEffect()
 usePlayStatusEffect()
 useMediaSessionEffect()
 useLyricsEffect()
+useLikeEffect()
 
 const route = useRoute()
 </script>

@@ -8,12 +8,18 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     IFluentDismiss32Regular: typeof import('~icons/fluent/dismiss32-regular')['default']
+    ISolarChatDotsLineDuotone: typeof import('~icons/solar/chat-dots-line-duotone')['default']
     ISolarFileRemoveBoldDuotone: typeof import('~icons/solar/file-remove-bold-duotone')['default']
     ISolarGalleryBoldDuotone: typeof import('~icons/solar/gallery-bold-duotone')['default']
     ISolarHamburgerMenuLineDuotone: typeof import('~icons/solar/hamburger-menu-line-duotone')['default']
+    ISolarHeartBold: typeof import('~icons/solar/heart-bold')['default']
+    ISolarHeartBoldDuotone: typeof import('~icons/solar/heart-bold-duotone')['default']
+    ISolarHeartBrokenLineDuotone: typeof import('~icons/solar/heart-broken-line-duotone')['default']
+    ISolarHeartLineDuotone: typeof import('~icons/solar/heart-line-duotone')['default']
     ISolarListHeartMinimalisticLineDuotone: typeof import('~icons/solar/list-heart-minimalistic-line-duotone')['default']
     ISolarMagniferLineDuotone: typeof import('~icons/solar/magnifer-line-duotone')['default']
     ISolarMenuDotsBold: typeof import('~icons/solar/menu-dots-bold')['default']
+    ISolarMenuDotsLineDuotone: typeof import('~icons/solar/menu-dots-line-duotone')['default']
     ISolarMicrophoneBoldDuotone: typeof import('~icons/solar/microphone-bold-duotone')['default']
     ISolarMusicNotesBoldDuotone: typeof import('~icons/solar/music-notes-bold-duotone')['default']
     ISolarPauseBoldDuotone: typeof import('~icons/solar/pause-bold-duotone')['default']

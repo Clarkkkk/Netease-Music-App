@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Controls, Cover, Info, MusicBar, Playlist } from './components'
+import Playlist from '../../Playlist.vue'
+import { Controls, Cover, Info, MusicBar } from './components'
 </script>
 
 <template>
@@ -15,7 +16,7 @@ import { Controls, Cover, Info, MusicBar, Playlist } from './components'
             <Info />
             <MusicBar />
             <Controls />
-            <Playlist />
+            <Playlist class="ml-3" />
         </div>
     </div>
 </template>
