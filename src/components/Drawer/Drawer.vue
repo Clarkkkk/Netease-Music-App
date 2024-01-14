@@ -9,7 +9,7 @@ defineSlots<{
      * @param open 打开抽屉
      * @param close 关闭抽屉
      */
-    default: (visible: boolean, open: () => void, close: () => void) => void
+    default: (props: { visible: boolean; open: () => void; close: () => void }) => void
 }>()
 
 const visible = ref(false)
