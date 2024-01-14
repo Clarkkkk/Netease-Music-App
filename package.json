@@ -38,7 +38,7 @@
     "swiper": "^10.3.1",
     "tippy.js": "^6.3.7",
     "vee-validate": "^4.12.2",
-    "vue": "^3.4.5",
+    "vue": "^3.4.13",
     "vue-route-prefetch": "^3.0.2",
     "vue-router": "^4.2.5",
     "vue-tippy": "^6.3.1",
