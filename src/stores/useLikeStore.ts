@@ -23,9 +23,9 @@ export const useLikeStore = defineStore('like', () => {
     }
 
     async function dislikeThisSong(song: Song) {
-        await post<ApiFmTrash>('/fm_trash', { id: song.id })
         await switchToNextSong()
         await removeSong(song)
+        post<ApiFmTrash>('/fm_trash', { id: song.id })
     }
 
     async function fetchLikeList(uid: number) {
