@@ -71,7 +71,7 @@ function formatTime(time: number) {
                         :style="thumbStyle"
                     >
                         <div
-                            class="-top-7 h-5 rounded-sm bg-neutral p-2 text-xs font-bold text-neutral-content shadow-lg shadow-neutral/30"
+                            class="pointer-events-none -top-7 h-5 select-none rounded-sm bg-neutral p-2 text-xs font-bold text-neutral-content shadow-lg shadow-neutral/30"
                             :style="tooltipStyle"
                         >
                             {{ tooltipText }}

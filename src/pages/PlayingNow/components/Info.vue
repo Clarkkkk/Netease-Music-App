@@ -11,7 +11,7 @@ const { currentSong } = storeToRefs(usePlaylistStore())
         <Tooltip :content="currentSong?.subName">
             <h1
                 v-view-transition-name="'playing-name'"
-                class="px-4 text-center text-lg font-bold text-base-content sm:text-xl"
+                class="max-w-[500px] px-4 text-center text-lg font-bold text-base-content sm:text-xl"
             >
                 {{ currentSong?.name || '未播放' }}
             </h1>
@@ -26,7 +26,7 @@ const { currentSong } = storeToRefs(usePlaylistStore())
         <p
             v-if="currentSong?.artist"
             v-view-transition-name="'playing-artist'"
-            class="mt-1 flex items-center text-center text-xs text-base-content sm:text-sm"
+            class="mt-2 flex items-center text-center text-xs text-base-content sm:text-sm"
         >
             <i-solar-microphone-bold-duotone class="mr-1 h-4 w-4 text-primary sm:h-5 sm:w-5" />
             {{ currentSong?.artist || '--' }}

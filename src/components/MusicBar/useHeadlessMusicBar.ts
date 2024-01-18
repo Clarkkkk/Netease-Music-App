@@ -1,5 +1,6 @@
 import type { ComputedRef, CSSProperties, Ref } from 'vue'
-import { computed, ref, watch } from 'vue'
+import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { debounce } from 'lodash'
 import { minmax } from 'utils'
 
 interface MusicBarData {
@@ -17,9 +18,21 @@ export const useHeadlessMusicBar = ({
 }: MusicBarData) => {
     const isPointerDown = ref(false)
     const percentage = ref(current.value / (duration.value || 1))
+    const rect = ref(containerElement.value.getBoundingClientRect())
 
-    const rect = computed(() => {
-        return containerElement.value.getBoundingClientRect()
+    const updateRect = debounce(() => {
+        rect.value = containerElement.value.getBoundingClientRect()
+    }, 300)
+    const observer = new ResizeObserver(updateRect)
+
+    onMounted(() => {
+        observer.observe(containerElement.value)
+        window.addEventListener('resize', updateRect)
+    })
+
+    onUnmounted(() => {
+        observer.disconnect()
+        window.removeEventListener('resize', updateRect)
     })
 
     const thumbStyle: ComputedRef<CSSProperties> = computed(() => {

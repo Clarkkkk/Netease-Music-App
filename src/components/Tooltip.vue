@@ -15,7 +15,7 @@ const body = document.body
 
 <template>
     <Tippy
-        v-if="content"
+        v-if="content && content !== 'null'"
         max-width="none"
         trigger="touchstart mouseenter"
         :delay="[0, 100]"

@@ -96,7 +96,10 @@ async function onAlbumJumpClick() {
             </Button>
 
             <template #menu>
-                <ContextMenuItem @click="onAlbumJumpClick">查看专辑</ContextMenuItem>
+                <ContextMenuItem @click="onAlbumJumpClick">
+                    <i-solar-vinyl-line-duotone class="h-5 w-5" />
+                    查看专辑
+                </ContextMenuItem>
             </template>
         </ContextMenu>
     </div>
