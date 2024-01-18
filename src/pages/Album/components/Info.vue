@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
 import type { ApiAlbum } from 'api'
 import { Collapsible, Image } from 'components'
@@ -9,11 +9,14 @@ interface InfoProps {
     info: ApiAlbum['return']['album'] | null
 }
 
-defineProps<InfoProps>()
+const props = defineProps<InfoProps>()
 
 const modal = ref<InstanceType<typeof Image> | null>(null)
 const lessThan768 = useMediaQuery('(max-width: 767px)')
 const lessThan1280 = useMediaQuery('(max-width: 1279px)')
+const collapsible = computed(() => {
+    return (props.info?.description?.length || 0) > (lessThan768 ? 150 : lessThan1280 ? 300 : 400)
+})
 </script>
 
 <template>
@@ -91,9 +94,7 @@ const lessThan1280 = useMediaQuery('(max-width: 1279px)')
                 </span>
             </div>
             <Collapsible
-                :collapsible="
-                    (info?.description.length || 0) > (lessThan768 ? 150 : lessThan1280 ? 300 : 400)
-                "
+                :collapsible="collapsible"
                 :collapse-height="lessThan768 ? 97 : 110"
                 :possible-max-height="lessThan1280 ? 500 : 1000"
             >
