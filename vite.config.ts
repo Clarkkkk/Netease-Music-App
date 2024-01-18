@@ -5,6 +5,7 @@ import Icons from 'unplugin-icons/vite'
 import turboConsole from 'unplugin-turbo-console/vite'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
+import vitePluginImp from 'vite-plugin-imp'
 // import checker from 'vite-plugin-checker'
 import { VitePWA } from 'vite-plugin-pwa'
 import svgLoader from 'vite-svg-loader'
@@ -38,6 +39,15 @@ export default defineConfig(() => {
             }),
             tsconfigPaths({
                 loose: true
+            }),
+            vitePluginImp({
+                libList: [
+                    {
+                        libName: 'lodash',
+                        libDirectory: '',
+                        camel2DashComponentName: false
+                    }
+                ]
             }),
             Icons(),
             Components({

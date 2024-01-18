@@ -111,6 +111,7 @@
     "vite-bundle-visualizer": "^1.0.0",
     "vite-plugin-checker": "^0.6.2",
     "vite-plugin-debug": "^1.0.1",
+    "vite-plugin-imp": "^2.4.0",
     "vite-plugin-pwa": "^0.17.4",
     "vite-plugin-svgr": "^4.2.0",
     "vite-svg-loader": "^5.1.0",

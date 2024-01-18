@@ -264,6 +264,9 @@ devDependencies:
   vite-plugin-debug:
     specifier: ^1.0.1
     version: 1.0.1
+  vite-plugin-imp:
+    specifier: ^2.4.0
+    version: 2.4.0(vite@5.0.11)
   vite-plugin-pwa:
     specifier: ^0.17.4
     version: 0.17.4(vite@5.0.11)(workbox-build@7.0.0)(workbox-window@7.0.0)
@@ -10584,6 +10587,13 @@ packages:
     resolution: {integrity: sha512-NUcwaKxUxWrZLpDG+z/xZaCgQITkA/Dv4V/T6bw7VON6l1Xz/VnrBqrYjZQ12TamKHzITTfOEIYUj48y2KXImA==}
     dev: true
 
+  /param-case@3.0.4:
+    resolution: {integrity: sha512-RXlj7zCYokReqWpOPH9oYivUzLYZ5vAPIfEmCTNViosC78F8F0H9y7T7gG2M39ymgutxF5gcFEsyZQSph9Bp3A==}
+    dependencies:
+      dot-case: 3.0.4
+      tslib: 2.6.2
+    dev: true
+
   /parent-module@1.0.1:
     resolution: {integrity: sha512-GQ2EWRpQV8/o+Aw8YqtfZZPfNRWZYkbidE9k5rpl/hC3vtHHBfGm2Ifi6qWV+coDGkrUKZAxE3Lot5kcsRlh+g==}
     engines: {node: '>=6'}
@@ -10629,6 +10639,13 @@ packages:
   /parseurl@1.3.3:
     resolution: {integrity: sha512-CiyeOxFT/JZyN5m0z9PfXw4SCBJ6Sygz1Dpl0wqjlhDEGGBP1GnsUVEL0p63hoG1fcj3fHynXi9NYO4nWOL+qQ==}
     engines: {node: '>= 0.8'}
+    dev: true
+
+  /pascal-case@3.1.2:
+    resolution: {integrity: sha512-uWlGT3YSnK9x3BQJaOdcZwrnV6hPpd8jFH1/ucpiLRPh/2zCVJKS19E4GvYHvaCcACn3foXZ0cLB9Wrx1KGe5g==}
+    dependencies:
+      no-case: 3.0.4
+      tslib: 2.6.2
     dev: true
 
   /path-browserify@1.0.1:
@@ -13373,6 +13390,23 @@ packages:
 
   /vite-plugin-debug@1.0.1:
     resolution: {integrity: sha512-php2qOvaWtESUUjhsWiHwRbIPWRylY0fuV2iWdwHlGqo3rwELdAT7RPxh+movu1H+mgr5lqRBMFZn4OjTt/rEg==}
+    dev: true
+
+  /vite-plugin-imp@2.4.0(vite@5.0.11):
+    resolution: {integrity: sha512-L/6/nvOw+MyNh4UxAlCZHsmKd5MitmHamqqAWB15sbUgVIEz/OQ8jpKr6kkQU0eA/AIe8fkCVbQBlP81ajrqWg==}
+    peerDependencies:
+      vite: '>= 2.0.0-beta.5'
+    dependencies:
+      '@babel/core': 7.23.5
+      '@babel/generator': 7.23.5
+      '@babel/parser': 7.23.6
+      '@babel/traverse': 7.23.5
+      chalk: 4.1.2
+      param-case: 3.0.4
+      pascal-case: 3.1.2
+      vite: 5.0.11(@types/node@20.10.2)(sass@1.69.5)
+    transitivePeerDependencies:
+      - supports-color
     dev: true
 
   /vite-plugin-pwa@0.17.4(vite@5.0.11)(workbox-build@7.0.0)(workbox-window@7.0.0):
