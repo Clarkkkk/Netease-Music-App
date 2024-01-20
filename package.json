@@ -38,7 +38,7 @@
     "swiper": "^10.3.1",
     "tippy.js": "^6.3.7",
     "vee-validate": "^4.12.2",
-    "vue": "^3.4.13",
+    "vue": "^3.4.15",
     "vue-route-prefetch": "^3.0.2",
     "vue-router": "^4.2.5",
     "vue-tippy": "^6.3.1",
@@ -121,8 +121,8 @@
   },
   "pnpm": {
     "patchedDependencies": {
-      "@vue/shared@3.4.5": "patches/@vue__shared@3.4.5.patch",
-      "@storybook/vue3@7.6.7": "patches/@storybook__vue3@7.6.7.patch"
+      "@storybook/vue3@7.6.7": "patches/@storybook__vue3@7.6.7.patch",
+      "@vue/shared@3.4.15": "patches/@vue__shared@3.4.15.patch"
     }
   }
 }
