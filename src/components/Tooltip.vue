@@ -18,7 +18,7 @@ const body = document.body
         v-if="content && content !== 'null'"
         max-width="none"
         trigger="touchstart mouseenter"
-        :delay="[0, 100]"
+        :delay="[0, 400]"
         :placement="placement || 'top'"
         :append-to="() => body"
         role="tooltip"
