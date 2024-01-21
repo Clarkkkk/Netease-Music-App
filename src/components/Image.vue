@@ -14,6 +14,7 @@ const props = defineProps<{
     webpSrcSet?: string
     alt?: string
     loading?: 'lazy' | 'eager'
+    objectFit?: 'cover' | 'contain'
     size?: number
     crossorigin?: 'anonymous' | 'use-credentials'
     blurBeforeLoaded?: boolean
@@ -90,7 +91,7 @@ defineExpose({
                 :alt="alt || src"
                 :loading="loading"
                 :crossorigin="crossorigin"
-                class="h-full w-full"
+                :class="['h-full', 'w-full', { [`object-${objectFit}`]: !!objectFit }]"
                 @load="
                     (e) => {
                         loadingStatus = false

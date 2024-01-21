@@ -37,11 +37,14 @@ onBeforeRouteLeave(async () => {
         <Image
             v-view-transition-name="'playing-cover-shadow'"
             :src="playlist.currentSong?.cover"
+            object-fit="cover"
             :class="[
                 'playing-cover-shadow',
                 'absolute',
                 'left-0',
                 'top-0',
+                'w-full',
+                'h-full',
                 'rounded-3xl',
                 '!contain-[layout_style]',
                 '!content-visible',
@@ -92,8 +95,9 @@ onBeforeRouteLeave(async () => {
                 <Image
                     v-view-transition-name="'playing-cover'"
                     :src="playlist.currentSong?.cover"
-                    class="playing-cover absolute left-0 top-0 z-10 rounded-3xl"
+                    class="playing-cover absolute left-0 top-0 z-10 h-full w-full rounded-3xl"
                     :size="400"
+                    object-fit="cover"
                 />
                 <div
                     :class="[
