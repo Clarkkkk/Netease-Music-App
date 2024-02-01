@@ -5,6 +5,7 @@
         "module": "es2020",
         "strict": true,
         "jsx": "preserve",
+        "jsxImportSource": "vue",
         "sourceMap": true,
         "incremental": true,
         "outDir": "node_modules/.cache",
