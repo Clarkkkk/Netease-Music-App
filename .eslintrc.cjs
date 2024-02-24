@@ -102,6 +102,14 @@ module.exports = {
                 ignoreTypeReferences: false,
                 functions: false
             }
+        ],
+        'no-unused-vars': 'off',
+        '@typescript-eslint/no-unused-vars': [
+            'error',
+            {
+                varsIgnorePattern: '^_',
+                args: 'after-used'
+            }
         ]
     },
     overrides: [
@@ -111,6 +119,22 @@ module.exports = {
             extends: ['plugin:@typescript-eslint/recommended'],
             rules: {
                 '@typescript-eslint/no-explicit-any': 'off'
+            }
+        },
+        {
+            files: ['*.test.ts', '*.test.tsx'],
+            parser: '@typescript-eslint/parser',
+            extends: ['plugin:@typescript-eslint/recommended'],
+            rules: {
+                '@typescript-eslint/no-explicit-any': 'off',
+                '@typescript-eslint/consistent-type-imports': [
+                    'error',
+                    {
+                        prefer: 'type-imports',
+                        disallowTypeAnnotations: false,
+                        fixStyle: 'separate-type-imports'
+                    }
+                ]
             }
         }
     ]

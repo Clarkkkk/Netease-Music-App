@@ -1,8 +1,10 @@
+/// <reference types="vitest" />
 import vue from '@vitejs/plugin-vue'
+import vueJsx from '@vitejs/plugin-vue-jsx'
 import * as path from 'path'
 import IconsResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
-import turboConsole from 'unplugin-turbo-console/vite'
+// import turboConsole from 'unplugin-turbo-console/vite'
 import Components from 'unplugin-vue-components/vite'
 import { defineConfig } from 'vite'
 import vitePluginImp from 'vite-plugin-imp'
@@ -22,6 +24,7 @@ export default defineConfig(() => {
         clearScreen: false,
         plugins: [
             vue(),
+            vueJsx(),
             // checker({
             //     vueTsc: true,
             //     eslint: {
@@ -32,7 +35,7 @@ export default defineConfig(() => {
             //         initialIsOpen: false
             //     }
             // }),
-            turboConsole(),
+            // turboConsole(),
             svgLoader({
                 defaultImport: 'component',
                 svgo: false
@@ -173,6 +176,9 @@ export default defineConfig(() => {
         },
         preview: {
             port: 6400
+        },
+        test: {
+            environment: 'jsdom'
         }
     }
 })
