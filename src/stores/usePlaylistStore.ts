@@ -86,7 +86,14 @@ export const usePlaylistStore = defineStore('playlist', () => {
             // do nothing
         } else {
             updateCurrentSongStatus('not-playing')
-            await updateCurrentSong(nextSong.value)
+            const currentNextSong = nextSong.value
+            try {
+                await updateCurrentSong(nextSong.value)
+            } catch {
+                if (nextSong.value && nextSong.value.id !== currentNextSong.id) {
+                    await updateCurrentSong(nextSong.value)
+                }
+            }
         }
     }
 
@@ -100,11 +107,19 @@ export const usePlaylistStore = defineStore('playlist', () => {
             // do nothing
         } else {
             updateCurrentSongStatus('not-playing')
-            await updateCurrentSong(lastSong.value)
+            const currentLastSong = lastSong.value
+            try {
+                await updateCurrentSong(currentLastSong)
+            } catch {
+                if (lastSong.value && lastSong.value.id !== currentLastSong.id) {
+                    await updateCurrentSong(lastSong.value)
+                }
+            }
         }
     }
 
     async function switchToThisSong(song: Song) {
+        // TODO: handle url error
         console.log('switchToThisSong')
         console.log(playMode.value)
         console.log(playlist.value)
@@ -129,6 +144,7 @@ export const usePlaylistStore = defineStore('playlist', () => {
     }
 
     async function switchToThisList(list: Song[], shouldPlay?: Song) {
+        // TODO: handle url error
         historyPlaylist.value = playlist.value
         playlist.value = list
         await updateCurrentSong(shouldPlay || list[0] || null)
@@ -140,7 +156,14 @@ export const usePlaylistStore = defineStore('playlist', () => {
         const list = await fetchRadioList()
         historyPlaylist.value = playlist.value
         playlist.value = list
-        await updateCurrentSong(list[0] || null)
+        for (const song of list) {
+            try {
+                await updateCurrentSong(song)
+                break
+            } catch {
+                continue
+            }
+        }
         updatePlayMode('radio')
     }
 
@@ -152,7 +175,14 @@ export const usePlaylistStore = defineStore('playlist', () => {
             playlist.value.push(payload)
         }
         if (firstAppend) {
-            await updateCurrentSong(playlist.value[0])
+            for (const song of playlist.value) {
+                try {
+                    await updateCurrentSong(song)
+                    break
+                } catch {
+                    continue
+                }
+            }
         }
     }
 
@@ -178,7 +208,7 @@ export const usePlaylistStore = defineStore('playlist', () => {
         playlist.value.splice(index, 1)
 
         if (song === current) {
-            await updateCurrentSong(current || playlist.value[0] || null)
+            await switchToNextSong()
         }
     }
 
@@ -221,8 +251,9 @@ export const usePlaylistStore = defineStore('playlist', () => {
                 id: needUpdateArr.map((item) => item.id).join(','),
                 br: 320000
             })
+            const validData = res.data.filter((item) => item.url)
             needUpdateArr.forEach((item) => {
-                const data = res.data.find((d) => d.id === item.id)
+                const data = validData.find((d) => d.id === item.id)
                 if (data) {
                     item.url = toHttps(data.url)
                     item.timestamp = Date.now()
@@ -231,8 +262,14 @@ export const usePlaylistStore = defineStore('playlist', () => {
         } else {
             if (!payload.url || payload.timestamp + 15 * ONE_MINUTE < Date.now()) {
                 const res = await post<ApiSongUrl>('/song/url', { id: payload.id, br: 320000 })
-                payload.url = toHttps(res.data[0].url)
-                payload.timestamp = Date.now()
+                if (res.data[0].url) {
+                    payload.url = toHttps(res.data[0].url)
+                    payload.timestamp = Date.now()
+                } else {
+                    await removeSong(payload)
+                    console.error(`Song url is ${res.data[0].url}`)
+                    throw new Error('can not find song url')
+                }
             }
         }
     }
