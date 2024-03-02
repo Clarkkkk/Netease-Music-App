@@ -1,5 +1,9 @@
 <template>
-  <div class="app-back-button" @tap="back" @click="back">
+  <div
+    class="app-back-button"
+    @tap="back"
+    @click="back"
+  >
     <app-icon icon="go-back" />
   </div>
 </template>
@@ -13,7 +17,7 @@ export default {
   },
 
   methods: {
-    back(event) {
+    back() {
       // avoid duplicate click fired by both click and tap
       if (Date.now() - this.lastClick < 100) {
         console.log('duplicate click');

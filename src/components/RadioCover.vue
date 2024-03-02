@@ -16,8 +16,14 @@
       >
     </transition>
     <!-- cache these cover images in the background -->
-    <img class="transparent" :src="lastSong.cover">
-    <img class="transparent" :src="nextSong.cover">
+    <img
+      class="transparent"
+      :src="lastSong.cover"
+    >
+    <img
+      class="transparent"
+      :src="nextSong.cover"
+    >
   </div>
 </template>
 
@@ -79,11 +85,11 @@ export default {
       }
     },
 
-    pointerUp(event) {
+    pointerUp() {
       this.isPointerDown = false;
     },
 
-    animationEnd(event) {
+    animationEnd() {
       this.vibrate = false;
     },
 

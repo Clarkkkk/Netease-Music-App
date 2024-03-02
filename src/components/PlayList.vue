@@ -1,7 +1,13 @@
 <template>
-  <div id="playing-list" @pointerdown.self="hide">
+  <div
+    id="playing-list"
+    @pointerdown.self="hide"
+  >
     <transition name="list">
-      <div v-if="showList" class="container">
+      <div
+        v-if="showList"
+        class="container"
+      >
         <div class="header">
           <span class="title">当前播放</span>
           <span class="amount">（{{ playList.length }}）</span>
@@ -11,7 +17,10 @@
             @click.native="clear"
           />
         </div>
-        <div class="wrapper" ref="wrapper">
+        <div
+          ref="wrapper"
+          class="wrapper"
+        >
           <div class="content">
             <div
               v-for="song in playList"
@@ -20,7 +29,11 @@
               :class="['entry', {'playing': song.id===playID}]"
               @tap="playSongOfList(song)"
             >
-              <app-icon class="icon" icon="speaker" v-if="song.id===playID"/>
+              <app-icon
+                v-if="song.id===playID"
+                class="icon"
+                icon="speaker"
+              />
               <div class="song-info">
                 {{ song.name + (song.artist ? ' - ' + song.artist : '') }}
               </div>

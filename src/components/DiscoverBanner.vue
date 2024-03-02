@@ -3,8 +3,8 @@
     <transition name="fade">
       <div
         v-if="loading"
-        class="default-pic"
         key="loading"
+        class="default-pic"
       >
         <img src="@/assets/default-pic.jpg">
       </div>

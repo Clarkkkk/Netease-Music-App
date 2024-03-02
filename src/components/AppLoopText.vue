@@ -1,7 +1,17 @@
 <template>
   <div id="app-loop-text">
-    <div class="text" ref="text">{{ text }}</div>
-    <div class="clone" ref="clone">{{ text }}</div>
+    <div
+      ref="text"
+      class="text"
+    >
+      {{ text }}
+    </div>
+    <div
+      ref="clone"
+      class="clone"
+    >
+      {{ text }}
+    </div>
   </div>
 </template>
 
@@ -12,6 +22,21 @@ export default {
     return {
       intervalID: 0
     };
+  },
+
+  watch: {
+    text() {
+      this.$nextTick()
+        .then(() => {
+          this.boxWidth = this.$el.clientWidth;
+          this.textWidth = this.$refs.text.clientWidth;
+          clearInterval(this.intervalID);
+          if (this.boxWidth < this.textWidth) {
+            this.animate();
+            this.intervalID = setInterval(this.animate, 12000);
+          }
+        });
+    },
   },
 
   created() {
@@ -28,21 +53,6 @@ export default {
           this.intervalID = setInterval(this.animate, 12000);
         }
       });
-  },
-
-  watch: {
-    text() {
-      this.$nextTick()
-        .then(() => {
-          this.boxWidth = this.$el.clientWidth;
-          this.textWidth = this.$refs.text.clientWidth;
-          clearInterval(this.intervalID);
-          if (this.boxWidth < this.textWidth) {
-            this.animate();
-            this.intervalID = setInterval(this.animate, 12000);
-          }
-        });
-    },
   },
 
   methods: {

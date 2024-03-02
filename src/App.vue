@@ -2,7 +2,10 @@
   <div id="app">
     <transition :name="transitionName">
       <keep-alive>
-        <app-loading-icon class="loading" v-if="loading" />
+        <app-loading-icon
+          v-if="loading"
+          class="loading"
+        />
         <router-view v-else />
       </keep-alive>
     </transition>
@@ -55,7 +58,7 @@ export default {
     // relavant to Safari back gesture
     if (navigator.userAgent.includes('Safari')) {
       this.$store.commit('routeHistory/agent', true);
-      document.documentElement.addEventListener('touchend', (event) => {
+      document.documentElement.addEventListener('touchend', () => {
         this.$store.commit('routeHistory/touchEnd');
       });
     }

@@ -1,18 +1,27 @@
 <template>
   <div id="play">
-    <img alt="背景图片" class="background" :src="picUrl">
+    <img
+      alt="背景图片"
+      class="background"
+      :src="picUrl"
+    >
 
     <div class="content">
       <div class="header">
-        <app-back-button/>
-        <app-loop-text :text="playName" class="song-name"/>
-        <div class="song-artist">{{ playArtist }}</div>
+        <app-back-button />
+        <app-loop-text
+          :text="playName"
+          class="song-name"
+        />
+        <div class="song-artist">
+          {{ playArtist }}
+        </div>
       </div>
 
-      <play-cover/>
-      <play-interactions/>
-      <play-progress-bar/>
-      <play-controls :showPlayList.sync="showPlayList"/>
+      <play-cover />
+      <play-interactions />
+      <play-progress-bar />
+      <play-controls :show-play-list.sync="showPlayList" />
 
       <transition name="play-list">
         <play-list

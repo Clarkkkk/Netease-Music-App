@@ -1,21 +1,32 @@
 <template>
-  <div id="radio" @scroll="onScroll">
-
-    <img alt="背景图片" class="background fade-in" :src="picUrl">
+  <div
+    id="radio"
+    @scroll="onScroll"
+  >
+    <img
+      alt="背景图片"
+      class="background fade-in"
+      :src="picUrl"
+    >
 
     <div class="content">
       <div class="header">
-        <app-back-button/>
+        <app-back-button />
         <span class="title">私人FM</span>
       </div>
 
       <radio-cover class="cover" />
 
-      <app-loop-text :text="currentSong.name" class="song-name"/>
-      <div class="song-artist">{{ currentSong.artist }}</div>
+      <app-loop-text
+        :text="currentSong.name"
+        class="song-name"
+      />
+      <div class="song-artist">
+        {{ currentSong.artist }}
+      </div>
 
-      <play-progress-bar/>
-      <radio-controls/>
+      <play-progress-bar />
+      <radio-controls />
     </div>
   </div>
 </template>

@@ -1,7 +1,9 @@
 <template>
   <div id="profile-song-lists">
-    <div class="title">{{ titleString }}</div>
-    <app-loading-icon v-if="loading"/>
+    <div class="title">
+      {{ titleString }}
+    </div>
+    <app-loading-icon v-if="loading" />
     <div
       v-for="list in lists"
       :key="list.id"
@@ -13,7 +15,7 @@
         width="50"
       />
       <span class="list-name">{{ list.name }}</span>
-      <span class="list-info">{{ list.trackCount + '首'}}</span>
+      <span class="list-info">{{ list.trackCount + '首' }}</span>
     </div>
     <app-intersection-observer
       v-if="!loading"

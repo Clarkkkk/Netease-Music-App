@@ -66,15 +66,33 @@ export default {
 
 <template>
   <transition name="indicator">
-    <div id="play-indicator" @click="click" v-if="playID">
+    <div
+      v-if="playID"
+      id="play-indicator"
+      @click="click"
+    >
       <img
+        ref="cover"
         :class="['cover', {'rolling': playing}]"
         :src="picUrl"
-        ref="cover"
       >
-      <svg viewBox="0 0 100 100" class="svg">
-        <circle cx="50" cy="50" r="42" class="groove"/>
-        <circle cx="50" cy="50" r="42" ref="indicator" class="indicator"/>
+      <svg
+        viewBox="0 0 100 100"
+        class="svg"
+      >
+        <circle
+          cx="50"
+          cy="50"
+          r="42"
+          class="groove"
+        />
+        <circle
+          ref="indicator"
+          cx="50"
+          cy="50"
+          r="42"
+          class="indicator"
+        />
       </svg>
     </div>
   </transition>

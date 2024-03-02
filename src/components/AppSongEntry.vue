@@ -1,13 +1,22 @@
 <template>
-  <div class="app-song-entry" @click="play" @tap="play">
+  <div
+    class="app-song-entry"
+    @click="play"
+    @tap="play"
+  >
     <span class="name">
       {{ songName }}
     </span>
     <span class="info">
       {{ songInfoString }}
     </span>
-    <slot name="count"></slot>
-    <div class="menu" @click="openMenu" @tap="openMenu" v-if="hasMenu">
+    <slot name="count" />
+    <div
+      v-if="hasMenu"
+      class="menu"
+      @click="openMenu"
+      @tap="openMenu"
+    >
       <app-icon
         icon="vertical-dots"
         class="dots"
@@ -15,8 +24,8 @@
     </div>
     <app-pop-menu
       v-if="showMenu"
-      menuArr="[]"
-      v-bind:show.sync="showMenu"
+      menu-arr="[]"
+      :show.sync="showMenu"
     />
   </div>
 </template>
@@ -25,6 +34,11 @@
 import fetchJSON from '@/functions/fetchJSON.js';
 import AppPopMenu from './AppPopMenu.vue';
 export default {
+  
+  components: {
+    AppPopMenu
+  },
+  props: ['songName', 'songArtist', 'songAlbum', 'songId', 'songCover', 'songAlbumId', 'hasMenu'],
   data() {
     return {
       lastClick: 0,
@@ -40,11 +54,6 @@ export default {
         }
       ]
     };
-  },
-  props: ['songName', 'songArtist', 'songAlbum', 'songId', 'songCover', 'songAlbumId', 'hasMenu'],
-  
-  components: {
-    AppPopMenu
   },
 
   computed: {

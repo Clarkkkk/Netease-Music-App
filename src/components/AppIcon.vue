@@ -1,6 +1,6 @@
 <template>
   <svg class="app-icon">
-    <use v-bind:href="`#${icon}`" />
+    <use :href="`#${icon}`" />
   </svg>
 </template>
 

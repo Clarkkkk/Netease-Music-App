@@ -37,17 +37,6 @@ export default {
     },
   },
 
-  created: function() {
-    this.setActionhandlers();
-    if (this.playID) {
-      this.getUrl();
-    }
-  },
-
-  mounted: function() {
-    this.setPlayer(this.$refs.audio);
-  },
-
   watch: {
     playID: function(newID) {
       if (newID) {
@@ -91,6 +80,17 @@ export default {
     radio: function() {
       this.setActionhandlers();
     }
+  },
+
+  created: function() {
+    this.setActionhandlers();
+    if (this.playID) {
+      this.getUrl();
+    }
+  },
+
+  mounted: function() {
+    this.setPlayer(this.$refs.audio);
   },
 
   methods: {

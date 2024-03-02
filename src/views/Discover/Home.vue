@@ -5,35 +5,46 @@
       cursor="pointer"
       @click="search"
     >
-      <template v-slot:left>
-        <header class="title">网易云音乐</header>
+      <template #left>
+        <header class="title">
+          网易云音乐
+        </header>
       </template>
-      <template v-slot:right>
-        <app-play-indicator class="play-indicator"/>
+      <template #right>
+        <app-play-indicator class="play-indicator" />
       </template>
     </app-search-bar>
-    <div class="wrapper" ref="wrapper">
+    <div
+      ref="wrapper"
+      class="wrapper"
+    >
       <div class="contents">
-        <discover-banner/>
+        <discover-banner />
         <div class="features">
-          <div class="feature-container" @tap="tap('recommendation')">
+          <div
+            class="feature-container"
+            @tap="tap('recommendation')"
+          >
             <div class="calendar-container">
-              <app-icon icon="calendar"/>
+              <app-icon icon="calendar" />
               <span>17</span>
             </div>
             <span>每日推荐</span>
           </div>
-          <div class="feature-container" @tap="tap('/radio')">
-            <app-icon icon="radio"/>
+          <div
+            class="feature-container"
+            @tap="tap('/radio')"
+          >
+            <app-icon icon="radio" />
             <span>私人FM</span>
           </div>
         </div>
         <div class="recommend">
           <span class="recommend-title">推荐歌单</span>
           <div
-            class="list-container"
             v-for="list in recommend"
             :key="list.id"
+            class="list-container"
             @tap="tap('songlist/' + list.id)"
           >
             <app-image
@@ -42,7 +53,10 @@
               alt="歌单图片"
               width="240"
             />
-            <span class="list-count" v-if="list.playcount">
+            <span
+              v-if="list.playcount"
+              class="list-count"
+            >
               <app-icon
                 v-if="list.playcount"
                 class="list-count-icon"
@@ -67,7 +81,14 @@ import AppImage from '@/components/AppImage.vue';
 import fetchJSON from '@/functions/fetchJSON.js';
 import createScroll from '@/functions/createScroll.js';
 export default {
-  name: 'home',
+  name: 'Home',
+
+  components: {
+    DiscoverBanner,
+    AppSearchBar,
+    AppPlayIndicator,
+    AppImage
+  },
   data: function() {
     return {
       recommend: []
@@ -80,15 +101,8 @@ export default {
     }
   },
 
-  components: {
-    DiscoverBanner,
-    AppSearchBar,
-    AppPlayIndicator,
-    AppImage
-  },
-
   watch: {
-    login(val) {
+    login() {
       this.getRecommend();
     }
   },
@@ -124,7 +138,7 @@ export default {
   },
 
   methods: {
-    search(event) {
+    search() {
       // do not need to blur, otherwise the search bar in search page won't
       // get focused by the first tap in iOS Safari
       this.$router.push('search');

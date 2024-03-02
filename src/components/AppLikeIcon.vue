@@ -1,11 +1,15 @@
 <template>
-  <div id="app-like-icon"
+  <div
+    id="app-like-icon"
     @click="click"
   >
-    <transition name="like" mode="out-in">
+    <transition
+      name="like"
+      mode="out-in"
+    >
       <app-icon
-        :icon="iconName"
         :key="iconName"
+        :icon="iconName"
         :class="{'liked': isLiked}"
       />
     </transition>
@@ -38,7 +42,7 @@ export default {
   },
 
   methods: {
-    click(event) {
+    click() {
       if (this.login) {
         fetchJSON('/like', {
           id: this.playID,

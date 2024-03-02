@@ -1,15 +1,18 @@
 <template>
-  <form id="account-by" ref="form">
+  <form
+    id="account-by"
+    ref="form"
+  >
     <label
       v-if="method==='phone'"
       class="label"
     >
       <input
+        v-model="phoneNumber"
         class="input"
         type="tel"
-        @blur="$event.target.pattern='[0-9]{11}'"
         placeholder="手机号"
-        v-model="phoneNumber"
+        @blur="$event.target.pattern='[0-9]{11}'"
       >
       <span class="notice">请输入有效的手机号码</span>
     </label>
@@ -18,11 +21,11 @@
       class="label"
     >
       <input
+        v-model="mailAddress"
         class="input"
         type="email"
         placeholder="邮箱"
         list="suggestions"
-        v-model="mailAddress"
         @blur="$event.target.required=true"
       >
       <span class="notice">请输入有效的邮箱地址</span>
@@ -37,13 +40,13 @@
 
     <label class="label">
       <input
+        v-model="password"
         class="input"
         type="password"
         placeholder="密码"
         @blur="$event.target.required=true"
         @focus="$event.target.value=''"
         @keydown.enter="login"
-        v-model="password"
       >
       <span class="notice">密码不能为空</span>
     </label>
@@ -61,6 +64,7 @@
 import fetchJSON from '@/functions/fetchJSON.js';
 import SparkMD5 from 'spark-md5';
 export default {
+  props: ['method'],
   data: function() {
     return {
       phoneNumber: '',
@@ -72,7 +76,6 @@ export default {
       ]
     };
   },
-  props: ['method'],
   methods: {
     login() {
       if (!this.$refs.form.reportValidity()) {

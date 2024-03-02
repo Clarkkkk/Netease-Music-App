@@ -17,7 +17,10 @@
           :key="item.id"
           class="multimatch-item"
         >
-          <img :src="item.picUrl" alt="封面图片">
+          <img
+            :src="item.picUrl"
+            alt="封面图片"
+          >
           <span>{{ item.type + '：' + item.name }}</span>
           <span v-if="item.artist">{{ item.artist.name }}</span>
         </div>
@@ -45,6 +48,11 @@ import fetchJSON from '@/functions/fetchJSON.js';
 import AppSongEntry from '@/components/AppSongEntry.vue';
 import AppLoadingIcon from '@/components/AppLoadingIcon.vue';
 export default {
+
+  components: {
+    AppSongEntry,
+    AppLoadingIcon
+  },
   props: ['searchText'],
   data: function() {
     return {
@@ -53,11 +61,6 @@ export default {
       matchResult: [],
       mixedResult: []
     };
-  },
-
-  components: {
-    AppSongEntry,
-    AppLoadingIcon
   },
 
   created: function() {

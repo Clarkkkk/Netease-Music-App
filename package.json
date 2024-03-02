@@ -5,7 +5,8 @@
   "scripts": {
     "serve": "cross-env NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "format": "eslint --fix --cache src/**/*.{vue,ts}"
   },
   "dependencies": {
     "@better-scroll/core": "^2.5.1",
@@ -21,16 +22,16 @@
     "vuex": "^3.5.1"
   },
   "devDependencies": {
+    "@babel/eslint-parser": "^7.23.10",
     "@vue/cli-plugin-babel": "^4.5.7",
     "@vue/cli-plugin-eslint": "^4.5.7",
     "@vue/cli-plugin-pwa": "^4.5.7",
     "@vue/cli-plugin-router": "^4.5.7",
     "@vue/cli-service": "^4.5.7",
-    "babel-eslint": "^10.1.0",
     "cross-env": "^7.0.3",
-    "eslint": "^7.13.0",
+    "eslint": "^8.57.0",
     "eslint-config-google": "^0.14.0",
-    "eslint-plugin-vue": "^6.2.2",
+    "eslint-plugin-vue": "^9.22.0",
     "svg-sprite-loader": "^5.0.0",
     "vue-svg-loader": "^0.16.0",
     "vue-template-compiler": "^2.6.12"
@@ -45,9 +46,11 @@
       "eslint:recommended"
     ],
     "parserOptions": {
-      "parser": "babel-eslint"
+      "parser": "@babel/eslint-parser"
     },
-    "rules": {}
+    "rules": {
+      "vue/multi-word-component-names": "off"
+    }
   },
   "browserslist": [
     "> 1%",

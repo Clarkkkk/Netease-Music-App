@@ -1,27 +1,30 @@
 <template>
   <div id="app-search-bar">
-    <slot name="left"></slot>
+    <slot name="left" />
     <form
       class="input-area"
       action=""
     >
       <input
+        ref="input"
         type="search"
         class="input"
-        ref="input"
         v-bind="$attrs"
         :value="value"
         v-on="inputListeners"
       >
-      <app-icon icon="search" class="icon"/>
+      <app-icon
+        icon="search"
+        class="icon"
+      />
     </form>
-    <slot name="right"></slot>
+    <slot name="right" />
   </div>
 </template>
 
 <script>
 export default {
-  name: 'app-search-bar',
+  name: 'AppSearchBar',
   inheritAttrs: false,
   props: ['value', 'focus'],
   computed: {
@@ -35,14 +38,14 @@ export default {
     }
   },
 
-  mounted() {
-    this.focusIf(this.focus);
-  },
-
   watch: {
     focus(val) {
       this.focusIf(val);
     }
+  },
+
+  mounted() {
+    this.focusIf(this.focus);
   },
 
   methods: {

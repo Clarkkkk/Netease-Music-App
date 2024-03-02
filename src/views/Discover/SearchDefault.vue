@@ -1,18 +1,30 @@
 <template>
   <div id="discover-search-default">
-    <div class="loading" v-if="loading">
-      <app-loading-icon/>
+    <div
+      v-if="loading"
+      class="loading"
+    >
+      <app-loading-icon />
     </div>
-    <div class="content" v-else>
-      <div class="hot-title" v-show="!typing">
+    <div
+      v-else
+      class="content"
+    >
+      <div
+        v-show="!typing"
+        class="hot-title"
+      >
         热搜榜
       </div>
-      <div class="hot" v-show="!typing">
+      <div
+        v-show="!typing"
+        class="hot"
+      >
         <div
-          class="hot-item"
-          v-show="!typing"
           v-for="item in searchHotData"
+          v-show="!typing"
           :key="item.score"
+          class="hot-item"
           @click="search(item.searchWord)"
         >
           {{ item.searchWord }}
@@ -20,20 +32,26 @@
       </div>
 
       <div
-        class="text"
         v-show="typing"
+        class="text"
       >
         搜索「{{ searchText }}」
       </div>
-      <div class="advice" v-show="typing">
+      <div
+        v-show="typing"
+        class="advice"
+      >
         <div
-          class="advice-item"
-          v-show="typing"
           v-for="item in searchAdviceData"
+          v-show="typing"
           :key="item.keyword"
+          class="advice-item"
           @click="search(item.keyword)"
         >
-          <app-icon icon="search" class="advice-item-icon"/>
+          <app-icon
+            icon="search"
+            class="advice-item-icon"
+          />
           {{ item.keyword }}
         </div>
       </div>
@@ -46,7 +64,11 @@ import debounce from '@/functions/debounce.js';
 import fetchJSON from '@/functions/fetchJSON.js';
 import AppLoadingIcon from '@/components/AppLoadingIcon.vue';
 export default {
-  name: 'discover-search-default',
+  name: 'DiscoverSearchDefault',
+
+  components: {
+    AppLoadingIcon
+  },
   props: ['searchText'],
   data: function() {
     return {
@@ -55,18 +77,6 @@ export default {
       loading: true,
       typing: false
     };
-  },
-
-  components: {
-    AppLoadingIcon
-  },
-
-  created: function() {
-    fetchJSON('/search/hot/detail')
-      .then((data) => {
-        this.searchHotData = data.data;
-        this.loading = false;
-      });
   },
 
   watch: {
@@ -80,6 +90,14 @@ export default {
         this.searchAdvice(newVal);
       }
     }
+  },
+
+  created: function() {
+    fetchJSON('/search/hot/detail')
+      .then((data) => {
+        this.searchHotData = data.data;
+        this.loading = false;
+      });
   },
 
   methods: {

@@ -1,6 +1,6 @@
 <template>
   <div id="play-interactions">
-    <app-like-icon class="like"/>
+    <app-like-icon class="like" />
     <app-icon
       icon="comment"
       class="comments"

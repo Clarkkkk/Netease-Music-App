@@ -1,8 +1,15 @@
 <template>
-  <div id="pop-menu" @click="closeMenu" @tap="closeMenu">
-    <div v-for="menuItem in menuArr" :key="menuItem.name">
+  <div
+    id="pop-menu"
+    @click="closeMenu"
+    @tap="closeMenu"
+  >
+    <div
+      v-for="menuItem in menuArr"
+      :key="menuItem.name"
+    >
       <div class="menu-item">
-        {{menuItem.name}}
+        {{ menuItem.name }}
       </div>
     </div>
   </div>
@@ -10,12 +17,12 @@
 
 <script>
 export default {
+  props: ['menuArr', 'show'],
   data() {
     return {
       lastClick: Date.now()
     }
   },
-  props: ['menuArr', 'show'],
   methods: {
     closeMenu(event) {
       console.log('close')

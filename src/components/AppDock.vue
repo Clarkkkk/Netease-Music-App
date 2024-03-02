@@ -1,19 +1,34 @@
 <template>
-  <div id="app-dock" v-if="show">
+  <div
+    v-if="show"
+    id="app-dock"
+  >
     <div
       :class="['category', {'active': active==='discover'}]"
       @click="click('discover')"
     >
-      <app-icon v-if="active==='discover'" icon="compass-fill"/>
-      <app-icon v-else icon="compass"/>
+      <app-icon
+        v-if="active==='discover'"
+        icon="compass-fill"
+      />
+      <app-icon
+        v-else
+        icon="compass"
+      />
       <span>发现</span>
     </div>
     <div
       :class="['category', {'active': active==='account'}]"
       @click="click('account')"
     >
-      <app-icon v-if="active==='account'" icon="person-fill"/>
-      <app-icon v-else icon="person"/>
+      <app-icon
+        v-if="active==='account'"
+        icon="person-fill"
+      />
+      <app-icon
+        v-else
+        icon="person"
+      />
       <span>我的</span>
     </div>
   </div>
@@ -28,14 +43,6 @@ export default {
     };
   },
 
-  created() {
-    if (this.$route.path.includes('account')) {
-      this.active = 'account';
-    } else {
-      this.active = 'discover';
-    }
-  },
-
   watch: {
     '$route': function(route) {
       if (route.path.includes('account')) {
@@ -48,6 +55,14 @@ export default {
       } else {
         this.show = true;
       }
+    }
+  },
+
+  created() {
+    if (this.$route.path.includes('account')) {
+      this.active = 'account';
+    } else {
+      this.active = 'discover';
     }
   },
 

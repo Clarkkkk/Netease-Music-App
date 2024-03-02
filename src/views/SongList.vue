@@ -1,66 +1,92 @@
 <template>
-  <div id="song-list" ref="wrapper">
-    <div class="background-container" ref="backgroundBox">
+  <div
+    id="song-list"
+    ref="wrapper"
+  >
+    <div
+      ref="backgroundBox"
+      class="background-container"
+    >
       <div
-        class="background fade-in"
         ref="background"
+        class="background fade-in"
         :style="bgStyle"
-      ></div>
+      />
     </div>
     <div :class="['fixed-container', {'blur': type==='songlist'}]">
-
       <div class="header">
-        <app-back-button/>
+        <app-back-button />
         <div class="title">
           {{ title ? title : '歌单' }}
         </div>
         <div class="right">
-          <slot name="right"></slot>
+          <slot name="right" />
         </div>
       </div>
 
-      <div class="info" ref="info">
-        <div class="cover" v-if="type==='songlist'">
+      <div
+        ref="info"
+        class="info"
+      >
+        <div
+          v-if="type==='songlist'"
+          class="cover"
+        >
           <app-image
             :src="cover"
             width="150"
             alt="歌单封面"
           />
         </div>
-        <div class="name" v-if="name">
+        <div
+          v-if="name"
+          class="name"
+        >
           {{ name }}
         </div>
-        <div class="creator" v-if="creator">
+        <div
+          v-if="creator"
+          class="creator"
+        >
           {{ creator }}
         </div>
-        <div class="description" v-if="description">
+        <div
+          v-if="description"
+          class="description"
+        >
           {{ description }}
         </div>
-        <div class="date" v-if="type==='recommendation'">
+        <div
+          v-if="type==='recommendation'"
+          class="date"
+        >
           {{ dateString }}
         </div>
       </div>
 
-      <div class="playall" @tap="playAll">
-        <app-icon icon="play-circle"/>
+      <div
+        class="playall"
+        @tap="playAll"
+      >
+        <app-icon icon="play-circle" />
         <span>播放全部</span>
       </div>
     </div>
 
     <div class="list">
-      <div class="placeholder"></div>
-      <app-loading-icon v-if="loading"/>
+      <div class="placeholder" />
+      <app-loading-icon v-if="loading" />
       <app-song-entry
         v-for="song in list"
-        class="entry"
         :key="song.id"
-        :songName="song.name"
-        :songArtist="song.artist"
-        :songId="song.id"
-        :songAlbum="song.album"
-        :songAlbumId="song.albumId"
-        :songCover="song.cover"
-        :hasMenu="true"
+        class="entry"
+        :song-name="song.name"
+        :song-artist="song.artist"
+        :song-id="song.id"
+        :song-album="song.album"
+        :song-album-id="song.albumId"
+        :song-cover="song.cover"
+        :has-menu="true"
       />
       <app-intersection-observer
         v-if="!loading"
@@ -80,7 +106,17 @@ import AppIntersectionObserver from '@/components/AppIntersectionObserver.vue';
 import fetchJSON from '@/functions/fetchJSON.js';
 import createScroll from '@/functions/createScroll.js';
 export default {
-  name: 'songlist',
+  name: 'Songlist',
+
+  components: {
+    AppBackButton,
+    AppSongEntry,
+    AppLoadingIcon,
+    AppImage,
+    AppIntersectionObserver
+  },
+
+  props: ['type', 'listId'],
   data: function() {
     return {
       // basic info
@@ -99,8 +135,6 @@ export default {
       index: -1
     };
   },
-
-  props: ['type', 'listId'],
 
   computed: {
     // date string in everyday recommendation page
@@ -129,12 +163,50 @@ export default {
     }
   },
 
-  components: {
-    AppBackButton,
-    AppSongEntry,
-    AppLoadingIcon,
-    AppImage,
-    AppIntersectionObserver
+  watch: {
+    loading(isLoading) {
+      if (!isLoading) {
+        this.$nextTick()
+          .then(() => {
+            // mount the observer component and initialize better-scroll
+            // when the list is loaded
+            this.scroll = createScroll(2, this.$refs.wrapper, onScroll);
+            const self = this;
+            function onScroll(pos) {
+              const percentage = (-pos.y) / 200 < 1 ? (-pos.y) / 200 : 1;
+              self.$refs.info.style.opacity = `${1 - percentage}`;
+              self.$refs.info.style.height = `calc(12rem + (${pos.y}px))`;
+              self.$refs.backgroundBox.style.height =
+                `calc(15rem + (${pos.y}px) + env(safe-area-inset-top))`;
+              self.$refs.background.style.height =
+                `calc(15rem + (${pos.y}px) + env(safe-area-inset-top))`;
+            }
+          })
+          .catch((e) => {
+            console.log(e);
+          });
+      }
+    },
+
+    seen(val) {
+      // when the page is close to the bottom, load 15 more songs
+      if (val && this.more) {
+        console.log('load more');
+        this.more = this.ids.length > this.index + 15;
+        const end = this.more ? this.index + 15 : this.ids.length;
+        const ids = this.ids.slice(this.index, end).join(',');
+        fetchJSON('/song/detail', {ids: ids})
+          .then((res) => {
+            console.log('detail');
+            console.log(res);
+            if (res && res.code === 200) {
+              this.createList(res.songs)
+                .then(() => this.seen = false);
+            }
+          });
+        this.index = end;
+      }
+    }
   },
 
   created() {
@@ -199,52 +271,6 @@ export default {
 
   beforeDestroy() {
     this.scroll.destroy();
-  },
-
-  watch: {
-    loading(isLoading) {
-      if (!isLoading) {
-        this.$nextTick()
-          .then(() => {
-            // mount the observer component and initialize better-scroll
-            // when the list is loaded
-            this.scroll = createScroll(2, this.$refs.wrapper, onScroll);
-            const self = this;
-            function onScroll(pos) {
-              const percentage = (-pos.y) / 200 < 1 ? (-pos.y) / 200 : 1;
-              self.$refs.info.style.opacity = `${1 - percentage}`;
-              self.$refs.info.style.height = `calc(12rem + (${pos.y}px))`;
-              self.$refs.backgroundBox.style.height =
-                `calc(15rem + (${pos.y}px) + env(safe-area-inset-top))`;
-              self.$refs.background.style.height =
-                `calc(15rem + (${pos.y}px) + env(safe-area-inset-top))`;
-            }
-          })
-          .catch((e) => {
-            console.log(e);
-          });
-      }
-    },
-
-    seen(val) {
-      // when the page is close to the bottom, load 15 more songs
-      if (val && this.more) {
-        console.log('load more');
-        this.more = this.ids.length > this.index + 15;
-        const end = this.more ? this.index + 15 : this.ids.length;
-        const ids = this.ids.slice(this.index, end).join(',');
-        fetchJSON('/song/detail', {ids: ids})
-          .then((res) => {
-            console.log('detail');
-            console.log(res);
-            if (res && res.code === 200) {
-              this.createList(res.songs)
-                .then(() => this.seen = false);
-            }
-          });
-        this.index = end;
-      }
-    }
   },
 
   methods: {

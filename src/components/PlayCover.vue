@@ -5,8 +5,8 @@
     <div class="transition-group">
       <div
         v-for="cover in recentCovers"
-        ref="covers"
         :id="cover.key"
+        ref="covers"
         :key="cover.key"
         class="image-container"
       >

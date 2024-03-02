@@ -5,7 +5,7 @@
       class="dislike"
       @click.native="dislike"
     />
-    <app-like-icon class="like"/>
+    <app-like-icon class="like" />
     <div
       class="play"
       @click="playOrPause"

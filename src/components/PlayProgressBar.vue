@@ -4,22 +4,22 @@
       {{ playTime }}
     </div>
     <div
-      class="container"
       ref="container"
+      class="container"
+      :class="{'pointer-down': isPointerDown}"
       @pointerdown="pointerDown"
       @pointermove="pointerMove"
       @pointerup="pointerUp"
-      :class="{'pointer-down': isPointerDown}"
     >
       <div :class="['groove', {'pointer-down': isPointerDown}]">
         <div
-          :class="['played-section', {'pointer-down': isPointerDown}]"
           ref="played"
-        ></div>
+          :class="['played-section', {'pointer-down': isPointerDown}]"
+        />
         <div
-          :class="['pointer', {'pointer-down': isPointerDown}, {'waiting': waiting}]"
           ref="pointer"
-        ></div>
+          :class="['pointer', {'pointer-down': isPointerDown}, {'waiting': waiting}]"
+        />
       </div>
     </div>
     <div class="time">
@@ -48,13 +48,6 @@ export default {
     }
   },
 
-  mounted() {
-    this.$nextTick()
-      .then(() => {
-        this.rect = this.$refs.container.getBoundingClientRect();
-      });
-  },
-
 
   watch: {
     currentTime(current) {
@@ -70,6 +63,13 @@ export default {
         `translateX(calc(${percentage * 60}vw - 0.5rem))`;
       this.$refs.played.style.width = `${percentage * 100}%`;
     }
+  },
+
+  mounted() {
+    this.$nextTick()
+      .then(() => {
+        this.rect = this.$refs.container.getBoundingClientRect();
+      });
   },
 
   methods: {

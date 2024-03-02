@@ -1,18 +1,18 @@
 <template>
   <div id="loading-spinner">
     <div class="spinner-icon">
-      <div class="bar bar-one"></div>
-      <div class="bar bar-two"></div>
-      <div class="bar bar-three"></div>
-      <div class="bar bar-four"></div>
-      <div class="bar bar-five"></div>
-      <div class="bar bar-six"></div>
-      <div class="bar bar-seven"></div>
-      <div class="bar bar-eight"></div>
-      <div class="bar bar-nine"></div>
-      <div class="bar bar-ten"></div>
-      <div class="bar bar-eleven"></div>
-      <div class="bar bar-twelve"></div>
+      <div class="bar bar-one" />
+      <div class="bar bar-two" />
+      <div class="bar bar-three" />
+      <div class="bar bar-four" />
+      <div class="bar bar-five" />
+      <div class="bar bar-six" />
+      <div class="bar bar-seven" />
+      <div class="bar bar-eight" />
+      <div class="bar bar-nine" />
+      <div class="bar bar-ten" />
+      <div class="bar bar-eleven" />
+      <div class="bar bar-twelve" />
     </div>
   </div>
 </template>

@@ -4,19 +4,23 @@
       <div
         :class="['method', {'active': loginMethod==='phone'}]"
         @click="loginMethod='phone'"
-      >手机登录</div>
+      >
+        手机登录
+      </div>
       <div
         :class="['method', {'active': loginMethod==='email'}]"
         @click="loginMethod='email'"
-      >邮箱登录</div>
+      >
+        邮箱登录
+      </div>
     </nav>
-    <div class="shadow"></div>
+    <div class="shadow" />
     <keep-alive>
       <component
-        class="login-body"
         :is="'login-by'"
-        :method="loginMethod"
         :key="loginMethod"
+        class="login-body"
+        :method="loginMethod"
       />
     </keep-alive>
   </div>
@@ -25,15 +29,15 @@
 <script>
 import LoginBy from '@/components/LoginBy.vue';
 export default {
-  name: 'login',
+  name: 'Login',
+
+  components: {
+    LoginBy
+  },
   data: function() {
     return {
       loginMethod: 'phone'
     };
-  },
-
-  components: {
-    LoginBy
   }
 };
 </script>

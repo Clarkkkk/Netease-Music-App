@@ -1,36 +1,41 @@
 <template>
   <div id="rank">
     <div class="header">
-      <app-back-button/>
-      <div class="title">我的听歌排行</div>
+      <app-back-button />
+      <div class="title">
+        我的听歌排行
+      </div>
     </div>
     <nav class="nav">
       <div
-        @click="nav='week-list'"
         :class="{'active': nav==='week-list'}"
+        @click="nav='week-list'"
       >
         最近一周
       </div>
       <div
-        @click="nav='all-list'"
         :class="{'active': nav==='all-list'}"
+        @click="nav='all-list'"
       >
         所有时间
       </div>
     </nav>
-    <div class="list" ref="wrapper">
+    <div
+      ref="wrapper"
+      class="list"
+    >
       <div class="content">
         <app-song-entry
           v-for="song in currentList"
           :key="song.id"
-          :songId="song.id"
-          :songName="song.name"
-          :songArtist="song.artist"
-          :songAlbum="song.album"
-          :songAlbumId="song.albumId"
-          :songCover="song.cover"
+          :song-id="song.id"
+          :song-name="song.name"
+          :song-artist="song.artist"
+          :song-album="song.album"
+          :song-album-id="song.albumId"
+          :song-cover="song.cover"
         >
-          <template v-slot:count>
+          <template #count>
             <span class="count">{{ song.playCount + '次' }}</span>
           </template>
         </app-song-entry>
@@ -45,7 +50,12 @@ import createScroll from '@/functions/createScroll.js';
 import AppBackButton from '@/components/AppBackButton.vue';
 import AppSongEntry from '@/components/AppSongEntry.vue';
 export default {
-  name: 'rank',
+  name: 'Rank',
+
+  components: {
+    AppBackButton,
+    AppSongEntry
+  },
   data() {
     return {
       weekList: [],
@@ -62,11 +72,6 @@ export default {
         return this.allList;
       }
     }
-  },
-
-  components: {
-    AppBackButton,
-    AppSongEntry
   },
 
   created() {

@@ -1,5 +1,8 @@
 <template>
-  <div id="profile" ref="wrapper">
+  <div
+    id="profile"
+    ref="wrapper"
+  >
     <div
       ref="bg"
       class="background fade-in"
@@ -7,29 +10,49 @@
     />
     <div class="fixed-container">
       <div
-        class="card"
         ref="card"
+        class="card"
       >
-        <img class="avatar fade-in" :src="avtSrc" ref="avatar">
-        <span class="nickname" ref="nickname">{{ nickname }}</span>
-        <span class="level" ref="level">{{ 'LV. ' + level }}</span>
-        <div class="logout" @tap="logout" ref="logout">
-          <app-icon icon="log-out"/>
+        <img
+          ref="avatar"
+          class="avatar fade-in"
+          :src="avtSrc"
+        >
+        <span
+          ref="nickname"
+          class="nickname"
+        >{{ nickname }}</span>
+        <span
+          ref="level"
+          class="level"
+        >{{ 'LV. ' + level }}</span>
+        <div
+          ref="logout"
+          class="logout"
+          @tap="logout"
+        >
+          <app-icon icon="log-out" />
           <span>登出</span>
         </div>
       </div>
     </div>
 
     <div class="content">
-      <div class="placeholder"></div>
+      <div class="placeholder" />
       <div class="features">
-        <div class="feature-container" @tap="routeTo('rank')">
-          <app-icon icon="bar-chart"/>
+        <div
+          class="feature-container"
+          @tap="routeTo('rank')"
+        >
+          <app-icon icon="bar-chart" />
           <span>听歌排行</span>
         </div>
-        <div class="feature-container" @tap="routeTo('favorite')">
+        <div
+          class="feature-container"
+          @tap="routeTo('favorite')"
+        >
           <div class="icon-container">
-            <app-icon icon="like-fill"/>
+            <app-icon icon="like-fill" />
           </div>
           <span>我喜欢的音乐</span>
         </div>
@@ -70,7 +93,11 @@ import fetchJSON from '@/functions/fetchJSON.js';
 import createScroll from '@/functions/createScroll.js';
 import ProfileSongLists from '@/components/ProfileSongLists.vue';
 export default {
-  name: 'profile',
+  name: 'Profile',
+
+  components: {
+    ProfileSongLists
+  },
   data: function() {
     return {
       nickname: '',
@@ -99,10 +126,6 @@ export default {
     listSum() {
       return this.createdCount + this.savedCount;
     }
-  },
-
-  components: {
-    ProfileSongLists
   },
 
   created() {

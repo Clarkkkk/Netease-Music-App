@@ -6,7 +6,7 @@
     >
       — 到底啦 —
     </span>
-    <app-loading-icon v-else/>
+    <app-loading-icon v-else />
   </div>
 </template>
 
@@ -23,7 +23,7 @@ export default {
       rootMargin: '0px 0px 65% 0px',
       threshold: 0.0
     };
-    const callback = (entries, observer) => {
+    const callback = (entries) => {
       entries.forEach((entry) => {
         if (entry.target === this.$el && !this.seen && entry.isIntersecting) {
           this.$emit('update:seen', true);

@@ -1,16 +1,22 @@
 <template>
   <div id="search">
     <app-search-bar
-      class="header"
       v-model="searchText"
+      class="header"
       :focus="!isResult"
       @focus="onFocus"
       @keydown.enter="search"
     >
-      <template v-slot:left v-if="isResult">
-        <app-back-button/>
+      <template
+        v-if="isResult"
+        #left
+      >
+        <app-back-button />
       </template>
-      <template v-slot:right v-if="!isResult">
+      <template
+        v-if="!isResult"
+        #right
+      >
         <input
           type="button"
           class="cancel"
@@ -20,7 +26,7 @@
       </template>
     </app-search-bar>
     <keep-alive include="discover-search-default">
-      <router-view :searchText.sync="searchText"></router-view>
+      <router-view :search-text.sync="searchText" />
     </keep-alive>
   </div>
 </template>
@@ -29,17 +35,17 @@
 import AppSearchBar from '@/components/AppSearchBar.vue';
 import AppBackButton from '@/components/AppBackButton.vue';
 export default {
-  name: 'search',
+  name: 'Search',
+
+  components: {
+    AppSearchBar,
+    AppBackButton
+  },
   data: function() {
     return {
       loading: false,
       searchText: ''
     };
-  },
-
-  components: {
-    AppSearchBar,
-    AppBackButton
   },
 
   computed: {
@@ -49,7 +55,7 @@ export default {
   },
 
   watch: {
-    searchText(val) {
+    searchText() {
       console.log('searchText changed');
     }
   },
