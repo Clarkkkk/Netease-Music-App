@@ -3,11 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
+    "serve": "cross-env NODE_OPTIONS=--openssl-legacy-provider vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
+    "@better-scroll/core": "^2.5.1",
+    "@better-scroll/mouse-wheel": "^2.5.1",
+    "@better-scroll/scroll-bar": "^2.5.1",
     "better-scroll": "^2.0.4",
     "core-js": "^3.6.5",
     "css-loader": "^4.3.0",
@@ -24,6 +27,7 @@
     "@vue/cli-plugin-router": "^4.5.7",
     "@vue/cli-service": "^4.5.7",
     "babel-eslint": "^10.1.0",
+    "cross-env": "^7.0.3",
     "eslint": "^7.13.0",
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-vue": "^6.2.2",

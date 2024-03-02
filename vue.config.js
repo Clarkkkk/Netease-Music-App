@@ -6,6 +6,18 @@ function resolve(dir) {
 
 module.exports = {
   lintOnSave: false,
+  devServer: {
+    proxy: {
+      '/api': {
+        target: 'https://api.carllllo.work/music',
+        changeOrigin: true,
+        pathRewrite: { '^/api': '' },
+        headers: {
+          Referer: 'https://carllllo.work'
+        }
+      }
+    }
+  },
   pwa: {
     workboxPluginMode: 'GenerateSW',
     workboxOptions: {
