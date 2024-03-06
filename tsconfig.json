@@ -10,6 +10,7 @@
         "incremental": true,
         "outDir": "node_modules/.cache",
         "resolveJsonModule": true,
+        "moduleResolution": "Bundler",
         "isolatedModules": true,
         "esModuleInterop": false,
         "lib": [
