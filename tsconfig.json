@@ -9,6 +9,7 @@
         "sourceMap": true,
         "incremental": true,
         "outDir": "node_modules/.cache",
+        "moduleResolution": "Bundler",
         "resolveJsonModule": true,
         "isolatedModules": true,
         "esModuleInterop": false,
@@ -56,16 +57,7 @@
         "noImplicitAny": true,
         "strictNullChecks": true,
         "forceConsistentCasingInFileNames": true,
-        "types": [
-            "vite-plugin-svgr/client"
-        ]
     },
-    "include": [
-        "src/**/*.ts",
-        "src/**/*.d.ts",
-        "src/**/*.tsx",
-        "src/**/*.vue"
-    ],
     "exclude": [
         "node_modules"
     ]
