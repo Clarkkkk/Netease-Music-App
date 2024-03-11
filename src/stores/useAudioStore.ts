@@ -1,4 +1,5 @@
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
+import { useStorage } from '@vueuse/core'
 import { defineStore } from 'pinia'
 
 export const useAudioStore = defineStore('audio', () => {
@@ -7,6 +8,8 @@ export const useAudioStore = defineStore('audio', () => {
     /** 当前已播放时间，单位是秒 */
     const currentTime = ref(0)
     const loop = ref(false)
+    const volume = ref(1)
+    const lastVolume = useStorage('last-volume', 1)
     const audioStatus = ref<
         | 'not-ready'
         | 'can-play'
@@ -74,6 +77,16 @@ export const useAudioStore = defineStore('audio', () => {
         loop.value = val
     }
 
+    function setVolume(val: number) {
+        volume.value = val
+    }
+
+    watch(volume, (val) => {
+        if (val > 0.01) {
+            lastVolume.value = val
+        }
+    })
+
     return {
         audioRef,
         duration,
@@ -87,6 +100,9 @@ export const useAudioStore = defineStore('audio', () => {
         updateAudioStatus,
         updateDuration,
         updateCurrentTime,
-        setLoop
+        setLoop,
+        volume,
+        lastVolume,
+        setVolume
     }
 })

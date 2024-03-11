@@ -1,11 +1,12 @@
 <script setup lang="ts">
+import { watch } from 'vue'
 import { ONE_MINUTE } from 'common'
 import { storeToRefs } from 'pinia'
 import { useAudioStore, usePlaylistStore } from 'stores'
 import { wait } from 'utils'
 
-const { audioRef, loop, audioStatus } = storeToRefs(useAudioStore())
-const { updateAudioStatus, updateCurrentTime, updateDuration } = useAudioStore()
+const { audioRef, loop, audioStatus, volume } = storeToRefs(useAudioStore())
+const { updateAudioStatus, updateCurrentTime, updateDuration, setVolume } = useAudioStore()
 const { currentSong } = storeToRefs(usePlaylistStore())
 
 let reloadCount = 0
@@ -24,6 +25,12 @@ async function onError(e: any) {
         }
     }
 }
+
+watch(volume, (val) => {
+    if (!audioRef.value) return
+    console.log('volume changed')
+    audioRef.value.volume = val
+})
 </script>
 
 <template>
@@ -53,5 +60,6 @@ async function onError(e: any) {
         @waiting="updateAudioStatus('loading')"
         @playing="updateAudioStatus('playing')"
         @ended="updateAudioStatus('ended')"
+        @volumechange="(e) => setVolume((e.target as HTMLMediaElement).volume)"
     />
 </template>

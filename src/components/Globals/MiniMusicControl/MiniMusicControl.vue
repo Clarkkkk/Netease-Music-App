@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Playlist from '../../Playlist.vue'
+import VolumeControlBtn from '../../VolumeControlBtn.vue'
 import { Controls, Cover, Info, MusicBar } from './components'
 </script>
 
@@ -14,6 +15,7 @@ import { Controls, Cover, Info, MusicBar } from './components'
         >
             <Cover />
             <Info />
+            <VolumeControlBtn />
             <MusicBar />
             <Controls />
             <Playlist class="ml-3" />

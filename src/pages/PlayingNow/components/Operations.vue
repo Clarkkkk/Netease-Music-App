@@ -4,7 +4,7 @@ import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useAnimation } from 'services'
 import { useLikeStore, usePlaylistStore } from 'stores'
-import { Button, ContextMenu, ContextMenuItem, Playlist } from 'components'
+import { Button, ContextMenu, ContextMenuItem, Playlist, VolumeControl } from 'components'
 
 const router = useRouter()
 const { animating, onAnimationEnd, startAnimation } = useAnimation()
@@ -96,6 +96,9 @@ async function onAlbumJumpClick() {
             </Button>
 
             <template #menu>
+                <div class="mb-2">
+                    <VolumeControl />
+                </div>
                 <ContextMenuItem @click="onAlbumJumpClick">
                     <i-solar-vinyl-line-duotone class="h-5 w-5" />
                     查看专辑

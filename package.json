@@ -39,6 +39,7 @@
     "tippy.js": "^6.3.7",
     "vee-validate": "^4.12.2",
     "vue": "^3.4.15",
+    "vue-component-type-helpers": "^1.8.27",
     "vue-route-prefetch": "^3.0.2",
     "vue-router": "^4.2.5",
     "vue-tippy": "^6.3.1",

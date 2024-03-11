@@ -72,7 +72,7 @@ provide('ContextMenu', { hideMenu, visible })
                 <div
                     :class="[
                         'context-menu-panel',
-                        size === 'large' ? 'w-96' : 'w-48',
+                        size === 'large' ? 'w-96' : 'w-56',
                         'rounded-xl',
                         'bg-base-100',
                         'p-2',
