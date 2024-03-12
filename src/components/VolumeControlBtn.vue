@@ -19,6 +19,7 @@ const {
     onPointerMove,
     onPointerUp,
     onTouchStart,
+    onWheel,
     thumbStyle,
     rangeStyle,
     tooltipStyle,
@@ -110,6 +111,7 @@ function onVolumeChange(val: number) {
                         @pointermove="onPointerMove"
                         @pointerup="onPointerUp"
                         @touchstart="onTouchStart"
+                        @wheel="onWheel"
                     >
                         <div class="flex h-full w-full flex-col items-center">
                             <div

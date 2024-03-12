@@ -2,7 +2,7 @@
 import type { ComputedRef, CSSProperties, Ref } from 'vue'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { debounce } from 'lodash'
-import { minmax } from 'utils'
+import { minmax, wait } from 'utils'
 
 interface HeadlessSliderProps {
     currentPosition: Ref<number>
@@ -22,6 +22,8 @@ export const useHeadlessSlider = ({
 }: HeadlessSliderProps) => {
     direction = direction || 'horizontal'
     const isPointerDown = ref(false)
+    const isWheelScrolling = ref(false)
+    /** 0到1的比例 */
     const percentage = ref(currentPosition.value / (totalLength.value || 1))
     const rect = ref(containerElement.value?.getBoundingClientRect())
 
@@ -55,7 +57,7 @@ export const useHeadlessSlider = ({
     })
 
     const rangeStyle: ComputedRef<CSSProperties> = computed(() => {
-        if (!rect.value) {
+        if (!rect.value || rect.value.top === 0 && rect.value.left === 0) {
             return {}
         }
         return direction === 'horizontal'
@@ -76,7 +78,7 @@ export const useHeadlessSlider = ({
             position: 'relative',
             zIndex: '10',
             transition: 'opacity 300ms',
-            opacity: isPointerDown.value ? 0.9 : 0,
+            opacity: (isPointerDown.value || isWheelScrolling.value) ? 0.9 : 0,
             flex: '0 0 auto',
             pointerEvents: 'none',
             width: 'max-content',
@@ -128,6 +130,14 @@ export const useHeadlessSlider = ({
         event.preventDefault()
     }
 
+    async function onWheel(event: WheelEvent) {
+        if (!rect.value) return
+        percentage.value = minmax(percentage.value + event.deltaY / 50 / 100, { min: 0, max: 1 })
+        isWheelScrolling.value = true
+        await wait(300)
+        isWheelScrolling.value = false
+    }
+
     watch([currentPosition, totalLength], ([newCurrentPosition, newLength]) => {
         if (isPointerDown.value) return
         percentage.value = newCurrentPosition / (newLength || 1)
@@ -141,6 +151,7 @@ export const useHeadlessSlider = ({
         onPointerDown,
         onPointerMove,
         onPointerUp,
-        onTouchStart
+        onTouchStart,
+        onWheel
     }
 }
