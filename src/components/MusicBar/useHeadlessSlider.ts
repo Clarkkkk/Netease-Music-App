@@ -132,7 +132,12 @@ export const useHeadlessSlider = ({
 
     async function onWheel(event: WheelEvent) {
         if (!rect.value) return
-        percentage.value = minmax(percentage.value + event.deltaY / 50 / 100, { min: 0, max: 1 })
+        event.preventDefault()
+        if (direction === 'horizontal') {
+            percentage.value = minmax(percentage.value + event.deltaY / 50 / 100, { min: 0, max: 1 })
+        } else {
+            percentage.value = minmax(percentage.value - event.deltaY / 50 / 100, { min: 0, max: 1 })
+        }
         isWheelScrolling.value = true
         await wait(300)
         isWheelScrolling.value = false
