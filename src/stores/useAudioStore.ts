@@ -8,8 +8,8 @@ export const useAudioStore = defineStore('audio', () => {
     /** 当前已播放时间，单位是秒 */
     const currentTime = ref(0)
     const loop = ref(false)
-    const volume = ref(1)
     const lastVolume = useStorage('last-volume', 1)
+    const volume = ref(lastVolume || 1)
     const audioStatus = ref<
         | 'not-ready'
         | 'can-play'
