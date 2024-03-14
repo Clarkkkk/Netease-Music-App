@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch } from 'vue'
+import { onMounted, watch } from 'vue'
 import { ONE_MINUTE } from 'common'
 import { storeToRefs } from 'pinia'
 import { useAudioStore, usePlaylistStore } from 'stores'
@@ -25,6 +25,11 @@ async function onError(e: any) {
         }
     }
 }
+
+onMounted(() => {
+    if (!audioRef.value) return
+    audioRef.value.volume = volume.value
+})
 
 watch(volume, (val) => {
     if (!audioRef.value) return
