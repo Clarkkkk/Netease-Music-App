@@ -142,7 +142,7 @@ export default defineConfig(() => {
                             options: {
                                 cacheName: 'app-music',
                                 cacheableResponse: {
-                                    statuses: [200, 206]
+                                    statuses: [0, 200, 206]
                                 },
                                 expiration: {
                                     maxEntries: 50
