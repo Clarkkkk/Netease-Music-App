@@ -1,7 +1,11 @@
 <script setup lang="ts">
+import { useDeviceType } from 'services'
+import { isAppleMobileDevice } from 'utils'
 import Playlist from '../../Playlist.vue'
 import VolumeControlBtn from '../../VolumeControlBtn.vue'
 import { Controls, Cover, Info, MusicBar } from './components'
+
+const { isMobile } = useDeviceType()
 </script>
 
 <template>
@@ -15,7 +19,7 @@ import { Controls, Cover, Info, MusicBar } from './components'
         >
             <Cover />
             <Info />
-            <VolumeControlBtn />
+            <VolumeControlBtn v-if="!isMobile && !isAppleMobileDevice()" />
             <MusicBar />
             <Controls />
             <Playlist class="ml-3" />

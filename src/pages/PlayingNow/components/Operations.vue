@@ -2,12 +2,14 @@
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
-import { useAnimation } from 'services'
+import { useAnimation, useDeviceType } from 'services'
 import { useLikeStore, usePlaylistStore } from 'stores'
 import { Button, ContextMenu, ContextMenuItem, Playlist, VolumeControl } from 'components'
+import { isAppleMobileDevice } from 'utils'
 
 const router = useRouter()
 const { animating, onAnimationEnd, startAnimation } = useAnimation()
+const { isMobile } = useDeviceType()
 const { getLikeStatus, switchLikeStatus, dislikeThisSong } = useLikeStore()
 const { currentSong } = storeToRefs(usePlaylistStore())
 const likingCurrentSong = computed(() => {
@@ -96,7 +98,10 @@ async function onAlbumJumpClick() {
             </Button>
 
             <template #menu>
-                <div class="mb-2">
+                <div
+                    v-if="!isMobile && !isAppleMobileDevice()"
+                    class="mb-2"
+                >
                     <VolumeControl />
                 </div>
                 <ContextMenuItem @click="onAlbumJumpClick">
