@@ -71,7 +71,7 @@ export default defineConfig(() => {
                     short_name: 'Music',
                     description: 'A Music web app',
                     theme_color: '#5f19f7',
-                    start_url: 'index.html',
+                    start_url: 'https://carllllo.work/music/index.html',
                     id: 'carllllo-music',
                     scope: '/',
                     icons: [
