@@ -1,6 +1,7 @@
 /// <reference types="vitest" />
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
+import { codeInspectorPlugin } from 'code-inspector-plugin'
 import * as path from 'path'
 import IconsResolver from 'unplugin-icons/resolver'
 import Icons from 'unplugin-icons/vite'
@@ -25,6 +26,9 @@ export default defineConfig(() => {
         plugins: [
             vue(),
             vueJsx(),
+            codeInspectorPlugin({
+                bundler: 'vite'
+            }),
             // checker({
             //     vueTsc: true,
             //     eslint: {

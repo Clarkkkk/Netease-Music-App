@@ -70,6 +70,7 @@
     "@vue/tsconfig": "^0.5.1",
     "autoprefixer": "^10.4.16",
     "boxen": "^7.1.1",
+    "code-inspector-plugin": "^0.10.0",
     "commit-and-tag-version": "^11.3.0",
     "conventional-changelog": "^3.1.25",
     "conventional-changelog-aaron-preset": "^0.2.2",
