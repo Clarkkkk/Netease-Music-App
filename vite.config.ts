@@ -135,20 +135,6 @@ export default defineConfig(() => {
                                     maxEntries: 100
                                 }
                             }
-                        },
-                        {
-                            urlPattern: /^https:\/\/.*126.net\/.*\.(mp3|flac)$/i,
-                            handler: 'CacheFirst',
-                            options: {
-                                cacheName: 'app-music',
-                                cacheableResponse: {
-                                    statuses: [0, 200, 206]
-                                },
-                                expiration: {
-                                    maxEntries: 50
-                                },
-                                rangeRequests: true
-                            }
                         }
                     ]
                 }
