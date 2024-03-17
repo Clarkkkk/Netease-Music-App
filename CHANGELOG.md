@@ -2,6 +2,85 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+# 1.1.0    (2024-03-17)
+
+
+## **Features**
+
+* remember the last volume ([3d9daa43](https://github.com/Clarkkkk/Netease-Music-App/commit/3d9daa434b112f68ede95ee10a38c62b607e337e))
+* use mouse wheel to adjust volume ([becfae44](https://github.com/Clarkkkk/Netease-Music-App/commit/becfae44e37ef04a81c5c49a266ee694b087000b))
+* add volume control ([7ea15588](https://github.com/Clarkkkk/Netease-Music-App/commit/7ea15588d996b5a282bf659bdf8e0f5a4762a596))
+* add jump to album in the context menu of the playing page ([80b918ab](https://github.com/Clarkkkk/Netease-Music-App/commit/80b918ab5bc7beb5901ef20fcd99897f8f9668fe))
+* add Tooltip to display the sub name of a song ([1d4530c6](https://github.com/Clarkkkk/Netease-Music-App/commit/1d4530c69fe9e5bdd2ee197dca23352a9cb3aff2))
+* add operation buttons in playing page ([ae3fa031](https://github.com/Clarkkkk/Netease-Music-App/commit/ae3fa0312c7616d5616acff4ce1d14489ff3fcd7))
+    
+    ### **Description**
+    
+    - add like and dislike button
+    - add playlist button
+    - add other buttons just for the unimplemented features
+    - move and rename some files
+    
+* jump to album page from SongTable ([a99e7577](https://github.com/Clarkkkk/Netease-Music-App/commit/a99e75775839765d4bb46c8c52079f5418b93679))
+
+## **Bug Fixes**
+
+* fix volume thumb's unintentional position change when open ([0d64c119](https://github.com/Clarkkkk/Netease-Music-App/commit/0d64c119530650be2c5c52fb6ab67ff2b70bc53f))
+* remove the delay of useIsHovering ([1c4dff3e](https://github.com/Clarkkkk/Netease-Music-App/commit/1c4dff3e8ebf86d813d41352ad8efe35cfb4f33e))
+* should set the volume of audioRef in onMounted hook ([9a20f60c](https://github.com/Clarkkkk/Netease-Music-App/commit/9a20f60cf4634c2ef54e48e51d6247f3119cf660))
+* fix bugs in scrolling to adjust volume ([97aca217](https://github.com/Clarkkkk/Netease-Music-App/commit/97aca2170d6ef4303521497667671e7e8e5c5038))
+* song's url could be null ([34c9306c](https://github.com/Clarkkkk/Netease-Music-App/commit/34c9306c0556d67227a5634ba65034661e95b92c))
+* wrong size when the cover is not 1 to 1 ratio ([3a5b7d70](https://github.com/Clarkkkk/Netease-Music-App/commit/3a5b7d70cffd40421eabbb69c97fbe489b4e4dcf))
+* add delay for tooltip ([86421a7b](https://github.com/Clarkkkk/Netease-Music-App/commit/86421a7b3ece4c89a34eb34cc44eb2bc7ad1c4b2))
+* update vue and the patch ([8d2f66c8](https://github.com/Clarkkkk/Netease-Music-App/commit/8d2f66c8180cec8ac3fb8e6bc9b9c26045c6f1fc))
+* the description of an album could be `null` ([5057278f](https://github.com/Clarkkkk/Netease-Music-App/commit/5057278fa2e31c463da03f480db57500930d35d2))
+* reduce the time of dislike operation ([1838783f](https://github.com/Clarkkkk/Netease-Music-App/commit/1838783f4023ad0f23d135e494dbe024a26410c4))
+* minor bug fixes ([bde3e663](https://github.com/Clarkkkk/Netease-Music-App/commit/bde3e6630408cd7fb061cf77d9306b6390a07140))
+    
+    ### **Description**
+    
+    - the thumb's position when dragging is not right after window resizing
+    - should not show the tooltip of the title when its text is 'null'
+    - other appearence adjustments
+    
+* fix type errors ([bf768355](https://github.com/Clarkkkk/Netease-Music-App/commit/bf76835559e62e413b296a5e7fcd3d779ed292bd))
+* should not switch mode when there are network errors ([9df0b16d](https://github.com/Clarkkkk/Netease-Music-App/commit/9df0b16d884d84354a321e1fe368daaa6855418d))
+* unify date format ([17f7e478](https://github.com/Clarkkkk/Netease-Music-App/commit/17f7e47898149a5713ba5ab106e3d195587f2a60))
+
+## **Styles**
+
+* add transtion to nav links ([feb5398b](https://github.com/Clarkkkk/Netease-Music-App/commit/feb5398bc7e482a8a209064a0dde9279be32f9bf))
+
+## **Performance Improvements**
+
+* use vite-plugin-imp to import lodash on demand ([d22ab5cc](https://github.com/Clarkkkk/Netease-Music-App/commit/d22ab5cc32baeb35003750d344189c793e8b83f9))
+* add prefetch everywhere ([7abd03c4](https://github.com/Clarkkkk/Netease-Music-App/commit/7abd03c427a9c68f9e987d55a405263c9548fec5))
+* add prefetch for nav links ([c5bf7384](https://github.com/Clarkkkk/Netease-Music-App/commit/c5bf73847bb2d542ac71e339917db3cb816f7b10))
+
+## **Documentation**
+
+* add storybook for the components ([35bdd41b](https://github.com/Clarkkkk/Netease-Music-App/commit/35bdd41b1f3e75e59c86bb3a743daa5bd5f22d23))
+
+## **Chores**
+
+* add `code-inspector-plugin` ([75506e49](https://github.com/Clarkkkk/Netease-Music-App/commit/75506e49b20cc28cab57f5a486fba915f910a902))
+* update vue-tsc ([a68b81b4](https://github.com/Clarkkkk/Netease-Music-App/commit/a68b81b4ea699fc3c1f9240e106a35914d430fba))
+* update storybook to 8.0.0-beta.5 ([dd36d70f](https://github.com/Clarkkkk/Netease-Music-App/commit/dd36d70fa0f319dff0cbd8b7c419d4a643db6495))
+* try out storybook@canary ([f4d38998](https://github.com/Clarkkkk/Netease-Music-App/commit/f4d38998e6c3968eee00a636f3249c9599c5feb9))
+* update tailwindcss, prettier and relative deps, and format again ([1562e787](https://github.com/Clarkkkk/Netease-Music-App/commit/1562e787ef57cb7570296a61e9159155ef295935))
+* update vue ([eb260f85](https://github.com/Clarkkkk/Netease-Music-App/commit/eb260f850a56d6f1ec2745cb7d7f21555a0e23cd))
+* add vite-bundle-visualizer ([f1b76cf5](https://github.com/Clarkkkk/Netease-Music-App/commit/f1b76cf5404585581a1be0dbacb7a5b7916d213f))
+* format ([25fedb70](https://github.com/Clarkkkk/Netease-Music-App/commit/25fedb70061276477a520037d089d153e417a80a))
+* update deps ([e4068731](https://github.com/Clarkkkk/Netease-Music-App/commit/e406873196c76f2abcf05bae88fa6164b1ededcf))
+* log audio error ([01e997d2](https://github.com/Clarkkkk/Netease-Music-App/commit/01e997d2b5ced9f4e390ed35af224d1c50007abe))
+* add unplugin-turbo-console for a better console in development ([947d2205](https://github.com/Clarkkkk/Netease-Music-App/commit/947d2205b415c9c3e9f54f84726334f206d2c826))
+* update to vite 5 and fix minor bugs ([309243f2](https://github.com/Clarkkkk/Netease-Music-App/commit/309243f2b910fbda3f895867e4e9c81a4f276bc0))
+* update deps ([47747d8f](https://github.com/Clarkkkk/Netease-Music-App/commit/47747d8f946d3b6799b72b195d612d7603be829d))
+* add manifest id ([1fb87108](https://github.com/Clarkkkk/Netease-Music-App/commit/1fb87108aa6d53569e100678fb5062c47ba8c1db))
+* cleanup some code ([ecbb1f87](https://github.com/Clarkkkk/Netease-Music-App/commit/ecbb1f87b408fbcfc8e327f95801dd0cd786017e))
+
+
+
 # 1.0.0    (2023-10-07)
 
 
