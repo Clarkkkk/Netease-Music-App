@@ -82,7 +82,7 @@ function onVolumeChange(val: number) {
             <div class="flex h-full w-full items-center">
                 <div class="groove relative flex h-1 w-full items-center rounded-full bg-base-300">
                     <div
-                        class="h-full w-full flex-shrink-0 rounded-full bg-slate-200"
+                        class="h-full flex-shrink-0 rounded-full bg-slate-200"
                         :style="rangeStyle"
                     />
                     <div

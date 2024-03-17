@@ -57,17 +57,33 @@ export const useHeadlessSlider = ({
     })
 
     const rangeStyle: ComputedRef<CSSProperties> = computed(() => {
-        if (!rect.value || rect.value.top === 0 && rect.value.left === 0) {
+        if (!rect.value) {
             return {}
+        }
+        let computedSize = 0
+        for (const className of Array.from(containerElement.value?.classList || [])) {
+            if (direction ==='horizontal') {
+                if (/^w-\d+$/.test(className)) {
+                    computedSize = +className.match(/w-(\d+)/)![1] * 4
+                } else if (/^w-\[(\d+px)\]$/.test(className)) {
+                    computedSize = +className.match(/w-\[(\d+)px\]/)![1]
+                }
+            } else {
+                if (/^h-\d+$/.test(className)) {
+                    computedSize = +className.match(/h-(\d+)/)![1] * 4
+                } else if (/^h-\[(\d+px)\]$/.test(className)) {
+                    computedSize = +className.match(/h-\[(\d+)px\]/)![1]
+                }
+            }
         }
         return direction === 'horizontal'
             ? {
-                width: `${rect.value.width * percentage.value}px`,
+                width: `${(rect.value.width || computedSize) * percentage.value}px`,
                 flex: '0 0 auto',
                 position: 'relative'
             }
             : {
-                height: `${rect.value.height * percentage.value}px`,
+                height: `${(rect.value.height || computedSize) * percentage.value}px`,
                 flex: '0 0 auto',
                 position: 'relative'
             }
@@ -78,7 +94,7 @@ export const useHeadlessSlider = ({
             position: 'relative',
             zIndex: '10',
             transition: 'opacity 300ms',
-            opacity: (isPointerDown.value || isWheelScrolling.value) ? 0.9 : 0,
+            opacity: isPointerDown.value || isWheelScrolling.value ? 0.9 : 0,
             flex: '0 0 auto',
             pointerEvents: 'none',
             width: 'max-content',
@@ -94,13 +110,11 @@ export const useHeadlessSlider = ({
         const target = event.target as HTMLElement
         isPointerDown.value = true
 
-        console.log(event)
         if (direction === 'horizontal') {
             const relativeLeft = (event as any).clientX - rect.value.left
             percentage.value = minmax(relativeLeft / rect.value.width, { min: 0, max: 1 })
         } else {
             const relativeBottom = rect.value.bottom - (event as any).clientY
-            console.log(relativeBottom)
             percentage.value = minmax(relativeBottom / rect.value.height, { min: 0, max: 1 })
         }
 
@@ -134,9 +148,15 @@ export const useHeadlessSlider = ({
         if (!rect.value) return
         event.preventDefault()
         if (direction === 'horizontal') {
-            percentage.value = minmax(percentage.value + event.deltaY / 50 / 100, { min: 0, max: 1 })
+            percentage.value = minmax(percentage.value + event.deltaY / 50 / 100, {
+                min: 0,
+                max: 1
+            })
         } else {
-            percentage.value = minmax(percentage.value - event.deltaY / 50 / 100, { min: 0, max: 1 })
+            percentage.value = minmax(percentage.value - event.deltaY / 50 / 100, {
+                min: 0,
+                max: 1
+            })
         }
         isWheelScrolling.value = true
         await wait(300)
