@@ -156,7 +156,7 @@ function useFrequentLoadingEffect() {
             loadingCount++
         }
 
-        if (loadingCount > 3) {
+        if (loadingCount > 2) {
             console.log('frequent loading, trying to load last part')
             loadingCount = 0
             seeking.value = true

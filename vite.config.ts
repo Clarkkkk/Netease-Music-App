@@ -138,9 +138,9 @@ export default defineConfig(() => {
                         },
                         {
                             urlPattern: /^https:\/\/.*126.net\/.*\.(mp3|flac)$/i,
-                            handler: 'StaleWhileRevalidate',
+                            handler: 'CacheFirst',
                             options: {
-                                cacheName: 'music',
+                                cacheName: 'app-music',
                                 cacheableResponse: {
                                     statuses: [200, 206]
                                 },
