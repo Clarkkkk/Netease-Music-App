@@ -30,6 +30,8 @@ export const usePlayStatusEffect = () => {
         }
     }
 
+    useFrequentLoadingEffect()
+
     // 当前歌曲准备就绪后自动播放
     watch(
         [currentSong, audioStatus],
@@ -135,6 +137,50 @@ export const usePlayStatusEffect = () => {
             if (list.length) {
                 appendSongs(list)
             }
+        }
+    })
+}
+
+// 如果播放一首歌时加载太频繁，就直接加载最后的部分
+function useFrequentLoadingEffect() {
+    const { audioStatus, currentTime, duration } = storeToRefs(useAudioStore())
+    const { seek } = useAudioStore()
+    const { currentSong } = storeToRefs(usePlaylistStore())
+
+    const seeking = ref(false)
+    let loadingCount = 0
+    let lastTimestamp = 0
+
+    watch(audioStatus, async (val) => {
+        if (val === 'loading' && currentTime.value < 60 && !seeking.value) {
+            loadingCount++
+        }
+
+        if (loadingCount > 3) {
+            console.log('frequent loading, trying to load last part')
+            loadingCount = 0
+            seeking.value = true
+            lastTimestamp = currentTime.value
+            const seekPosition = duration.value - (duration.value - currentTime.value) / 3
+            seek(seekPosition)
+        }
+    })
+
+    watch(
+        () => currentSong.value?.id,
+        (newVal, oldVal) => {
+            if (newVal && newVal !== oldVal && oldVal !== undefined) {
+                loadingCount = 0
+            }
+        }
+    )
+
+    watchEffect(() => {
+        if (audioStatus.value === 'can-play' && seeking.value) {
+            console.log('seeking completed, recovering')
+            seeking.value = false
+            seek(lastTimestamp)
+            lastTimestamp = 0
         }
     })
 }
