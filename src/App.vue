@@ -56,7 +56,9 @@ html::view-transition-group(*) {
 
 * {
     // Firefox
-    scrollbar-width: thin;
+    @supports not selector(::-webkit-scrollbar) {
+        scrollbar-width: thin;
+    }
 
     &::-webkit-scrollbar {
         width: 8px;
