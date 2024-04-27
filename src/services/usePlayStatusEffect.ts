@@ -84,7 +84,9 @@ export const usePlayStatusEffect = () => {
             console.log(audioStatus.value)
             try {
                 await updateSongUrl(nextSong.value)
-            } catch {}
+            } catch (e) {
+                console.error(e)
+            }
         } else if (audioStatus.value === 'ended') {
             console.log('play next')
             switchToNextSong()

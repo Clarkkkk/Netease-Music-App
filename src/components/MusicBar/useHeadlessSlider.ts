@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import type { ComputedRef, CSSProperties, Ref } from 'vue'
 import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
 import { debounce } from 'lodash'
