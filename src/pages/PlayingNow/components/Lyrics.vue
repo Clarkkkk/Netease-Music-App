@@ -40,7 +40,7 @@ watch(lyricsCurrentIndex, (currentIndex) => {
         class="flex aspect-square w-full flex-col items-center overflow-y-auto overflow-x-hidden"
     >
         <template v-if="lyricsStatus === 'loading'">
-            <span class="loading loading-spinner h-full text-primary"></span>
+            <span class="loading loading-spinner h-full text-primary" />
         </template>
         <div
             v-else-if="lyricsStatus === 'error'"

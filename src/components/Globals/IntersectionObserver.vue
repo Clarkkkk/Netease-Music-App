@@ -51,7 +51,7 @@ onBeforeUnmount(() => {
             class="text-center text-xs text-primary/70"
         >
             <template v-if="slots.default">
-                <slot></slot>
+                <slot />
             </template>
             <template v-else> — 到底啦 — </template>
         </span>

@@ -137,7 +137,7 @@ onBeforeRouteUpdate((to, from) => {
             v-if="loading"
             class="mt-4 flex w-full justify-center"
         >
-            <div class="loading text-primary"></div>
+            <div class="loading text-primary" />
         </div>
 
         <template v-else>

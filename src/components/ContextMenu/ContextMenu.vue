@@ -66,7 +66,7 @@ provide('ContextMenu', { hideMenu, visible })
                 }
             "
         >
-            <slot></slot>
+            <slot />
 
             <template #content>
                 <div
@@ -79,7 +79,7 @@ provide('ContextMenu', { hideMenu, visible })
                         'shadow-xl'
                     ]"
                 >
-                    <slot name="menu"></slot>
+                    <slot name="menu" />
                 </div>
             </template>
         </Tippy>
@@ -88,7 +88,7 @@ provide('ContextMenu', { hideMenu, visible })
             v-if="!isPc"
             @click="visible = !visible"
         >
-            <slot></slot>
+            <slot />
         </span>
 
         <Teleport
@@ -103,7 +103,7 @@ provide('ContextMenu', { hideMenu, visible })
                     <div
                         class="context-menu-popup-background absolute left-0 top-0 h-full w-full bg-gray-900/80 backdrop-blur-lg transition-all duration-300"
                         @click="visible = false"
-                    ></div>
+                    />
                     <div
                         class="context-menu-popup-content absolute bottom-0 left-0 w-full overflow-auto rounded-t-xl bg-base-100 px-2 pb-5 transition-all duration-300"
                     >
@@ -115,7 +115,7 @@ provide('ContextMenu', { hideMenu, visible })
                                 <i-fluent-dismiss-32-regular />
                             </Button>
                         </div>
-                        <slot name="menu"></slot>
+                        <slot name="menu" />
                     </div>
                 </div>
             </Transition>

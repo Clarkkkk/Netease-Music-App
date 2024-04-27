@@ -24,7 +24,7 @@ const body = document.body
         role="tooltip"
         :offset="[0, 5]"
     >
-        <slot></slot>
+        <slot />
 
         <template #content>
             <div class="rounded-md bg-slate-900/70 px-3 py-1 text-sm text-base-200 shadow-lg">
@@ -32,7 +32,7 @@ const body = document.body
             </div>
         </template>
     </Tippy>
-    <slot v-else></slot>
+    <slot v-else />
 </template>
 
 <style lang="scss">

@@ -60,7 +60,7 @@ async function onTabClick(tab: T) {
                 v-if="_loading || loading"
                 class="mt-4 flex w-full justify-center"
             >
-                <div class="loading text-primary"></div>
+                <div class="loading text-primary" />
             </div>
             <slot
                 :name="tab.name"

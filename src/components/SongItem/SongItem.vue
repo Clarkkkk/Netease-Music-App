@@ -72,7 +72,7 @@ const { isPc } = useDeviceType()
         >
             {{ song.album }}
         </div>
-        <slot></slot>
+        <slot />
         <SongItemOption
             :song="song"
             :class="['ml-2', 'transition-all', { 'opacity-0': !isHovering && isPc }]"

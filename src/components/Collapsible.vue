@@ -42,7 +42,7 @@ watch(isOpen, async (val) => {
                 maxHeight: height
             }"
         >
-            <slot name="default"></slot>
+            <slot name="default" />
         </div>
 
         <Button

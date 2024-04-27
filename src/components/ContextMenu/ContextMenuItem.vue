@@ -38,7 +38,7 @@ if (provided) {
         class="btn btn-ghost btn-sm h-10 w-full justify-start pr-0 font-normal content-auto"
         @click="clickHandler"
     >
-        <slot></slot>
+        <slot />
     </Button>
 </template>
 

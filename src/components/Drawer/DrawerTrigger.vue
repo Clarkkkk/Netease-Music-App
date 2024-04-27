@@ -7,7 +7,7 @@ const { open } = useDrawerContext()
 
 <template>
     <Button @click="open">
-        <slot></slot>
+        <slot />
     </Button>
 </template>
 

@@ -24,8 +24,8 @@ watch(visible, (val) => {
                     v-if="visible"
                     class="drawer-background absolute left-0 top-0 h-full w-full bg-gray-900/80 backdrop-blur-lg transition-all duration-300"
                     @click.self="close"
-                ></div>
-                <slot></slot>
+                />
+                <slot />
             </div>
         </Transition>
     </Teleport>

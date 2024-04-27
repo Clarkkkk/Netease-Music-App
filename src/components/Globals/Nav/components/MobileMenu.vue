@@ -73,7 +73,7 @@ async function onRouteClick(to: string, close: () => void) {
             <DrawerBackground>
                 <DrawerContent class="mobile-menu flex flex-col">
                     <div class="flex justify-between p-2">
-                        <div></div>
+                        <div />
                         <Button
                             class="btn-square btn-ghost"
                             @click="drawerProps.close()"
@@ -105,7 +105,7 @@ async function onRouteClick(to: string, close: () => void) {
                                 </div>
                             </div>
                         </div>
-                        <div class="menu-divider my-6"></div>
+                        <div class="menu-divider my-6" />
                     </template>
 
                     <div class="relative h-full p-2">

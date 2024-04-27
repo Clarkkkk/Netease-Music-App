@@ -49,7 +49,7 @@ onMounted(() => {
             v-if="loading"
             class="mt-4 flex w-full justify-center"
         >
-            <div class="loading text-primary"></div>
+            <div class="loading text-primary" />
         </div>
         <ul class="relative flex w-full flex-wrap items-center py-4">
             <AlbumItem
