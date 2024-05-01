@@ -12,7 +12,7 @@ const meta = {
     // This component will have an automatically generated docsPage entry: https://storybook.js.org/docs/writing-docs/autodocs
     tags: ['autodocs'],
     argTypes: {
-        default: { control: 'function' }
+        // default: { control: 'function' }
     },
     args: {} // default value
 } satisfies Meta<typeof Drawer>
