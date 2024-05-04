@@ -9,7 +9,7 @@ interface Props extends /* @vue-ignore */ ButtonHTMLAttributes {
      *
      * 若回调返回一个promise，菜单会等待promise resolve后再关闭
      */
-    onClick: (e: MouseEvent) => void | Promise<void>
+    onClick?: (e: MouseEvent) => void | Promise<void>
     /** 当菜单很长，需要滚动时，将`active`设为`true`会使菜单在打开后自动滚动到这个item */
     active?: boolean
 }
@@ -19,7 +19,9 @@ const props = defineProps<Props>()
 const buttonRef = ref<InstanceType<typeof Button> | null>(null)
 
 async function clickHandler(e: MouseEvent) {
-    await props.onClick(e)
+    if (props.onClick) {
+        await props.onClick(e)
+    }
     provided?.hideMenu()
 }
 

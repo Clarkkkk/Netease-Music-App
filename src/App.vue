@@ -2,11 +2,13 @@
 import { RouterView, useRoute } from 'vue-router'
 import { Audio, LoginModal, MiniMusicControl, Nav } from 'components'
 import {
+    useDebugEffect,
     useLikeEffect,
     useLoginInitEffect,
     useLyricsEffect,
     useMediaSessionEffect,
-    usePlayStatusEffect
+    usePlayStatusEffect,
+    useThemeEffect
 } from './services'
 import './global.css'
 
@@ -15,6 +17,8 @@ usePlayStatusEffect()
 useMediaSessionEffect()
 useLyricsEffect()
 useLikeEffect()
+useThemeEffect()
+useDebugEffect()
 
 const route = useRoute()
 </script>

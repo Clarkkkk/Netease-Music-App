@@ -23,10 +23,6 @@ const navRoutes = computed(() => {
         {
             name: 'Playing',
             to: '/playing'
-        },
-        {
-            name: 'Setting',
-            to: '/setting'
         }
     ]
     if (loggedIn.value) {
@@ -35,6 +31,10 @@ const navRoutes = computed(() => {
             to: '/user-center'
         })
     }
+    arr.push({
+        name: 'Setting',
+        to: '/setting'
+    })
     return arr
 })
 const route = useRoute()

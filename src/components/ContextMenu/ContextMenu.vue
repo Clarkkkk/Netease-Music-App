@@ -146,7 +146,7 @@ provide('ContextMenu', { hideMenu, visible })
 }
 
 .context-menu-panel {
-    max-height: calc(100vh - 200px);
+    max-height: 50vh;
     overflow: auto;
 }
 

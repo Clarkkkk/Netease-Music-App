@@ -94,7 +94,7 @@ watch(qrcodeLoginStatus, (val) => {
                             </div>
                         </div>
                     </div>
-                    <div class="h-5 text-sm text-info-content">
+                    <div class="h-5 text-sm text-base-content">
                         {{ message }}
                     </div>
                     <DialogCloseTrigger class="absolute right-1 top-1">

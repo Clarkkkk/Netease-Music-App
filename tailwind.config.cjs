@@ -25,7 +25,41 @@ module.exports = {
         }
     },
     daisyui: {
-        logs: false // Shows info about daisyUI version and used config in the console when building your CSS
+        logs: false, // Shows info about daisyUI version and used config in the console when building your CSS
+        themes: [
+            'light',
+            'dark',
+            'cupcake',
+            'bumblebee',
+            'emerald',
+            'corporate',
+            'synthwave',
+            'retro',
+            'cyberpunk',
+            'valentine',
+            'halloween',
+            'garden',
+            'forest',
+            'aqua',
+            'lofi',
+            'pastel',
+            'fantasy',
+            'wireframe',
+            'black',
+            'luxury',
+            'dracula',
+            'cmyk',
+            'autumn',
+            'business',
+            'acid',
+            'lemonade',
+            'night',
+            'coffee',
+            'winter',
+            'dim',
+            'nord',
+            'sunset'
+        ]
     },
     plugins: [
         require('daisyui'),
