@@ -24,6 +24,10 @@ const navRoutes = [
     {
         name: 'My music',
         to: '/user-center'
+    },
+    {
+        name: 'Setting',
+        to: '/setting'
     }
 ]
 const route = useRoute()

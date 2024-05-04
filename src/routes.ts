@@ -30,6 +30,10 @@ const routes = [
         path: '/user-center',
         component: () => import('./pages/UserCenter/UserCenter.vue'),
         meta: { requiresAuth: true }
+    },
+    {
+        path: '/setting',
+        component: () => import('./pages/Setting/Setting.vue')
     }
 ]
 

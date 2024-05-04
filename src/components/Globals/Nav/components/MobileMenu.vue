@@ -23,6 +23,10 @@ const navRoutes = computed(() => {
         {
             name: 'Playing',
             to: '/playing'
+        },
+        {
+            name: 'Setting',
+            to: '/setting'
         }
     ]
     if (loggedIn.value) {

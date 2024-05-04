@@ -48,6 +48,7 @@ watch(volume, (val) => {
         @loadeddata="updateAudioStatus('not-ready')"
         @canplay="
             (e) => {
+                console.log('can play')
                 updateDuration((e.target as HTMLAudioElement).duration)
                 updateAudioStatus('can-play')
             }
@@ -68,8 +69,8 @@ watch(volume, (val) => {
         @volumechange="(e) => setVolume((e.target as HTMLMediaElement).volume)"
     />
     <!-- mitigate the safari issue: https://bugs.webkit.org/show_bug.cgi?id=261554 -->
-    <audio
+    <!-- <audio
         src="/music/example.mp3"
         type="audio/mpeg"
-    />
+    /> -->
 </template>

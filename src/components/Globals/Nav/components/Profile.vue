@@ -4,6 +4,7 @@ import { storeToRefs } from 'pinia'
 import { useAuthStore, useProfileStore } from 'stores'
 import Button from '../../../Button.vue'
 import Image from '../../../Image.vue'
+
 const { profile } = storeToRefs(useProfileStore())
 const { logout } = useAuthStore()
 
@@ -60,10 +61,10 @@ async function onLogout() {
                             />
                         </div>
                     </div>
+                    <div class="text-lg font-bold">
+                        {{ profile?.profile.nickname || '' }}
+                    </div>
                     <div class="flex w-full flex-col items-center px-4 pb-4">
-                        <div class="text-lg font-bold">
-                            {{ profile?.profile.nickname || '' }}
-                        </div>
                         <Button
                             class="btn btn-primary btn-outline mt-8 w-full"
                             @click="onLogout"

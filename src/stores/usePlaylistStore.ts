@@ -1,7 +1,7 @@
 import { computed, nextTick, ref } from 'vue'
 import type { ApiPersonalFm, ApiSongUrl } from 'api'
 import { ONE_MINUTE } from 'common'
-import { defineStore } from 'pinia'
+import { defineStore, storeToRefs } from 'pinia'
 import { post, toHttps } from 'utils'
 import { useAudioStore } from './useAudioStore'
 
@@ -11,6 +11,7 @@ export const usePlaylistStore = defineStore('playlist', () => {
     const currentSong = ref<Song | null>(null)
     const playMode = ref<'list-loop' | 'list-sequent' | 'song-loop' | 'radio'>('list-sequent')
     const { updateAudioStatus } = useAudioStore()
+    const { audioStatus } = storeToRefs(useAudioStore())
 
     const nextSong = computed(() => {
         if (!currentSong.value || !playlist.value.length) {
@@ -77,11 +78,13 @@ export const usePlaylistStore = defineStore('playlist', () => {
     }
 
     async function switchToNextSong() {
-        if (
+        if (audioStatus.value === 'ended' && !nextSong.value) {
+            updateCurrentSongStatus('not-playing')
+        } else if (
             !currentSong.value ||
-            playlist.value.length <= 1 ||
             playMode.value === 'song-loop' ||
-            !nextSong.value
+            !nextSong.value ||
+            nextSong.value.id === currentSong.value.id
         ) {
             // do nothing
         } else {

@@ -26,10 +26,11 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@ark-ui/vue": "^0.5.3",
+    "@ark-ui/vue": "^1.0.0-4",
     "@unhead/vue": "^1.8.8",
     "@vueuse/core": "^10.6.1",
     "axios": "^1.6.2",
+    "eruda": "^3.0.1",
     "fast-average-color": "^9.4.0",
     "lodash": "^4.17.21",
     "paroles": "^2.3.0",

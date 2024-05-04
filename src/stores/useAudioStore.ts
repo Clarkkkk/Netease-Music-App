@@ -4,6 +4,7 @@ import { defineStore } from 'pinia'
 
 export const useAudioStore = defineStore('audio', () => {
     const audioRef = ref<HTMLAudioElement | null>(null)
+    /** 当前歌曲总时长，单位是秒 */
     const duration = ref(0)
     /** 当前已播放时间，单位是秒 */
     const currentTime = ref(0)
@@ -30,12 +31,9 @@ export const useAudioStore = defineStore('audio', () => {
                 updateAudioStatus('playing')
             } catch (e: any) {
                 console.error(e)
-                console.log(e.name)
-                console.log(e.message)
                 if (e.name === 'NotAllowedError') {
                     updateAudioStatus('paused')
                 }
-                // throw new Error(e)
             }
         }
     }

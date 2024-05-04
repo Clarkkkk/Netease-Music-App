@@ -1,6 +1,6 @@
 import { ref, watch, watchEffect } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useAudioStore, useAuthStore, usePlaylistStore } from 'stores'
+import { useAudioStore, useAuthStore, usePlaylistStore, usePreferenceStore } from 'stores'
 import type { ApiScrobble } from '../api/ApiScrobble'
 import { post } from '../utils/request'
 
@@ -8,6 +8,7 @@ export const usePlayStatusEffect = () => {
     const { loggedIn } = storeToRefs(useAuthStore())
     const { audioStatus, currentTime, duration } = storeToRefs(useAudioStore())
     const { updateAudioStatus, play } = useAudioStore()
+    const { preference } = storeToRefs(usePreferenceStore())
     const { playlist, currentSong, nextSong, playMode } = storeToRefs(usePlaylistStore())
     const {
         appendSongs,
@@ -139,6 +140,24 @@ export const usePlayStatusEffect = () => {
             if (list.length) {
                 appendSongs(list)
             }
+        }
+
+        // 如果当前歌曲在播放列表末尾且播放结束
+        // 更新播放列表后自动切换下一首
+        if (
+            listTail.at(-1)?.id === currentSong.id &&
+            audioStatus.value === 'ended' &&
+            currentSong.status === 'not-playing'
+        ) {
+            await switchToNextSong()
+        }
+    })
+
+    // 时长不足30秒，自动切换下一首
+    watch(duration, async (val) => {
+        if (val > 0 && val < 30 && preference.value.skipShortSongs) {
+            console.log(`${currentSong.value?.name} 时长 ${val} 秒，不足30秒，自动切换下一首`)
+            await switchToNextSong()
         }
     })
 }

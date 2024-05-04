@@ -1,6 +1,7 @@
 export * from './useAlbum'
 export * from './useAnimation'
 export * from './useDeviceType'
+export * from './useEruda'
 export * from './useIsHovering'
 export * from './useLikeEffect'
 export * from './useLoginInitEffect'

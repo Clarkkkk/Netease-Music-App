@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { computed, watch } from 'vue'
 import {
-    Dialog,
     DialogCloseTrigger,
-    DialogContainer,
     DialogContent,
+    DialogPositioner,
+    DialogRoot,
     DialogTitle
 } from '@ark-ui/vue'
 import { storeToRefs } from 'pinia'
@@ -49,12 +49,12 @@ watch(qrcodeLoginStatus, (val) => {
 </script>
 
 <template>
-    <Dialog
+    <DialogRoot
         v-model:open="showLoginModal"
-        :close-on-outside-click="false"
+        :close-on-interact-outside="false"
     >
         <Teleport to="body">
-            <DialogContainer
+            <DialogPositioner
                 :class="['modal', 'backdrop-blur-xl', { 'modal-open': showLoginModal }]"
             >
                 <DialogContent class="modal-box flex flex-col items-center">
@@ -103,9 +103,9 @@ watch(qrcodeLoginStatus, (val) => {
                         </button>
                     </DialogCloseTrigger>
                 </DialogContent>
-            </DialogContainer>
+            </DialogPositioner>
         </Teleport>
-    </Dialog>
+    </DialogRoot>
 </template>
 
 <style lang="scss">
