@@ -78,7 +78,7 @@ defineExpose({
                 :src="reload ? '' : webpSrc"
                 :srcSet="reload ? '' : webpSrcSet"
                 type="image/webp"
-            >
+            />
             <img
                 v-if="!errorStatus"
                 ref="img"
@@ -99,7 +99,7 @@ defineExpose({
                     }
                 "
                 @error="onError"
-            >
+            />
             <i-solar-file-remove-bold-duotone v-else />
         </picture>
     </div>

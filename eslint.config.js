@@ -1,5 +1,6 @@
 import vueParser from 'vue-eslint-parser'
 import js from '@eslint/js'
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
 import pluginVue from 'eslint-plugin-vue'
 import globals from 'globals'
@@ -9,6 +10,7 @@ export default [
     js.configs.recommended,
     ...pluginVue.configs['flat/recommended'],
     ...tseslint.configs.recommended,
+    eslintPluginPrettierRecommended,
     {
         files: ['**/*.{ts,tsx,js,mjs,cjs,vue}'],
         plugins: {
@@ -123,11 +125,11 @@ export default [
                 {
                     varsIgnorePattern: '^_',
                     args: 'after-used',
-                    "argsIgnorePattern": "^_",
-                    "caughtErrors": "all",
-                    "caughtErrorsIgnorePattern": "^_",
-                    "destructuredArrayIgnorePattern": "^_",
-                    "ignoreRestSiblings": true
+                    argsIgnorePattern: '^_',
+                    caughtErrors: 'all',
+                    caughtErrorsIgnorePattern: '^_',
+                    destructuredArrayIgnorePattern: '^_',
+                    ignoreRestSiblings: true
                 }
             ],
             '@typescript-eslint/no-explicit-any': 'off'

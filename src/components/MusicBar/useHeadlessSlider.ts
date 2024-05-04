@@ -61,7 +61,7 @@ export const useHeadlessSlider = ({
         }
         let computedSize = 0
         for (const className of Array.from(containerElement.value?.classList || [])) {
-            if (direction ==='horizontal') {
+            if (direction === 'horizontal') {
                 if (/^w-\d+$/.test(className)) {
                     computedSize = +className.match(/w-(\d+)/)![1] * 4
                 } else if (/^w-\[(\d+px)\]$/.test(className)) {
@@ -75,6 +75,7 @@ export const useHeadlessSlider = ({
                 }
             }
         }
+        // prettier-ignore
         return direction === 'horizontal'
             ? {
                 width: `${(rect.value.width || computedSize) * percentage.value}px`,
