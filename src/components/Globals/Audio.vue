@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { ONE_MINUTE } from 'common'
 import { storeToRefs } from 'pinia'
 import { useAudioStore, usePlaylistStore } from 'stores'
@@ -8,6 +8,7 @@ import { wait } from 'utils'
 const { audioRef, loop, audioStatus, volume } = storeToRefs(useAudioStore())
 const { updateAudioStatus, updateCurrentTime, updateDuration, setVolume } = useAudioStore()
 const { currentSong } = storeToRefs(usePlaylistStore())
+const hiddenAudioRef = ref<HTMLAudioElement>()
 
 let reloadCount = 0
 async function onError(e: any) {
@@ -29,6 +30,8 @@ async function onError(e: any) {
 onMounted(() => {
     if (!audioRef.value) return
     audioRef.value.volume = volume.value
+    if (!hiddenAudioRef.value) return
+    hiddenAudioRef.value.volume = 0
 })
 
 watch(volume, (val) => {
@@ -70,8 +73,8 @@ watch(volume, (val) => {
     />
     <!-- mitigate the safari issue: https://bugs.webkit.org/show_bug.cgi?id=261554 -->
     <audio
+        ref="hiddenAudioRef"
         autoplay
-        muted
         src="/music/example.mp3"
         type="audio/mpeg"
     />
