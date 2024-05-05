@@ -72,6 +72,8 @@ export const usePlayStatusEffect = () => {
             currentTime.value + 10 > duration.value &&
             audioStatus.value === 'playing'
         ) {
+            console.log('currentTime and duration')
+            console.log(currentTime.value, duration.value)
             updateAudioStatus('almost-ended')
         }
     })
@@ -82,6 +84,7 @@ export const usePlayStatusEffect = () => {
             (audioStatus.value === 'almost-ended' || audioStatus.value === 'can-play') &&
             nextSong.value
         ) {
+            console.log('update song url')
             console.log(audioStatus.value)
             try {
                 await updateSongUrl(nextSong.value)

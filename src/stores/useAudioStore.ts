@@ -30,6 +30,7 @@ export const useAudioStore = defineStore('audio', () => {
 
                 updateAudioStatus('playing')
             } catch (e: any) {
+                console.error('play error')
                 console.error(e)
                 if (e.name === 'NotAllowedError') {
                     updateAudioStatus('paused')
@@ -59,7 +60,7 @@ export const useAudioStore = defineStore('audio', () => {
     }
 
     function updateAudioStatus(val: typeof audioStatus.value) {
-        console.log('updateAudioStatus: ' + val)
+        console.log('updateAudioStatus: ' + val, new Date().toLocaleTimeString())
         audioStatus.value = val
     }
 
