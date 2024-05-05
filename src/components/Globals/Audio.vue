@@ -31,7 +31,7 @@ onMounted(() => {
     if (!audioRef.value) return
     audioRef.value.volume = volume.value
     if (!hiddenAudioRef.value) return
-    hiddenAudioRef.value.volume = 0
+    hiddenAudioRef.value.volume = 0.0001
 })
 
 watch(volume, (val) => {
@@ -75,6 +75,7 @@ watch(volume, (val) => {
     <audio
         ref="hiddenAudioRef"
         autoplay
+        loop
         src="/music/example.mp3"
         type="audio/mpeg"
     />
