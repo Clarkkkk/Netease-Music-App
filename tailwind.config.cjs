@@ -58,7 +58,29 @@ module.exports = {
             'winter',
             'dim',
             'nord',
-            'sunset'
+            'sunset',
+            {
+                'netease-classic': {
+                    // eslint-disable-next-line @typescript-eslint/no-var-requires
+                    ...require('daisyui/src/theming/themes')['[data-theme=light]'],
+                    primary: '#ff1b18',
+                    'primary-content': '#ffcfca',
+                    secondary: '#ff1b18',
+                    'secondary-content': '#ffcfca',
+                    accent: '#327ffb'
+                }
+            },
+            {
+                'netease-classic-dark': {
+                    // eslint-disable-next-line @typescript-eslint/no-var-requires
+                    ...require('daisyui/src/theming/themes')['[data-theme=dark]'],
+                    primary: '#ff1b18',
+                    'primary-content': '#ffcfca',
+                    secondary: '#ff1b18',
+                    'secondary-content': '#ffcfca',
+                    accent: '#327ffb'
+                }
+            }
         ]
     },
     plugins: [

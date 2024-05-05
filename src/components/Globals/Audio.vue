@@ -71,6 +71,7 @@ watch(volume, (val) => {
     <!-- mitigate the safari issue: https://bugs.webkit.org/show_bug.cgi?id=261554 -->
     <audio
         autoplay
+        muted
         src="/music/example.mp3"
         type="audio/mpeg"
     />

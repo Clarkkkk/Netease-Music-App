@@ -1,6 +1,7 @@
 export const lightThemeOptions = [
     { label: 'light', value: 'light' },
     { label: 'cupcake', value: 'cupcake' },
+    { label: 'netease-classic', value: 'netease-classic' },
     { label: 'bumblebee', value: 'bumblebee' },
     { label: 'emerald', value: 'emerald' },
     { label: 'corporate', value: 'corporate' },
@@ -24,6 +25,7 @@ export const lightThemeOptions = [
 export const darkThemeOptions = [
     { label: 'dark', value: 'dark' },
     { label: 'synthwave', value: 'synthwave' },
+    { label: 'netease-classic-dark', value: 'netease-classic-dark' },
     { label: 'halloween', value: 'halloween' },
     { label: 'forest', value: 'forest' },
     { label: 'black', value: 'black' },
