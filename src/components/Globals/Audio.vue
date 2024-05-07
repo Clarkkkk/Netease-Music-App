@@ -3,7 +3,7 @@ import { onMounted, ref, watch } from 'vue'
 import { ONE_MINUTE } from 'common'
 import { storeToRefs } from 'pinia'
 import { useAudioStore, usePlaylistStore } from 'stores'
-import { wait } from 'utils'
+import { isAppleMobileDevice, wait } from 'utils'
 
 const { audioRef, loop, audioStatus, volume } = storeToRefs(useAudioStore())
 const { updateAudioStatus, updateCurrentTime, updateDuration, setVolume } = useAudioStore()
@@ -73,6 +73,7 @@ watch(volume, (val) => {
     />
     <!-- mitigate the safari issue: https://bugs.webkit.org/show_bug.cgi?id=261554 -->
     <audio
+        v-if="isAppleMobileDevice()"
         ref="hiddenAudioRef"
         autoplay
         loop
