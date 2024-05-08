@@ -6,7 +6,7 @@ import { useRouter } from 'vue-router'
 import { Image } from 'components'
 import { minmax, toHttps } from 'utils'
 
-const props = defineProps<{ img: string; position: number; id: number }>()
+const props = defineProps<{ img: string; position: number; id: number; name: string }>()
 
 const router = useRouter()
 const { prefetchRoute } = usePrefetch()
@@ -38,6 +38,14 @@ const transformStyle: ComputedRef<StyleValue> = computed(() => {
             positionPercentage.value * 10 + (1 - relativePosition / 100) * -1
         }deg) scale(${(1 - Math.abs(positionPercentage.value)) * 0.5 + 0.6})`
     }
+})
+
+const isActive = computed(() => {
+    if (!elementRef.value) return false
+    const relativePosition =
+        (elementRef.value.offsetLeft + elementRef.value.clientWidth / 2 - props.position) /
+        elementRef.value.clientWidth
+    return Math.abs(relativePosition) < 0.1
 })
 
 function onClick() {
@@ -88,6 +96,14 @@ function onClick() {
                 :size="300"
             />
         </div>
+        <Transition name="fade">
+            <span
+                v-if="isActive"
+                class="absolute -left-8 top-36 w-32 text-center text-xs font-bold text-base-content"
+            >
+                {{ name }}
+            </span>
+        </Transition>
     </div>
 </template>
 

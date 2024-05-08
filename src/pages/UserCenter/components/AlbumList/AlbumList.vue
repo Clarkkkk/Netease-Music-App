@@ -25,6 +25,7 @@ const { onScroll, onWheel, centerPosition } = useScrollPosition(containerRef)
                 :id="album.id"
                 :key="album.id"
                 :img="album.picUrl"
+                :name="album.name"
                 :position="centerPosition"
             />
             <IntersectionObserver
