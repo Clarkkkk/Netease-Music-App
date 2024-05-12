@@ -25,12 +25,6 @@ const { preference } = storeToRefs(usePreferenceStore())
                 label="播放跟踪"
                 explanation="关闭后，播放的歌曲不会出现在记录中，也不会计入个性化推荐"
             />
-            <Switch
-                v-model="preference.enableDebugMode"
-                class="w-full"
-                input-class="toggle-primary"
-                label="开启调试"
-            />
             <hr class="my-6 h-px w-full bg-base-content/10" />
             <Select
                 v-model="preference.lightDarkThemeToggleStrategy"
@@ -75,6 +69,7 @@ const { preference } = storeToRefs(usePreferenceStore())
                 class="w-full"
                 input-class="toggle-primary"
                 label="开启调试"
+                explanation="是否显示移动端调试组件"
             />
         </div>
     </div>
