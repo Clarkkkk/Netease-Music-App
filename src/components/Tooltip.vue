@@ -27,7 +27,7 @@ const body = document.body
         <slot />
 
         <template #content>
-            <div class="rounded-md bg-slate-900/70 px-3 py-1 text-sm text-base-200 shadow-lg">
+            <div class="rounded-md bg-slate-900/70 px-3 py-1 text-sm text-slate-50 shadow-lg">
                 {{ content }}
             </div>
         </template>

@@ -4,6 +4,7 @@ import { ContextMenu, ContextMenuItem } from './ContextMenu'
 
 defineProps<{
     label?: string
+    explanation?: string
     options: {
         label: string
         value: string
@@ -26,6 +27,12 @@ const value = defineModel<string>()
             class="label"
         >
             {{ label }}
+            <Tooltip
+                v-if="explanation"
+                :content="explanation"
+            >
+                <i-solar-question-circle-linear class="ml-2" />
+            </Tooltip>
         </Select.Label>
         <ContextMenu>
             <Select.Control>

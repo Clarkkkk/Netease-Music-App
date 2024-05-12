@@ -16,6 +16,7 @@ const { preference } = storeToRefs(usePreferenceStore())
                 class="w-full"
                 input-class="toggle-primary"
                 label="过滤30秒内的音乐"
+                explanation="自动跳过时长小于30秒的音乐"
             />
             <Switch
                 v-model="preference.enableDebugMode"
