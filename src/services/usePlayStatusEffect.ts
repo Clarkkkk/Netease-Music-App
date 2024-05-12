@@ -101,7 +101,7 @@ export const usePlayStatusEffect = () => {
     watch(
         [currentSong, audioStatus],
         ([currentSong, audioStatus]) => {
-            if (!loggedIn.value && !preference.value.playTracing) return
+            if (!loggedIn.value || !preference.value.playTracing) return
 
             if (
                 currentSong?.status === 'updating' &&
@@ -122,7 +122,7 @@ export const usePlayStatusEffect = () => {
     )
 
     watch(audioStatus, (val) => {
-        if (!loggedIn.value || !currentSong.value) return
+        if (!loggedIn.value || !currentSong.value || !preference.value.playTracing) return
 
         if (val === 'ended') {
             post<ApiScrobble>('/scrobble', {
