@@ -101,7 +101,7 @@ export const usePlayStatusEffect = () => {
     watch(
         [currentSong, audioStatus],
         ([currentSong, audioStatus]) => {
-            if (!loggedIn.value) return
+            if (!loggedIn.value && !preference.value.playTracing) return
 
             if (
                 currentSong?.status === 'updating' &&

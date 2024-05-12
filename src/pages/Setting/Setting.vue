@@ -19,11 +19,19 @@ const { preference } = storeToRefs(usePreferenceStore())
                 explanation="自动跳过时长小于30秒的音乐"
             />
             <Switch
+                v-model="preference.playTracing"
+                class="w-full"
+                input-class="toggle-primary"
+                label="播放跟踪"
+                explanation="关闭后，播放的歌曲不会出现在记录中，也不会计入个性化推荐"
+            />
+            <Switch
                 v-model="preference.enableDebugMode"
                 class="w-full"
                 input-class="toggle-primary"
                 label="开启调试"
             />
+            <hr class="my-6 h-px w-full bg-base-content/10" />
             <Select
                 v-model="preference.lightDarkThemeToggleStrategy"
                 :options="[
@@ -61,6 +69,13 @@ const { preference } = storeToRefs(usePreferenceStore())
                     label="深色主题"
                 />
             </template>
+            <hr class="my-6 h-px w-full bg-base-content/10" />
+            <Switch
+                v-model="preference.enableDebugMode"
+                class="w-full"
+                input-class="toggle-primary"
+                label="开启调试"
+            />
         </div>
     </div>
 </template>

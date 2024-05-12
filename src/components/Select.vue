@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { Select } from '@ark-ui/vue'
 import { ContextMenu, ContextMenuItem } from './ContextMenu'
+import Tooltip from './Tooltip.vue'
 
 defineProps<{
     label?: string
