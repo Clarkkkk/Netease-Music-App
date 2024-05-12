@@ -62,7 +62,7 @@
     "@tailwindcss/container-queries": "^0.1.1",
     "@types/lodash": "^4.14.202",
     "@types/node": "^20.10.2",
-    "@vite-pwa/assets-generator": "^0.0.4",
+    "@vite-pwa/assets-generator": "^0.2.4",
     "@vitejs/plugin-basic-ssl": "^1.0.2",
     "@vitejs/plugin-vue": "^5.0.4",
     "@vitejs/plugin-vue-jsx": "^3.1.0",
@@ -126,6 +126,9 @@
     "vue-tsc": "^2.0.16"
   },
   "pnpm": {
+    "overrides": {
+      "sharp": "^0.33.3"
+    },
     "patchedDependencies": {
       "@vue/shared@3.4.15": "patches/@vue__shared@3.4.15.patch"
     }
