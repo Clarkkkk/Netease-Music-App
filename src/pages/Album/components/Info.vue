@@ -1,12 +1,13 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useMediaQuery } from '@vueuse/core'
-import type { ApiAlbum } from 'api'
+import type { ApiAlbum, ApiAlbumDetailDynamic } from 'api'
 import { Collapsible, Image } from 'components'
 import { toHttps } from 'utils'
 
 interface InfoProps {
     info: ApiAlbum['return']['album'] | null
+    extraInfo: ApiAlbumDetailDynamic['return'] | null
 }
 
 const props = defineProps<InfoProps>()
@@ -54,14 +55,14 @@ const collapsible = computed(() => {
                     {{ tag }}
                 </span>
                 <div
-                    v-if="info"
+                    v-if="extraInfo"
                     class="badge badge-ghost badge-sm"
                 >
                     {{ '已有' }}
                     <span class="mx-1 font-bold text-primary">
-                        {{ info.info.shareCount }}
+                        {{ extraInfo.subCount }}
                     </span>
-                    {{ '人分享' }}
+                    {{ '人收藏' }}
                 </div>
                 <div
                     v-if="info"

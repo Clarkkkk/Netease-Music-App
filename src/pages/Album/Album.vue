@@ -5,7 +5,7 @@ import { useAlbum } from 'services'
 import { Info, List } from './components'
 
 const route = useRoute()
-const { album, info, initAlbum } = useAlbum()
+const { album, info, initAlbum, extraInfo, updateExtraInfo } = useAlbum()
 
 watch(
     route,
@@ -24,8 +24,16 @@ watch(
         id="songlist-page"
         class="container mx-auto mt-6 px-6 pt-16 md:px-12"
     >
-        <Info :info="info" />
-        <List :list="album" />
+        <Info
+            :info="info"
+            :extra-info="extraInfo"
+        />
+        <List
+            :id="Number(route.params.id)"
+            :list="album"
+            :extra-info="extraInfo"
+            @change="() => updateExtraInfo(Number(route.params.id))"
+        />
     </div>
 </template>
 

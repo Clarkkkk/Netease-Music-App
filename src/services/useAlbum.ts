@@ -1,10 +1,11 @@
 import { ref } from 'vue'
-import type { ApiAlbum } from 'api'
+import type { ApiAlbum, ApiAlbumDetailDynamic } from 'api'
 import { post, toHttps } from 'utils'
 
 export function useAlbum() {
     const info = ref<ApiAlbum['return']['album'] | null>(null)
     const album = ref<Song[]>([])
+    const extraInfo = ref<ApiAlbumDetailDynamic['return'] | null>(null)
 
     async function initAlbum(id: number) {
         const res = await post<ApiAlbum>('/album', { id })
@@ -25,11 +26,20 @@ export function useAlbum() {
                 status: 'not-playing'
             }
         })
+
+        updateExtraInfo(id)
+    }
+
+    async function updateExtraInfo(id: number) {
+        const res = await post<ApiAlbumDetailDynamic>('/album/detail/dynamic', { id })
+        extraInfo.value = res
     }
 
     return {
         album,
         info,
-        initAlbum
+        extraInfo,
+        initAlbum,
+        updateExtraInfo
     }
 }

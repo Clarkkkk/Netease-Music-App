@@ -4,7 +4,16 @@ export interface ApiAlbumDetailDynamic {
     method: 'post'
     params: {
         /** 专辑 id */
-        id: any
+        id: number
     }
-    return: ApiResponse
+    return: {
+        onSale: boolean
+        commentCount: number
+        likedCount: number
+        shareCount: number
+        subTime: number
+        isSub: boolean
+        subCount: number
+        code: number
+    }
 }
