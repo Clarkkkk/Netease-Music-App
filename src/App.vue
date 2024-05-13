@@ -3,6 +3,7 @@ import { RouterView, useRoute } from 'vue-router'
 import { Audio, LoginModal, MiniMusicControl, Nav } from 'components'
 import {
     useDebugEffect,
+    useGlobalKeyboardListeners,
     useLikeEffect,
     useLoginInitEffect,
     useLyricsEffect,
@@ -19,6 +20,7 @@ useLyricsEffect()
 useLikeEffect()
 useThemeEffect()
 useDebugEffect()
+useGlobalKeyboardListeners()
 
 const route = useRoute()
 </script>
