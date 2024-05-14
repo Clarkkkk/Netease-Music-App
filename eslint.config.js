@@ -1,6 +1,7 @@
 import vueParser from 'vue-eslint-parser'
 import js from '@eslint/js'
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended'
+import * as regexpPlugin from 'eslint-plugin-regexp'
 import simpleImportSort from 'eslint-plugin-simple-import-sort'
 import pluginVue from 'eslint-plugin-vue'
 import globals from 'globals'
@@ -11,6 +12,7 @@ export default [
     ...pluginVue.configs['flat/recommended'],
     ...tseslint.configs.recommended,
     eslintPluginPrettierRecommended,
+    regexpPlugin.configs['flat/recommended'],
     {
         files: ['**/*.{ts,tsx,js,mjs,cjs,vue}'],
         plugins: {

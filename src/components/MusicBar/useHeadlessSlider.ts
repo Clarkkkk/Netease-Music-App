@@ -64,13 +64,13 @@ export const useHeadlessSlider = ({
             if (direction === 'horizontal') {
                 if (/^w-\d+$/.test(className)) {
                     computedSize = +className.match(/w-(\d+)/)![1] * 4
-                } else if (/^w-\[(\d+px)\]$/.test(className)) {
+                } else if (/^w-\[\d+px\]$/.test(className)) {
                     computedSize = +className.match(/w-\[(\d+)px\]/)![1]
                 }
             } else {
                 if (/^h-\d+$/.test(className)) {
                     computedSize = +className.match(/h-(\d+)/)![1] * 4
-                } else if (/^h-\[(\d+px)\]$/.test(className)) {
+                } else if (/^h-\[\d+px\]$/.test(className)) {
                     computedSize = +className.match(/h-\[(\d+)px\]/)![1]
                 }
             }
