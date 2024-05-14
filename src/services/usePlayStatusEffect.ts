@@ -158,7 +158,7 @@ export const usePlayStatusEffect = () => {
 
     // 时长不足30秒，自动切换下一首
     watch(duration, async (val) => {
-        if (val > 0 && val < 30 && preference.value.skipShortSongs) {
+        if (val > 0 && val < 31 && preference.value.skipShortSongs) {
             console.log(`${currentSong.value?.name} 时长 ${val} 秒，不足30秒，自动切换下一首`)
             await switchToNextSong()
         }
