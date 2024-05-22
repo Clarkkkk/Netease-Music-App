@@ -3,7 +3,7 @@ import { onMounted, ref, watch } from 'vue'
 import { ONE_MINUTE } from 'common'
 import { storeToRefs } from 'pinia'
 import { useAudioStore, usePlaylistStore } from 'stores'
-import { isAppleMobileDevice, wait } from 'utils'
+import { wait } from 'utils'
 
 const { audioRef, loop, audioStatus, volume } = storeToRefs(useAudioStore())
 const { updateAudioStatus, updateCurrentTime, updateDuration, setVolume } = useAudioStore()
@@ -70,14 +70,5 @@ watch(volume, (val) => {
         @playing="updateAudioStatus('playing')"
         @ended="updateAudioStatus('ended')"
         @volumechange="(e) => setVolume((e.target as HTMLMediaElement).volume)"
-    />
-    <!-- mitigate the safari issue: https://bugs.webkit.org/show_bug.cgi?id=261554 -->
-    <audio
-        v-if="isAppleMobileDevice()"
-        ref="hiddenAudioRef"
-        autoplay
-        loop
-        src="/music/example.mp3"
-        type="audio/mpeg"
     />
 </template>
