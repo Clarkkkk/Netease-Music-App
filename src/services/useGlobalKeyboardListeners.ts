@@ -20,12 +20,13 @@ export function useGlobalKeyboardListeners() {
     function onSpaceUp(e: KeyboardEvent) {
         // play/pause when space is pressed and no input is focused
         if (e.code === 'Space' && document.activeElement?.tagName !== 'INPUT') {
+            e.preventDefault()
             switchPlay()
         }
     }
     onMounted(() => {
-        document.addEventListener('keyup', onSpaceUp)
+        document.addEventListener('keydown', onSpaceUp)
     })
 
-    onUnmounted(() => document.removeEventListener('keyup', onSpaceUp))
+    onUnmounted(() => document.removeEventListener('keydown', onSpaceUp))
 }
