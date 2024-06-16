@@ -10,6 +10,7 @@ export const useMediaSessionEffect = () => {
 
     onMounted(() => {
         setActionhandlers()
+        setAudioSession()
     })
 
     watch(audioStatus, (status) => {
@@ -62,6 +63,29 @@ export const useMediaSessionEffect = () => {
                 console.error(
                     `${error}: The media session action "${action}" is not supported yet.`
                 )
+            }
+        }
+    }
+
+    /** Note: audioSession is supported in safari only currently */
+    function setAudioSession() {
+        if ('audioSession' in navigator) {
+            // @ts-expect-error audioSession is experimental currently
+            if (navigator.audioSession?.type) {
+                // @ts-expect-error audioSession is experimental currently
+                navigator.audioSession.type = 'playback'
+            }
+
+            // @ts-expect-error audioSession is experimental currently
+            navigator.audioSession.onstatechange = async () => {
+                // @ts-expect-error audioSession is experimental currently
+                if (navigator.audioSession.state === 'interrupted') {
+                    console.log('audioSession interrupted')
+                    pause()
+                } else {
+                    console.log('audioSession resumed')
+                    play()
+                }
             }
         }
     }
