@@ -12,7 +12,7 @@ export const usePlaylistStore = defineStore('playlist', () => {
     const playMode = ref<'list-loop' | 'list-sequent' | 'song-loop' | 'radio' | 'radio-song-loop'>(
         'list-sequent'
     )
-    const { updateAudioStatus } = useAudioStore()
+    const { updateAudioStatus, setLoop } = useAudioStore()
     const { audioStatus } = storeToRefs(useAudioStore())
 
     const nextSong = computed(() => {
@@ -71,6 +71,12 @@ export const usePlaylistStore = defineStore('playlist', () => {
 
     function updatePlayMode(mode: typeof playMode.value) {
         playMode.value = mode
+
+        if (mode === 'song-loop' || mode === 'radio-song-loop') {
+            setLoop(true)
+        } else {
+            setLoop(false)
+        }
     }
 
     function updateCurrentSongStatus(status: Song['status']) {
