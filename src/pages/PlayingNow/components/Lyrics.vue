@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch } from 'vue'
+import { onActivated, onMounted, ref, watch } from 'vue'
 import type { ApiLyric } from 'api'
 import { storeToRefs } from 'pinia'
 import { useLyricsStore, usePlaylistStore } from 'stores'
@@ -23,14 +23,19 @@ async function reloadLyrics() {
     }
 }
 
-watch(lyricsCurrentIndex, (currentIndex) => {
-    if (!containerRef.value || currentIndex < 0) return
-
+function onLiricsIndexChange(index: number) {
+    if (!containerRef.value || index < 0) return
     containerRef.value.scroll({
-        top: currentIndex * 56,
+        top: index * 56,
         behavior: 'auto'
     })
+}
+
+watch(lyricsCurrentIndex, (currentIndex) => {
+    onLiricsIndexChange(currentIndex)
 })
+onMounted(() => onLiricsIndexChange(lyricsCurrentIndex.value))
+onActivated(() => onLiricsIndexChange(lyricsCurrentIndex.value))
 </script>
 
 <template>
