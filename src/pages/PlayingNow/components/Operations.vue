@@ -1,20 +1,37 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+import type { ComponentExposed } from 'vue-component-type-helpers'
 import { useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useAnimation, useDeviceType } from 'services'
 import { useLikeStore, usePlaylistStore } from 'stores'
-import { Button, ContextMenu, ContextMenuItem, Playlist, VolumeControl } from 'components'
+import { Button, ContextMenu, ContextMenuItem, Playlist, Tooltip, VolumeControl } from 'components'
 import { isAppleMobileDevice } from 'utils'
 
 const router = useRouter()
 const { animating, onAnimationEnd, startAnimation } = useAnimation()
 const { isMobile } = useDeviceType()
 const { getLikeStatus, switchLikeStatus, dislikeThisSong } = useLikeStore()
-const { currentSong } = storeToRefs(usePlaylistStore())
+const { currentSong, playMode } = storeToRefs(usePlaylistStore())
+const { updatePlayMode } = usePlaylistStore()
+const tooltipRef = ref<ComponentExposed<typeof Tooltip>>()
 const likingCurrentSong = computed(() => {
     if (!currentSong.value) return false
     return getLikeStatus(currentSong.value)
+})
+
+const playModeText = computed(() => {
+    if (playMode.value === 'list-loop') {
+        return '列表循环'
+    } else if (playMode.value === 'list-sequent') {
+        return '列表顺序'
+    } else if (playMode.value === 'song-loop' || playMode.value === 'radio-song-loop') {
+        return '单曲循环'
+    } else if (playMode.value === 'radio') {
+        return '电台顺序'
+    } else {
+        return ''
+    }
 })
 
 async function onLikeClick() {
@@ -36,6 +53,28 @@ async function onAlbumJumpClick() {
     if (!currentSong.value) return
     await router.push(`/album/${currentSong.value.albumId}`)
 }
+
+let timeoutId = 0
+function onPlayModeClick() {
+    clearTimeout(timeoutId)
+    tooltipRef.value?.show()
+
+    if (playMode.value === 'list-sequent') {
+        updatePlayMode('list-loop')
+    } else if (playMode.value === 'list-loop') {
+        updatePlayMode('song-loop')
+    } else if (playMode.value === 'song-loop') {
+        updatePlayMode('list-sequent')
+    } else if (playMode.value === 'radio') {
+        updatePlayMode('radio-song-loop')
+    } else if (playMode.value === 'radio-song-loop') {
+        updatePlayMode('radio')
+    }
+
+    timeoutId = window.setTimeout(() => {
+        tooltipRef.value?.hide()
+    }, 2000)
+}
 </script>
 
 <template>
@@ -43,6 +82,34 @@ async function onAlbumJumpClick() {
         id="playing-operations"
         class="flex w-80 items-center justify-around text-slate-500"
     >
+        <Tooltip
+            ref="tooltipRef"
+            :content="playModeText"
+        >
+            <Button
+                class="btn btn-square btn-ghost h-10 min-h-10 w-10"
+                @click="onPlayModeClick"
+            >
+                <template #icon>
+                    <i-solar-repeat-line-duotone
+                        v-if="playMode === 'list-loop'"
+                        class="h-6 w-6"
+                    />
+                    <i-solar-repeat-one-line-duotone
+                        v-if="playMode === 'song-loop' || playMode === 'radio-song-loop'"
+                        class="h-6 w-6"
+                    />
+                    <i-solar-list-down-minimalistic-line-duotone
+                        v-if="playMode === 'list-sequent'"
+                        class="h-6 w-6"
+                    />
+                    <i-solar-radio-line-duotone
+                        v-if="playMode === 'radio'"
+                        class="h-6 w-6"
+                    />
+                </template>
+            </Button>
+        </Tooltip>
         <Button
             class="btn btn-square btn-ghost h-10 min-h-10 w-10"
             @click="onLikeClick"
@@ -77,14 +144,6 @@ async function onAlbumJumpClick() {
                 <i-solar-heart-broken-line-duotone class="h-6 w-6" />
             </template>
         </Button>
-        <Button
-            class="btn btn-square btn-ghost h-10 min-h-10 w-10"
-            @click="onCommentClick"
-        >
-            <template #icon>
-                <i-solar-chat-dots-line-duotone class="h-6 w-6" />
-            </template>
-        </Button>
         <Playlist
             class="h-10 w-10"
             icon-class="h-6 w-6"
@@ -107,6 +166,10 @@ async function onAlbumJumpClick() {
                 <ContextMenuItem @click="onAlbumJumpClick">
                     <i-solar-vinyl-line-duotone class="h-5 w-5" />
                     查看专辑
+                </ContextMenuItem>
+                <ContextMenuItem @click="onCommentClick">
+                    <i-solar-chat-dots-line-duotone class="h-5 w-5" />
+                    查看评论
                 </ContextMenuItem>
             </template>
         </ContextMenu>

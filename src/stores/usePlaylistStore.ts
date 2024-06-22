@@ -9,7 +9,9 @@ export const usePlaylistStore = defineStore('playlist', () => {
     const playlist = ref<Song[]>([])
     const historyPlaylist = ref<Song[]>([])
     const currentSong = ref<Song | null>(null)
-    const playMode = ref<'list-loop' | 'list-sequent' | 'song-loop' | 'radio'>('list-sequent')
+    const playMode = ref<'list-loop' | 'list-sequent' | 'song-loop' | 'radio' | 'radio-song-loop'>(
+        'list-sequent'
+    )
     const { updateAudioStatus } = useAudioStore()
     const { audioStatus } = storeToRefs(useAudioStore())
 

@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { Tippy } from 'vue-tippy'
+import { ref } from 'vue'
+import { Tippy, type TippyComponent } from 'vue-tippy'
 import type { Placement } from 'tippy.js'
 
 interface ContextMenuProps {
@@ -11,11 +12,23 @@ interface ContextMenuProps {
 defineProps<ContextMenuProps>()
 
 const body = document.body
+const tippyRef = ref<TippyComponent>()
+
+function show() {
+    tippyRef.value?.show()
+}
+
+function hide() {
+    tippyRef.value?.hide()
+}
+
+defineExpose({ show, hide })
 </script>
 
 <template>
     <Tippy
         v-if="content && content !== 'null'"
+        ref="tippyRef"
         max-width="none"
         trigger="touchstart mouseenter"
         :delay="[0, 400]"
