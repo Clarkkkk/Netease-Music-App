@@ -1,21 +1,16 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import { ref } from 'vue'
 import { type ApiSearchDetail, SEARCH } from 'api'
 import { IntersectionObserver } from 'components'
 import { post, toHttps } from 'utils'
 import AlbumResult from './AlbumResult.vue'
+import { useSearchEffect } from './service'
 import { type SonglistItem } from './SonglistResult.vue'
 
 const props = defineProps<{
     active: boolean
+    keyword: string
 }>()
-
-const route = useRoute()
-
-const keyword = computed<string>(() => {
-    return (route.query.keyword as string) || ''
-})
 
 const loading = ref(false)
 const data = ref<{
@@ -28,13 +23,13 @@ const data = ref<{
     offset: 0
 })
 
-async function getData(offset: number) {
+async function getData(offset: number, keyword: string) {
     if ((!data.value.more && offset !== 0) || loading.value) return
     loading.value = true
     try {
         const res = await post<ApiSearchDetail<typeof SEARCH.ALBUM>>('/search', {
             type: SEARCH.ALBUM,
-            keywords: keyword.value,
+            keywords: keyword,
             offset
         })
         const list = data.value.list
@@ -56,36 +51,37 @@ async function getData(offset: number) {
     }
 }
 
-watch(
-    [props, route],
-    ([propsVal, routeVal], [_, routeOldVal]) => {
-        if (
-            propsVal.active &&
-            (data.value.offset === 0 || routeVal.query.keyword !== routeOldVal?.query.keyword)
-        ) {
-            getData(0)
-        }
-    },
-    { immediate: true, deep: true }
-)
+useSearchEffect({
+    getKeyword: () => props.keyword,
+    getActive: () => props.active,
+    effect: (keyword) => getData(0, keyword)
+})
 </script>
 
 <template>
     <div class="w-full">
-        <AlbumResult
-            class=""
-            :list="data.list"
-        />
-        <IntersectionObserver
-            :is-bottom="!data.more"
-            @change="
-                (v) => {
-                    if (v && data.list.length) {
-                        getData(data.offset)
+        <div
+            v-if="loading"
+            class="mt-4 flex w-full justify-center"
+        >
+            <div class="loading text-primary" />
+        </div>
+        <template v-else>
+            <AlbumResult
+                class=""
+                :list="data.list"
+            />
+            <IntersectionObserver
+                :is-bottom="!data.more"
+                @change="
+                    (v) => {
+                        if (v && data.list.length) {
+                            getData(data.offset, keyword)
+                        }
                     }
-                }
-            "
-        />
+                "
+            />
+        </template>
     </div>
 </template>
 

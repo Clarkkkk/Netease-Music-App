@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { onMounted, ref } from 'vue'
 import { useDeviceType } from 'services'
 import { SEARCH } from 'api'
 import { Tabs } from 'components'
@@ -30,28 +29,18 @@ const tabs = [
     }
 ] as const
 
-const route = useRoute()
-const router = useRouter()
 const keyword = ref('')
 const { isMobile } = useDeviceType()
 const viewTransitionEnded = ref(false)
 
 function onSearch(val: string) {
-    return router.replace({ path: '/search', query: { keyword: val } })
+    keyword.value = val
 }
 
 onMounted(async () => {
     await wait(1000)
     viewTransitionEnded.value = true
 })
-
-watch(
-    route,
-    (val) => {
-        keyword.value = val.query.keyword as string
-    },
-    { immediate: true }
-)
 </script>
 
 <template>
@@ -70,7 +59,6 @@ watch(
                 class="absolute left-3 top-1/2 z-10 h-4 w-4 -translate-y-1/2 text-primary md:h-6 md:w-6"
             />
             <input
-                v-model="keyword"
                 v-view-transition-name="{ 'search-input': !viewTransitionEnded }"
                 type="search"
                 autofocus
@@ -80,26 +68,41 @@ watch(
         </form>
 
         <Tabs
-            v-if="route.query.keyword"
+            v-show="keyword"
             :tabs="tabs"
             class="flex w-full flex-col items-center"
             tab-class="mt-6"
             tab-pane-class="mt-2"
         >
             <template #综合="{ currentTab }">
-                <MixedPanel :active="currentTab.name === '综合'" />
+                <MixedPanel
+                    :active="currentTab.name === '综合'"
+                    :keyword="keyword"
+                />
             </template>
             <template #专辑="{ currentTab }">
-                <AlbumPanel :active="currentTab.name === '专辑'" />
+                <AlbumPanel
+                    :active="currentTab.name === '专辑'"
+                    :keyword="keyword"
+                />
             </template>
             <template #歌单="{ currentTab }">
-                <SonglistPanel :active="currentTab.name === '歌单'" />
+                <SonglistPanel
+                    :active="currentTab.name === '歌单'"
+                    :keyword="keyword"
+                />
             </template>
             <template #歌曲="{ currentTab }">
-                <SongPanel :active="currentTab.name === '歌曲'" />
+                <SongPanel
+                    :active="currentTab.name === '歌曲'"
+                    :keyword="keyword"
+                />
             </template>
             <template #歌词="{ currentTab }">
-                <LyricsPanel :active="currentTab.name === '歌词'" />
+                <LyricsPanel
+                    :active="currentTab.name === '歌词'"
+                    :keyword="keyword"
+                />
             </template>
         </Tabs>
     </search>

@@ -1,23 +1,18 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
-import { onBeforeRouteUpdate, useRoute } from 'vue-router'
+import { ref } from 'vue'
 import { type ApiSearch, SEARCH } from 'api'
 import { post, toHttps } from 'utils'
 import AlbumResult from './AlbumResult.vue'
+import { useSearchEffect } from './service'
 import SonglistResult, { type SonglistItem } from './SonglistResult.vue'
 import SongResult from './SongResult.vue'
 
 const props = defineProps<{
     active: boolean
+    keyword: string
 }>()
 
-const route = useRoute()
-
 const loading = ref(false)
-
-const keyword = computed<string>(() => {
-    return (route.query.keyword as string) || ''
-})
 
 const mixedData = ref<{
     song: {
@@ -98,36 +93,10 @@ async function getData(keyword: string) {
     }
 }
 
-watch(
-    props,
-    (propsVal) => {
-        if (propsVal.active && mixedData.value.song.list.length === 0) {
-            getData(keyword.value)
-        }
-    },
-    { immediate: true, deep: true }
-)
-
-onBeforeRouteUpdate((to, from) => {
-    if (!props.active) return
-
-    if (to.query.keyword !== from.query.keyword) {
-        mixedData.value = {
-            song: {
-                list: [],
-                moreText: ''
-            },
-            songlist: {
-                list: [],
-                moreText: ''
-            },
-            album: {
-                list: [],
-                moreText: ''
-            }
-        }
-        getData(to.query.keyword as string)
-    }
+useSearchEffect({
+    getKeyword: () => props.keyword,
+    getActive: () => props.active,
+    effect: (keyword) => getData(keyword)
 })
 </script>
 

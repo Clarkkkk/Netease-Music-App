@@ -1,20 +1,15 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue'
-import { onBeforeRouteUpdate, useRoute } from 'vue-router'
+import { ref } from 'vue'
 import { type ApiSearchSongDetail, SEARCH } from 'api'
 import { IntersectionObserver } from 'components'
 import { post, toHttps } from 'utils'
+import { useSearchEffect } from './service'
 import SongResult from './SongResult.vue'
 
 const props = defineProps<{
     active: boolean
+    keyword: string
 }>()
-
-const route = useRoute()
-
-const keyword = computed<string>(() => {
-    return (route.query.keyword as string) || ''
-})
 
 const loading = ref(false)
 const data = ref<{
@@ -62,42 +57,37 @@ async function getData(offset: number, keyword: string) {
     }
 }
 
-watch(
-    props,
-    (propsVal) => {
-        if (propsVal.active && data.value.offset === 0) {
-            getData(0, keyword.value)
-        }
-    },
-    { immediate: true, deep: true }
-)
-
-onBeforeRouteUpdate((to, from) => {
-    if (!props.active) return
-
-    if (to.query.keyword !== from.query.keyword) {
-        data.value.list = []
-        getData(0, to.query.keyword as string)
-    }
+useSearchEffect({
+    getKeyword: () => props.keyword,
+    getActive: () => props.active,
+    effect: (keyword) => getData(0, keyword)
 })
 </script>
 
 <template>
     <div class="w-full">
-        <SongResult
-            class=""
-            :list="data.list"
-        />
-        <IntersectionObserver
-            :is-bottom="!data.more"
-            @change="
-                (v) => {
-                    if (v && data.list.length) {
-                        getData(data.offset, keyword)
+        <div
+            v-if="loading"
+            class="mt-4 flex w-full justify-center"
+        >
+            <div class="loading text-primary" />
+        </div>
+        <template v-else>
+            <SongResult
+                class=""
+                :list="data.list"
+            />
+            <IntersectionObserver
+                :is-bottom="!data.more"
+                @change="
+                    (v) => {
+                        if (v && data.list.length) {
+                            getData(data.offset, keyword)
+                        }
                     }
-                }
-            "
-        />
+                "
+            />
+        </template>
     </div>
 </template>
 
