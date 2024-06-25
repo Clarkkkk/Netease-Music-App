@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ButtonHTMLAttributes, Ref } from 'vue'
-import { inject, ref, watch } from 'vue'
+import { inject, nextTick, ref, watch } from 'vue'
 import Button from '../Button.vue'
 
 interface Props extends /* @vue-ignore */ ButtonHTMLAttributes {
@@ -26,11 +26,18 @@ async function clickHandler(e: MouseEvent) {
 }
 
 if (provided) {
-    watch(provided.visible, (val) => {
-        if (val && buttonRef.value?.el && props.active) {
-            buttonRef.value?.el.scrollIntoView({ block: 'center' })
-        }
-    })
+    watch(
+        provided.visible,
+        (val) => {
+            // we don't have dom yet in the first immediate watch, so we use nextTick
+            nextTick(() => {
+                if (val && buttonRef.value?.el && props.active) {
+                    buttonRef.value?.el.scrollIntoView({ block: 'center' })
+                }
+            })
+        },
+        { immediate: true }
+    )
 }
 </script>
 
