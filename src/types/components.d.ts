@@ -34,8 +34,6 @@ declare module 'vue' {
     ISolarPlayStreamLineDuotone: typeof import('~icons/solar/play-stream-line-duotone')['default']
     ISolarQuestionCircleLinear: typeof import('~icons/solar/question-circle-linear')['default']
     ISolarRadioLineDuotone: typeof import('~icons/solar/radio-line-duotone')['default']
-    ISolarReorderLineDuotone: typeof import('~icons/solar/reorder-line-duotone')['default']
-    ISolarReorderOutline: typeof import('~icons/solar/reorder-outline')['default']
     ISolarRepeatLineDuotone: typeof import('~icons/solar/repeat-line-duotone')['default']
     ISolarRepeatOneLineDuotone: typeof import('~icons/solar/repeat-one-line-duotone')['default']
     ISolarSkipNextBoldDuotone: typeof import('~icons/solar/skip-next-bold-duotone')['default']
@@ -45,7 +43,6 @@ declare module 'vue' {
     ISolarUserCircleBoldDuotone: typeof import('~icons/solar/user-circle-bold-duotone')['default']
     ISolarVinylBoldDuotone: typeof import('~icons/solar/vinyl-bold-duotone')['default']
     ISolarVinylLineDuotone: typeof import('~icons/solar/vinyl-line-duotone')['default']
-    ISolarVolumeLineDuotone: typeof import('~icons/solar/volume-line-duotone')['default']
     ISolarVolumeLoudLineDuotone: typeof import('~icons/solar/volume-loud-line-duotone')['default']
     ISolarVolumeSmallLineDuotone: typeof import('~icons/solar/volume-small-line-duotone')['default']
   }
