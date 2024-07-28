@@ -1,11 +1,14 @@
 <script setup lang="ts">
+import { storeToRefs } from 'pinia'
 import { useDeviceType, useIsHovering } from 'services'
+import { usePlaylistStore } from 'src/stores'
 import Image from '../Image.vue'
 import SongItemOption from './SongItemOption.vue'
 
 defineProps<{ song: Song }>()
 const { isHovering, onMouseEnter, onMouseLeave } = useIsHovering()
 const { isPc } = useDeviceType()
+const { currentSong } = storeToRefs(usePlaylistStore())
 </script>
 
 <template>
@@ -30,6 +33,13 @@ const { isPc } = useDeviceType()
                 loading="lazy"
                 :size="40"
             />
+            <span
+                v-if="currentSong?.id === song.id"
+                class="absolute left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 @2xl:hidden"
+            >
+                <i-solar-play-circle-bold class="h-5 w-5 rounded-full text-primary" />
+                <span class="playing-icon-shadow -z-10 bg-base-100"></span>
+            </span>
         </div>
         <div class="flex w-full flex-col justify-between overflow-hidden @2xl:hidden">
             <div
@@ -51,6 +61,13 @@ const { isPc } = useDeviceType()
                 :title="song.name"
             >
                 {{ song.name }}
+                <span
+                    v-if="currentSong?.id === song.id"
+                    class="relative inline-block h-5 w-5 align-bottom text-xs"
+                >
+                    <i-solar-play-circle-bold class="h-5 w-5 rounded-full text-primary" />
+                    <span class="playing-icon-shadow -z-10 bg-base-100"></span>
+                </span>
             </span>
             <span
                 v-if="song.subName"
@@ -100,6 +117,30 @@ const { isPc } = useDeviceType()
         .image {
             transform: rotateY(20deg) scale(1.25);
         }
+    }
+
+    .playing-icon-shadow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        animation: song-playing 2s infinite;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        border-radius: 50%;
+    }
+}
+
+@keyframes song-playing {
+    0% {
+        box-shadow: 0px 0px 0px 0px hsl(var(--p) / 0.7);
+    }
+
+    100% {
+        box-shadow: 0px 0px 0px 6px hsl(var(--p) / 0);
     }
 }
 </style>
