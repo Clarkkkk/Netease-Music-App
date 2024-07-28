@@ -76,7 +76,7 @@ useSearchEffect({
 <template>
     <div class="lyrics-panel w-full">
         <div
-            v-if="loading"
+            v-if="loading && !data.list.length"
             class="mt-4 flex w-full justify-center"
         >
             <div class="loading text-primary" />
