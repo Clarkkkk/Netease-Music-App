@@ -1,25 +1,8 @@
 diff --git a/dist/shared.cjs.js b/dist/shared.cjs.js
-index f19f92d158ade5d39050db8c17995ab1632f3d05..85789ea6a961e271bb0272e981ff5bbc4f1ddbfb 100644
+index 2b7d8946ab5ab9c67de732e4195f31dfc802562b..6a00cc3834e3ea851a95f4d4924f573526751916 100644
 --- a/dist/shared.cjs.js
 +++ b/dist/shared.cjs.js
-@@ -12,13 +12,13 @@ function makeMap(str, expectsLowerCase) {
-   return expectsLowerCase ? (val) => set.has(val.toLowerCase()) : (val) => set.has(val);
- }
- 
--const EMPTY_OBJ = Object.freeze({}) ;
--const EMPTY_ARR = Object.freeze([]) ;
-+const EMPTY_OBJ = Object.freeze({});
-+const EMPTY_ARR = Object.freeze([]);
- const NOOP = () => {
- };
- const NO = () => false;
- const isOn = (key) => key.charCodeAt(0) === 111 && key.charCodeAt(1) === 110 && // uppercase letter
--(key.charCodeAt(2) > 122 || key.charCodeAt(2) < 97);
-+  (key.charCodeAt(2) > 122 || key.charCodeAt(2) < 97);
- const isModelListener = (key) => key.startsWith("onUpdate:");
- const extend = Object.assign;
- const remove = (arr, el) => {
-@@ -314,7 +314,7 @@ function normalizeProps(props) {
+@@ -318,7 +318,7 @@ function normalizeProps(props) {
    return props;
  }
  
@@ -29,19 +12,10 @@ index f19f92d158ade5d39050db8c17995ab1632f3d05..85789ea6a961e271bb0272e981ff5bbc
  const MATH_TAGS = "annotation,annotation-xml,maction,maligngroup,malignmark,math,menclose,merror,mfenced,mfrac,mfraction,mglyph,mi,mlabeledtr,mlongdiv,mmultiscripts,mn,mo,mover,mpadded,mphantom,mprescripts,mroot,mrow,ms,mscarries,mscarry,msgroup,msline,mspace,msqrt,msrow,mstack,mstyle,msub,msubsup,msup,mtable,mtd,mtext,mtr,munder,munderover,none,semantics";
  const VOID_TAGS = "area,base,br,col,embed,hr,img,input,link,meta,param,source,track,wbr";
 diff --git a/dist/shared.cjs.prod.js b/dist/shared.cjs.prod.js
-index 4ee2b5492bac2287903d9352f731ae1463ee1bb6..18639f28db2c4707dae5e28c025d38a0facff1b8 100644
+index 65eaf2764efb21e4801efe51ebc9f7da7f351529..46f0a32d78c7b1a2db39e817f2dc62cd439a142b 100644
 --- a/dist/shared.cjs.prod.js
 +++ b/dist/shared.cjs.prod.js
-@@ -18,7 +18,7 @@ const NOOP = () => {
- };
- const NO = () => false;
- const isOn = (key) => key.charCodeAt(0) === 111 && key.charCodeAt(1) === 110 && // uppercase letter
--(key.charCodeAt(2) > 122 || key.charCodeAt(2) < 97);
-+  (key.charCodeAt(2) > 122 || key.charCodeAt(2) < 97);
- const isModelListener = (key) => key.startsWith("onUpdate:");
- const extend = Object.assign;
- const remove = (arr, el) => {
-@@ -314,7 +314,7 @@ function normalizeProps(props) {
+@@ -318,7 +318,7 @@ function normalizeProps(props) {
    return props;
  }
  
@@ -51,19 +25,10 @@ index 4ee2b5492bac2287903d9352f731ae1463ee1bb6..18639f28db2c4707dae5e28c025d38a0
  const MATH_TAGS = "annotation,annotation-xml,maction,maligngroup,malignmark,math,menclose,merror,mfenced,mfrac,mfraction,mglyph,mi,mlabeledtr,mlongdiv,mmultiscripts,mn,mo,mover,mpadded,mphantom,mprescripts,mroot,mrow,ms,mscarries,mscarry,msgroup,msline,mspace,msqrt,msrow,mstack,mstyle,msub,msubsup,msup,mtable,mtd,mtext,mtr,munder,munderover,none,semantics";
  const VOID_TAGS = "area,base,br,col,embed,hr,img,input,link,meta,param,source,track,wbr";
 diff --git a/dist/shared.esm-bundler.js b/dist/shared.esm-bundler.js
-index 6db52ab540ea3d31372fdfee88810044139045a5..a96d618d11aa82f38af9f1632a0534fcae857ece 100644
+index 8da3bbfcd19bef22925a14e4d6c390cd0bc1c828..7769cabd602debd1570accca91d6c1b8072cac6e 100644
 --- a/dist/shared.esm-bundler.js
 +++ b/dist/shared.esm-bundler.js
-@@ -14,7 +14,7 @@ const NOOP = () => {
- };
- const NO = () => false;
- const isOn = (key) => key.charCodeAt(0) === 111 && key.charCodeAt(1) === 110 && // uppercase letter
--(key.charCodeAt(2) > 122 || key.charCodeAt(2) < 97);
-+  (key.charCodeAt(2) > 122 || key.charCodeAt(2) < 97);
- const isModelListener = (key) => key.startsWith("onUpdate:");
- const extend = Object.assign;
- const remove = (arr, el) => {
-@@ -310,7 +310,7 @@ function normalizeProps(props) {
+@@ -314,7 +314,7 @@ function normalizeProps(props) {
    return props;
  }
  

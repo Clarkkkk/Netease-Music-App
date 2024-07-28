@@ -132,7 +132,7 @@
       "sharp": "^0.33.3"
     },
     "patchedDependencies": {
-      "@vue/shared@3.4.15": "patches/@vue__shared@3.4.15.patch"
+      "@vue/shared@3.4.34": "patches/@vue__shared@3.4.34.patch"
     }
   }
 }
