@@ -4,11 +4,11 @@ export interface ApiPlaylistTracks {
     method: 'post'
     params: {
         /** 从歌单增加单曲为 add, 删除为 del */
-        op: any
+        op: 'add' | 'del'
         /** 歌单 id */
-        pid: any
+        pid: number
         /** 歌曲 id,可多个,用逗号隔开 */
-        tracks: any
+        tracks: string
     }
     return: ApiResponse
 }

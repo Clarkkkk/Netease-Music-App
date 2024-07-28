@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { provide, ref, watch } from 'vue'
 import { Tippy } from 'vue-tippy'
-import { useDeviceType } from 'services'
+import { useDeviceType, useIsHovering } from 'services'
 import type { Instance, Placement } from 'tippy.js'
 import Button from '../Button.vue'
 
@@ -10,6 +10,7 @@ interface ContextMenuProps {
     placement?: Placement
     /** 菜单宽度 */
     size?: 'large' | 'normal'
+    trigger?: string
 }
 
 defineProps<ContextMenuProps>()
@@ -25,6 +26,13 @@ const { isPc } = useDeviceType()
 const tippy = ref<Instance | null>(null)
 const body = document.body
 const visible = ref(false)
+const { isHovering, onMouseEnter, onMouseLeave } = useIsHovering()
+const initialized = ref(false)
+
+function showMenu() {
+    tippy.value?.show()
+    visible.value = true
+}
 
 function hideMenu() {
     tippy.value?.hide()
@@ -40,16 +48,29 @@ watch(visible, (val) => {
 })
 
 provide('ContextMenu', { hideMenu, visible })
+
+const unwatch = watch(isHovering, (val) => {
+    if (val) {
+        initialized.value = true
+        unwatch()
+    }
+})
+
+defineExpose({ showMenu, hideMenu })
 </script>
 
 <template>
-    <div class="context-menu">
+    <div
+        class="context-menu"
+        @mouseenter="onMouseEnter"
+        @mouseleave="onMouseLeave"
+    >
         <Tippy
-            v-if="isPc"
+            v-if="isPc && initialized"
             ref="tippy"
             max-width="none"
             interactive
-            trigger="click"
+            :trigger="trigger || 'click'"
             :delay="[0, 0]"
             :placement="placement || 'bottom-end'"
             :append-to="() => body"
@@ -83,6 +104,9 @@ provide('ContextMenu', { hideMenu, visible })
                 </div>
             </template>
         </Tippy>
+        <template v-else-if="isPc && !initialized">
+            <slot />
+        </template>
 
         <span
             v-if="!isPc"

@@ -36,7 +36,8 @@ export default [
             }
         },
         rules: {
-            indent: ['error', 4],
+            indent: 'off',
+            '@typescript-eslint/indent': ['error', 4],
             'no-console': ['warn', { allow: ['warn', 'error'] }],
             'consistent-return': 'error',
             'space-before-function-paren': [

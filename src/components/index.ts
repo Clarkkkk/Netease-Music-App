@@ -1,3 +1,4 @@
+export { default as AddToSonglist } from './AddToSonglist.vue'
 export { default as Button } from './Button.vue'
 export { default as Collapsible } from './Collapsible.vue'
 export * from './ContextMenu'

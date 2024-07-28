@@ -4,9 +4,15 @@ import { useRoute } from 'vue-router'
 import { useSonglist } from 'services'
 import { IntersectionObserver } from 'components'
 import { Info, List } from './components'
+import { provide } from './context'
 
 const route = useRoute()
 const { info, songlist, onFullLoad, onIncrementalLoad, initSonglist, more } = useSonglist()
+
+provide({
+    id: Number(route.params.id),
+    reload: () => initSonglist(Number(route.params.id))
+})
 
 async function onChange(visible: boolean) {
     if (!visible) return

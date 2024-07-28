@@ -6,6 +6,7 @@ import { storeToRefs } from 'pinia'
 import { useAnimation, useDeviceType } from 'services'
 import { useLikeStore, usePlaylistStore } from 'stores'
 import { Button, ContextMenu, ContextMenuItem, Playlist, Tooltip, VolumeControl } from 'components'
+import AddToSonglist from 'components/AddToSonglist.vue'
 import { isAppleMobileDevice } from 'utils'
 
 const router = useRouter()
@@ -15,6 +16,8 @@ const { getLikeStatus, switchLikeStatus, dislikeThisSong } = useLikeStore()
 const { currentSong, playMode } = storeToRefs(usePlaylistStore())
 const { updatePlayMode } = usePlaylistStore()
 const tooltipRef = ref<ComponentExposed<typeof Tooltip>>()
+const addToSonglistRef = ref<ComponentExposed<typeof AddToSonglist>>()
+
 const likingCurrentSong = computed(() => {
     if (!currentSong.value) return false
     return getLikeStatus(currentSong.value)
@@ -47,6 +50,10 @@ async function onDislikeClick() {
 
 function onCommentClick() {
     alert('敬请期待')
+}
+
+function onAddToSonglistClick() {
+    addToSonglistRef.value?.show(currentSong.value?.id)
 }
 
 async function onAlbumJumpClick() {
@@ -163,6 +170,10 @@ function onPlayModeClick() {
                 >
                     <VolumeControl />
                 </div>
+                <ContextMenuItem @click="onAddToSonglistClick">
+                    <i-solar-playlist-minimalistic-3-line-duotone class="h-5 w-5" />
+                    收藏到歌单
+                </ContextMenuItem>
                 <ContextMenuItem @click="onAlbumJumpClick">
                     <i-solar-vinyl-line-duotone class="h-5 w-5" />
                     查看专辑
@@ -173,6 +184,8 @@ function onPlayModeClick() {
                 </ContextMenuItem>
             </template>
         </ContextMenu>
+
+        <AddToSonglist ref="addToSonglistRef" />
     </div>
 </template>
 
