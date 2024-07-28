@@ -2,5 +2,8 @@
 export interface ApiUserSubcount {
     api: '/user/subcount'
     method: 'post'
-    return: ApiResponse
+    return: {
+        createdPlaylistCount: number
+        subPlaylistCount: number
+    }
 }

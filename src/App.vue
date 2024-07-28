@@ -9,6 +9,7 @@ import {
     useLyricsEffect,
     useMediaSessionEffect,
     usePlayStatusEffect,
+    useSonglistsEffect,
     useThemeEffect
 } from './services'
 import './global.css'
@@ -21,6 +22,7 @@ useLikeEffect()
 useThemeEffect()
 useDebugEffect()
 useGlobalKeyboardListeners()
+useSonglistsEffect()
 
 const route = useRoute()
 </script>
