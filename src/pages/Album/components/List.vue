@@ -40,7 +40,7 @@ async function onCollectClick() {
                     class="btn-secondary btn-outline btn-xs mr-2"
                     @click="onCollectClick"
                 >
-                    {{ extraInfo?.isSub ? '取消收藏' : '收藏' }}
+                    {{ extraInfo?.isSub ? '已收藏' : '收藏' }}
                 </Button>
                 <Button
                     class="btn-secondary btn-outline btn-xs"

@@ -91,7 +91,7 @@ onProfileLoaded(() => {
             <span>最近播放</span>
         </h2>
         <Tabs
-            class="mt-3 h-full"
+            class="mt-3 min-h-0 flex-1"
             :tabs="tabs"
             :onTabChange="onTabChange"
             :disabled="loading"
@@ -121,6 +121,6 @@ onProfileLoaded(() => {
 
 <style lang="scss">
 .recent-songs {
-    height: 900px;
+    height: 500px;
 }
 </style>

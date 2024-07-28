@@ -50,7 +50,8 @@ async function onTabClick(tab: T) {
             v-show="currentTab.name === tab.name"
             :key="tab.name"
             :class="[
-                'h-full',
+                'flex-1',
+                'min-h-0',
                 'w-full',
                 tabPaneClass,
                 { 'content-hidden': currentTab.name !== tab.name }

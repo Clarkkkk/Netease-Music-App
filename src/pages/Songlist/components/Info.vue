@@ -77,7 +77,9 @@ const lessThan1280 = useMediaQuery('(max-width: 1279px)')
             </div>
             <Collapsible
                 :collapsible="
-                    (info?.description.length || 0) > (lessThan768 ? 150 : lessThan1280 ? 300 : 400)
+                    // prettier-ignore
+                    (info?.description?.length || 0) >
+                        (lessThan768 ? 150 : lessThan1280 ? 300 : 400)
                 "
                 :collapse-height="lessThan768 ? 97 : 110"
                 :possible-max-height="lessThan1280 ? 500 : 1000"

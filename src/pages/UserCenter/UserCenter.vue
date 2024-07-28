@@ -6,7 +6,7 @@ import { useLoginService } from 'services'
 import { useProfileStore } from 'stores'
 import { Image } from 'components'
 import { post } from '../../utils/request'
-import { AlbumList, FavoriteSongs, RecentSongs, UserInfo } from './components'
+import { AlbumList, FavoriteSongs, RecentSongs, SonglistsList, UserInfo } from './components'
 
 const { profile } = storeToRefs(useProfileStore())
 const { onProfileLoaded } = useLoginService()
@@ -44,6 +44,9 @@ onProfileLoaded((p) => {
                 <div class="mt-12 w-full lg:ml-12 lg:mt-0 lg:w-1/3">
                     <RecentSongs />
                 </div>
+            </div>
+            <div class="px-4 lg:flex">
+                <SonglistsList />
             </div>
         </div>
     </div>

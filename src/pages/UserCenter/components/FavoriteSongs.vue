@@ -50,6 +50,6 @@ watch(props, async (val) => {
 
 <style lang="scss">
 .my-favorite-songs {
-    height: 900px;
+    height: 500px;
 }
 </style>
