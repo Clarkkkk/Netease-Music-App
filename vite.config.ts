@@ -1,4 +1,5 @@
 /// <reference types="vitest" />
+import legacy from '@vitejs/plugin-legacy'
 import vue from '@vitejs/plugin-vue'
 import vueJsx from '@vitejs/plugin-vue-jsx'
 // import { codeInspectorPlugin } from 'code-inspector-plugin'
@@ -26,6 +27,10 @@ export default defineConfig(() => {
         plugins: [
             vue(),
             vueJsx(),
+            legacy({
+                modernPolyfills: true,
+                renderLegacyChunks: false
+            }),
             // codeInspectorPlugin({
             //     bundler: 'vite'
             // }),

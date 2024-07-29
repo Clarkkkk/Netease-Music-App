@@ -26,7 +26,7 @@
     "build-storybook": "storybook build"
   },
   "dependencies": {
-    "@ark-ui/vue": "^1.0.0-4",
+    "@ark-ui/vue": "1.0.0-4",
     "@unhead/vue": "^1.8.8",
     "@vueuse/core": "^10.11.0",
     "axios": "^1.6.2",
@@ -65,6 +65,7 @@
     "@types/node": "^20.10.2",
     "@vite-pwa/assets-generator": "^0.2.4",
     "@vitejs/plugin-basic-ssl": "^1.0.2",
+    "@vitejs/plugin-legacy": "^5.4.1",
     "@vitejs/plugin-vue": "^5.1.1",
     "@vitejs/plugin-vue-jsx": "^3.1.0",
     "@vue/test-utils": "^2.4.4",
