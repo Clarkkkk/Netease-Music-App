@@ -46,6 +46,10 @@ async function onAlbumClick() {
     await router.push(`/album/${props.song.albumId}`)
 }
 
+async function onArtistClick() {
+    await router.push(`/artist/${props.song.artistId}`)
+}
+
 function onAddToSonglistClick(id: number) {
     addToSonglistRef.value?.show(id)
 }
@@ -102,6 +106,10 @@ async function onRemoveFromSonglistClick(id: number) {
             <ContextMenuItem @click="onAlbumClick">
                 <i-solar-vinyl-line-duotone class="h-5 w-5" />
                 <span>查看专辑</span>
+            </ContextMenuItem>
+            <ContextMenuItem @click="onArtistClick">
+                <i-solar-users-group-rounded-line-duotone class="h-5 w-5" />
+                <span>查看歌手</span>
             </ContextMenuItem>
         </template>
     </ContextMenu>

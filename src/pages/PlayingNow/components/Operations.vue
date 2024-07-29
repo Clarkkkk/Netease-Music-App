@@ -61,6 +61,11 @@ async function onAlbumJumpClick() {
     await router.push(`/album/${currentSong.value.albumId}`)
 }
 
+async function onArtistJumpClick() {
+    if (!currentSong.value) return
+    await router.push(`/artist/${currentSong.value.artistId}`)
+}
+
 let timeoutId = 0
 function onPlayModeClick() {
     clearTimeout(timeoutId)
@@ -177,6 +182,10 @@ function onPlayModeClick() {
                 <ContextMenuItem @click="onAlbumJumpClick">
                     <i-solar-vinyl-line-duotone class="h-5 w-5" />
                     查看专辑
+                </ContextMenuItem>
+                <ContextMenuItem @click="onArtistJumpClick">
+                    <i-solar-users-group-rounded-line-duotone class="h-5 w-5" />
+                    查看歌手
                 </ContextMenuItem>
                 <ContextMenuItem @click="onCommentClick">
                     <i-solar-chat-dots-line-duotone class="h-5 w-5" />

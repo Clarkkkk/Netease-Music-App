@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { RouterLink } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { usePlaylistStore } from 'stores'
 import { Tooltip } from 'components'
@@ -29,7 +30,12 @@ const { currentSong } = storeToRefs(usePlaylistStore())
             class="mt-2 flex items-center text-center text-xs text-base-content sm:text-sm"
         >
             <i-solar-microphone-bold-duotone class="mr-1 h-4 w-4 text-primary sm:h-5 sm:w-5" />
-            {{ currentSong?.artist || '--' }}
+            <RouterLink
+                :to="`/artist/${currentSong?.artistId}`"
+                class="hover:underline"
+            >
+                {{ currentSong?.artist || '--' }}
+            </RouterLink>
         </p>
     </div>
 </template>
