@@ -23,6 +23,10 @@ const routes = [
         component: () => import('./pages/Album/Album.vue')
     },
     {
+        path: '/artist/:id',
+        component: () => import('./pages/Artist/Artist.vue')
+    },
+    {
         path: '/search',
         component: () => import('./pages/Search/Search.vue')
     },

@@ -3,7 +3,8 @@ export const SEARCH = {
     ALBUM: 10,
     PLAYLIST: 1000,
     MIXED: 1018,
-    LYRICS: 1006
+    LYRICS: 1006,
+    ARTIST: 100
 } as const
 
 export type SearchValue = (typeof SEARCH)[keyof typeof SEARCH]
