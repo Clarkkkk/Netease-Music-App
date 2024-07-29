@@ -2,6 +2,91 @@
 
 All notable changes to this project will be documented in this file. See [commit-and-tag-version](https://github.com/absolute-version/commit-and-tag-version) for commit guidelines.
 
+# 1.2.0    (2024-07-29)
+
+
+## **Features**
+
+* add symbol to indicate the playing song ([de75b427](https://github.com/Clarkkkk/Netease-Music-App/commit/de75b427c7ff7a51e3a0b66a9c6839a085830f30))
+* add to songlist ([275c9c14](https://github.com/Clarkkkk/Netease-Music-App/commit/275c9c14e0749dcfd6b753c3999b04ba50ac8c93))
+* add songlist panel in user center ([1a1945d5](https://github.com/Clarkkkk/Netease-Music-App/commit/1a1945d5cfda33a842510472047dfcf3d572e916))
+* add songlists store and songlists effect ([d0319e57](https://github.com/Clarkkkk/Netease-Music-App/commit/d0319e577399534f0fbff3a559fc67997a247338))
+* add play mode switching ([d721c63d](https://github.com/Clarkkkk/Netease-Music-App/commit/d721c63d888b1948b288fc94592b5f083b647576))
+* add audioSession for iOS safari ([7401aa2d](https://github.com/Clarkkkk/Netease-Music-App/commit/7401aa2dd5e0223ad2bb8a66a9db3480950f6098))
+* can add albums to collections now ([8504779b](https://github.com/Clarkkkk/Netease-Music-App/commit/8504779b48f93ae8fd8e4db47e2e483da4f6f067))
+* use space to toggle play/pause ([ce070b2a](https://github.com/Clarkkkk/Netease-Music-App/commit/ce070b2a682f0bdade9ba4d731a65b1390cda8d7))
+* add a setting to control whether to trace play records ([b22dc2ef](https://github.com/Clarkkkk/Netease-Music-App/commit/b22dc2ef89a074c3a35f36326df4d5d0695604ad))
+* add explanation tooltip for `Select` and `Switch` ([583574ae](https://github.com/Clarkkkk/Netease-Music-App/commit/583574ae45f628a102a062697d5d663d6b607551))
+* add album name for the album list ([c0fd1157](https://github.com/Clarkkkk/Netease-Music-App/commit/c0fd11574c8017cf8b84ecbe37a400d0cfaa4d5e))
+* new theme netease classic ([7f294ac0](https://github.com/Clarkkkk/Netease-Music-App/commit/7f294ac0ec628f16d641c203b763536eea64d583))
+* add a bunch of themes from daisyui and add corresponding settings as well ([e136937e](https://github.com/Clarkkkk/Netease-Music-App/commit/e136937e2aec1c1943e8671272dd611255546b34))
+    
+    ### **Description**
+    
+    - add `Select` component
+    - move the debug effect to `App.vue`
+    - other fixes
+    
+* add setting page ([54d97d7a](https://github.com/Clarkkkk/Netease-Music-App/commit/54d97d7afd8f78a41b9e7ec73955ec3380c0436a))
+    
+    ### **Description**
+    
+    - add a setting to control if to skip songs shorter than 30s
+    - add a setting to toggle eruda console for debugging
+    - add a new component `Switch`
+    - add two utility functions `loadScript` and `mergeClass`
+    - update deps
+    
+
+## **Bug Fixes**
+
+* should not hide the list when loading more search results ([30fe73b4](https://github.com/Clarkkkk/Netease-Music-App/commit/30fe73b42676aff7cf6d87d00284bd1580817906))
+* `scrollIntoView` not working in mobile ([1fdf3f76](https://github.com/Clarkkkk/Netease-Music-App/commit/1fdf3f76f653eb668798fe9a7a79a28da835705b))
+* cannot trigger search request in some cases ([d162290b](https://github.com/Clarkkkk/Netease-Music-App/commit/d162290b62e7f9ba8e8e51309c50b107743ea4c0))
+* fix song loop not working ([3db0c05c](https://github.com/Clarkkkk/Netease-Music-App/commit/3db0c05c984fcb701c110f5651999e0d046b873b))
+* should scroll the lyrics immediately when navigate to the playing page ([a31603ec](https://github.com/Clarkkkk/Netease-Music-App/commit/a31603ec169eac92dd409530a43183ff5bffe025))
+* prevent zooming when focusing on input in safari ([ed35c14b](https://github.com/Clarkkkk/Netease-Music-App/commit/ed35c14b57ba05f82ad936c32995c6945f5a916f))
+* should prevent scrolling when press space to switch playing ([c18d79bd](https://github.com/Clarkkkk/Netease-Music-App/commit/c18d79bd0a3d000958bc9a637f60bf2517e28058))
+* modify the threshold of song skipping ([7602a44c](https://github.com/Clarkkkk/Netease-Music-App/commit/7602a44ce0658190af79a09aa0cbd0fa0a6bb5f8))
+* fix bugs in play tracing ([e85ca6cc](https://github.com/Clarkkkk/Netease-Music-App/commit/e85ca6cc8843e5fe7d8af8bff7f603a8ae587f61))
+* minor fixes in Setting page ([c5621a4c](https://github.com/Clarkkkk/Netease-Music-App/commit/c5621a4c8a8db4da8bc0e87432cef5f7ddc9f0e9))
+* fix sharp installation error ([6f9d11a5](https://github.com/Clarkkkk/Netease-Music-App/commit/6f9d11a508711e9763a553e6639891611c10379c))
+* only need the extra audio element in mobile apple devices ([8f07e093](https://github.com/Clarkkkk/Netease-Music-App/commit/8f07e0933d9b47006df640c2bbad669ec05e5739))
+* try to fix the safari issue ([b76cfea5](https://github.com/Clarkkkk/Netease-Music-App/commit/b76cfea584aeac85841c1c8f32829de2b02a7865))
+* try to fix the safari issue ([4ec0a2f5](https://github.com/Clarkkkk/Netease-Music-App/commit/4ec0a2f5edc934b38f5e0d9070175a700771ece9))
+* set the `start_url` to absolute path ([9c8dde08](https://github.com/Clarkkkk/Netease-Music-App/commit/9c8dde08c22481f047968513b9ec73b86522e6fd))
+* remove song cache due to compatibility of safari ([34450ff6](https://github.com/Clarkkkk/Netease-Music-App/commit/34450ff60911a50fafe03ab92b8292a91b292903))
+* song resources are opaque responses ([e6f24ef4](https://github.com/Clarkkkk/Netease-Music-App/commit/e6f24ef423bc59b4c0a0e1e051a8eb9575c54647))
+* no need to show volume control on mobile device ([57118d53](https://github.com/Clarkkkk/Netease-Music-App/commit/57118d5379fa298ffadc7f9a83383ee0468ad246))
+* apply temporary fix for safari ([326170a3](https://github.com/Clarkkkk/Netease-Music-App/commit/326170a3d82a7be48806e15315a26a403653a7a6))
+* when a song gets loading frequently, load its last part ([fa6ba654](https://github.com/Clarkkkk/Netease-Music-App/commit/fa6ba6542cd5a733b0361850c787b44af44311b7))
+
+## **Styles**
+
+* fix scrollbar style on chrome 121 and above ([4100a632](https://github.com/Clarkkkk/Netease-Music-App/commit/4100a63248b410a2104bf96223c8b43f3471d592))
+
+## **Performance Improvements**
+
+* use CacheFirst for songs ([287c7ecb](https://github.com/Clarkkkk/Netease-Music-App/commit/287c7ecbf22fcdf79a092aee1476622ff6bb4ce2))
+
+## **Chores**
+
+* update patch ([7df88a08](https://github.com/Clarkkkk/Netease-Music-App/commit/7df88a08e345b7fa05577a5a4bc1d723db776ead))
+* update deps ([62f96265](https://github.com/Clarkkkk/Netease-Music-App/commit/62f9626519ac0be40f2415dd04a4f0f07767cd40))
+* remove the hack as the latest iOS fixes the issue ([bd04ed6c](https://github.com/Clarkkkk/Netease-Music-App/commit/bd04ed6cd0508b8a2d9fabd5f5534a13259ddabb))
+* add eslint-plugin-regexp ([2237f0f4](https://github.com/Clarkkkk/Netease-Music-App/commit/2237f0f42894ff068b64dde8b0f153f8b9c6681b))
+* run unit tests in github actions ([1c9f41cb](https://github.com/Clarkkkk/Netease-Music-App/commit/1c9f41cb3ef775eabbfed9a4f962fcd237db3612))
+* debug logs ([ffa75040](https://github.com/Clarkkkk/Netease-Music-App/commit/ffa7504017cbb930fc2945173b3c8a954c056932))
+* add prettier ([b3dea654](https://github.com/Clarkkkk/Netease-Music-App/commit/b3dea654b538046c075f09c8167207e9934e7862))
+* update vue-tsc ([08296349](https://github.com/Clarkkkk/Netease-Music-App/commit/082963495572ac2af01f4e35046bde40ee6ec975))
+* lint ([ce76b3de](https://github.com/Clarkkkk/Netease-Music-App/commit/ce76b3de7b0fad481e77dd2fa5cb6a8517b93898))
+* eslint migrate to flat config ([35884868](https://github.com/Clarkkkk/Netease-Music-App/commit/358848683ea4ffd2011b92d44649ed3f33f44502))
+* update storybook to v8 ([8256cb5a](https://github.com/Clarkkkk/Netease-Music-App/commit/8256cb5a3f65167f599ef230016c1f21a4946687))
+* update deps ([1d21824a](https://github.com/Clarkkkk/Netease-Music-App/commit/1d21824a4660c96bcdf9bc1233fbaf0763e8d614))
+* update github actions from node 16 to node 20 ([6c456344](https://github.com/Clarkkkk/Netease-Music-App/commit/6c4563448852614b96740bbed7dbd4d78eb50728))
+
+
+
 # 1.1.0    (2024-03-17)
 
 
