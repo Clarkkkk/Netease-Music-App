@@ -7,7 +7,7 @@ import { Info, List } from './components'
 import { provide } from './context'
 
 const route = useRoute()
-const { info, songlist, onFullLoad, onIncrementalLoad, initSonglist, more } = useSonglist()
+const { info, songlist, onFullLoad, onIncrementalLoad, initSonglist, more, reset } = useSonglist()
 
 provide({
     id: Number(route.params.id),
@@ -23,7 +23,10 @@ watch(
     route,
     (val) => {
         if (!val.path.includes('songlist')) return
-        initSonglist(Number(val.params.id))
+        if (!info.value || !route.path.includes(info.value.id.toString())) {
+            initSonglist(Number(val.params.id))
+            reset()
+        }
     },
     {
         immediate: true

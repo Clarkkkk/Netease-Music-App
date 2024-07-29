@@ -37,7 +37,7 @@ const route = useRoute()
     >
         <KeepAlive
             :max="10"
-            :include="['Home', 'PlayingNow', 'UserCenter', 'Search']"
+            :include="['Home', 'PlayingNow', 'UserCenter', 'Search', 'Album', 'Songlist', 'Artist']"
         >
             <component :is="Component" />
         </KeepAlive>

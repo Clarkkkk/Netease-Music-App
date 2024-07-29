@@ -47,6 +47,7 @@ async function onAlbumClick() {
 }
 
 async function onArtistClick() {
+    console.log(props.song)
     await router.push(`/artist/${props.song.artistId}`)
 }
 

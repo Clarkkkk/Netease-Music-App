@@ -35,11 +35,18 @@ export function useAlbum() {
         extraInfo.value = res
     }
 
+    function reset() {
+        info.value = null
+        album.value = []
+        extraInfo.value = null
+    }
+
     return {
         album,
         info,
         extraInfo,
         initAlbum,
-        updateExtraInfo
+        updateExtraInfo,
+        reset
     }
 }

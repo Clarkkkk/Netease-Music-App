@@ -5,13 +5,16 @@ import { useAlbum } from 'services'
 import { Info, List } from './components'
 
 const route = useRoute()
-const { album, info, initAlbum, extraInfo, updateExtraInfo } = useAlbum()
+const { album, info, initAlbum, extraInfo, updateExtraInfo, reset } = useAlbum()
 
 watch(
     route,
     (val) => {
         if (!val.path.includes('album')) return
-        initAlbum(+val.params.id.toString())
+        if (!info.value || !route.path.includes(info.value.id.toString())) {
+            initAlbum(+val.params.id.toString())
+            reset()
+        }
     },
     {
         immediate: true

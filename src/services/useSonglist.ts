@@ -54,6 +54,14 @@ export function useSonglist() {
         songlist.value.push(...list)
     }
 
+    function reset() {
+        info.value = null
+        songlist.value = []
+        more.value = true
+        offset.value = 0
+        songIdList.value = []
+    }
+
     return {
         info,
         songlist,
@@ -61,7 +69,8 @@ export function useSonglist() {
         more,
         initSonglist,
         onIncrementalLoad,
-        onFullLoad
+        onFullLoad,
+        reset
     }
 }
 
@@ -104,7 +113,9 @@ function getSonglistDetail(id: number) {
                     name: item.name,
                     subName: item.alia[0] || '',
                     artist: item.ar[0]?.name || '',
+                    artistId: item.ar[0]?.id || 0,
                     album: item.al.name,
+                    albumId: item.al.id,
                     cover: toHttps(item.al.picUrl) || '',
                     sourceid: id,
                     timestamp: 0,

@@ -2,7 +2,7 @@ import { onMounted, type Ref, ref } from 'vue'
 
 type PaginatedListConfig<T, S> = {
     limit: number
-    params: S
+    getParams: () => S
     immediate?: boolean
     requestFn: (args: S & { limit?: number; offset?: number }) => Promise<{
         data: T[]
@@ -13,7 +13,7 @@ type PaginatedListConfig<T, S> = {
 
 export function usePaginatedList<T, S>({
     limit,
-    params,
+    getParams,
     immediate,
     requestFn,
     hasMore
@@ -31,7 +31,7 @@ export function usePaginatedList<T, S>({
         loading.value = true
         try {
             const res = await requestFn({
-                ...params,
+                ...getParams(),
                 limit,
                 offset: currentOffset.value
             })
