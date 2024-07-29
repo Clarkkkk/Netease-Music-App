@@ -12,7 +12,7 @@ interface SonglistItem {
     id: number
 }
 
-const props = defineProps<{ listItem: SonglistItem; type: 'songlist' | 'album' }>()
+const props = defineProps<{ listItem: SonglistItem; type: 'songlist' | 'album' | 'artist' }>()
 const { isHovering, onMouseEnter, onMouseLeave } = useIsHovering()
 const { isPc } = useDeviceType()
 const { switchToThisList } = usePlaylistStore()
@@ -31,7 +31,7 @@ async function onPlayList(id: number) {
         await initSonglist(id)
         await onFullLoad()
         switchToThisList(songlist.value)
-    } else {
+    } else if (props.type === 'album') {
         await initAlbum(id)
         await switchToThisList(album.value)
     }
@@ -104,6 +104,7 @@ function onItemClick(id: number) {
             {{ listItem.creator }}
         </div>
         <Button
+            v-if="type !== 'artist'"
             :class="[
                 'ml-2',
                 'transition-all',

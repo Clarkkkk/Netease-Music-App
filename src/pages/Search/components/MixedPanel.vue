@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { type ApiSearch, SEARCH } from 'api'
 import { post, toHttps } from 'utils'
 import AlbumResult from './AlbumResult.vue'
+import ArtistResult from './ArtistResult.vue'
 import { useSearchEffect } from './service'
 import SonglistResult, { type SonglistItem } from './SonglistResult.vue'
 import SongResult from './SongResult.vue'
@@ -11,6 +12,13 @@ const props = defineProps<{
     active: boolean
     keyword: string
 }>()
+
+interface Artist {
+    id: number
+    name: string
+    subName?: string
+    picUrl: string
+}
 
 const loading = ref(false)
 
@@ -27,6 +35,10 @@ const mixedData = ref<{
         list: SonglistItem[]
         moreText: string
     }
+    artist: {
+        list: Artist[]
+        moreText: string
+    }
 }>({
     song: {
         list: [],
@@ -37,6 +49,10 @@ const mixedData = ref<{
         moreText: ''
     },
     album: {
+        list: [],
+        moreText: ''
+    },
+    artist: {
         list: [],
         moreText: ''
     }
@@ -86,6 +102,17 @@ async function getData(keyword: string) {
                         cover: toHttps(item.picUrl)
                     }
                 })
+            },
+            artist: {
+                moreText: res.result.artist.moreText,
+                list: res.result.artist.artists.map((item) => {
+                    return {
+                        id: item.id,
+                        name: item.name,
+                        subName: item.trans || item.transNames?.[0] || '',
+                        picUrl: toHttps(item.picUrl)
+                    }
+                })
             }
         }
     } finally {
@@ -101,7 +128,7 @@ useSearchEffect({
 </script>
 
 <template>
-    <div class="w-full lg:flex">
+    <div class="w-full xl:flex">
         <div
             v-if="loading"
             class="mt-4 flex w-full justify-center"
@@ -112,12 +139,16 @@ useSearchEffect({
         <template v-else>
             <SongResult :list="mixedData.song.list" />
             <SonglistResult
-                class="mt-8 lg:ml-8 lg:mt-0"
+                class="mt-8 xl:ml-8 xl:mt-0"
                 :list="mixedData.songlist.list"
             />
             <AlbumResult
-                class="mt-8 lg:ml-8 lg:mt-0"
+                class="mt-8 xl:ml-8 xl:mt-0"
                 :list="mixedData.album.list"
+            />
+            <ArtistResult
+                class="mt-8 xl:ml-8 xl:mt-0"
+                :list="mixedData.artist.list"
             />
         </template>
     </div>
