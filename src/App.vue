@@ -10,6 +10,7 @@ import {
     useMediaSessionEffect,
     usePlayStatusEffect,
     useSonglistsEffect,
+    useTabEffect,
     useThemeEffect
 } from './services'
 import './global.css'
@@ -23,6 +24,7 @@ useThemeEffect()
 useDebugEffect()
 useGlobalKeyboardListeners()
 useSonglistsEffect()
+useTabEffect()
 
 const route = useRoute()
 </script>
@@ -35,7 +37,7 @@ const route = useRoute()
     >
         <KeepAlive
             :max="10"
-            :include="['Home', 'PlayingNow', 'UserCenter']"
+            :include="['Home', 'PlayingNow', 'UserCenter', 'Search']"
         >
             <component :is="Component" />
         </KeepAlive>

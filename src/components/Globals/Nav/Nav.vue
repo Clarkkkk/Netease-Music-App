@@ -1,35 +1,50 @@
 <script setup lang="ts">
-import { nextTick, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
 import { usePrefetch } from 'vue-route-prefetch'
 import { RouterLink, useRoute, useRouter } from 'vue-router'
 import { useMediaQuery } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 import { useAuthStore, usePlaylistStore } from 'stores'
+import { useTabStore } from 'src/stores/useTabStore'
 import Button from '../../Button.vue'
 import { MobileMenu, Profile } from './components'
 
 const auth = useAuthStore()
 const { playMode, currentSong } = storeToRefs(usePlaylistStore())
+const { tabState } = storeToRefs(useTabStore())
 const { switchToRadio } = usePlaylistStore()
 const router = useRouter()
-const navRoutes = [
-    {
-        name: 'Home',
-        to: '/'
-    },
-    {
-        name: 'Playing',
-        to: '/playing'
-    },
-    {
-        name: 'My music',
-        to: '/user-center'
-    },
-    {
-        name: 'Setting',
-        to: '/setting'
-    }
-]
+const navRoutes = computed(() => {
+    const defaultRoutes = [
+        {
+            name: 'Home',
+            to: '/'
+        },
+        {
+            name: 'Playing',
+            to: '/playing'
+        },
+        {
+            name: 'My music',
+            to: '/user-center'
+        },
+        {
+            name: 'Setting',
+            to: '/setting'
+        }
+    ]
+
+    const historyRoutes = Object.entries(tabState.value)
+        .filter(([, val]) => Boolean(val))
+        .map(([name, path]) => {
+            return {
+                name: name.slice(0, 1).toUpperCase() + name.slice(1),
+                to: path
+            }
+        })
+
+    return defaultRoutes.toSpliced(2, 0, ...historyRoutes)
+})
 const route = useRoute()
 const isTop = ref(window.scrollY === 0)
 const searchTransition = ref(false)
