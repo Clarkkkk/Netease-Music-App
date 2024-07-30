@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { onMounted, ref } from 'vue'
-import { useMediaQuery } from '@vueuse/core'
 import type { ApiTopSong } from 'api'
 import { usePlaylistStore } from 'stores'
-import { Button, SongItem, Tabs } from 'components'
+import { Button, Tabs } from 'components'
 import { post, toHttps } from 'utils'
+import NewSongList from './NewSongList.vue'
 
 const AREA = {
     ALL: 0,
@@ -47,8 +47,6 @@ const list = ref<Record<AreaValue, Array<Song>>>({
     [AREA.KOREA]: []
 })
 
-const lessThan768 = useMediaQuery('(max-width: 767px)')
-const showAll = ref(!lessThan768.value || false)
 const loading = ref(false)
 const currentTab = ref<AreaValue>(AREA.ALL)
 const { switchToThisList } = usePlaylistStore()
@@ -111,9 +109,6 @@ onMounted(() => {
             :loading="loading"
             :onTabChange="
                 (tab) => {
-                    if (lessThan768) {
-                        showAll = false
-                    }
                     getData(tab.value)
                     currentTab = tab.value
                 }
@@ -124,37 +119,7 @@ onMounted(() => {
                 :key="tab.name"
                 #[tab.name]="{ tab: tabItem }"
             >
-                <ul
-                    :class="[
-                        'song-list',
-                        'list',
-                        'relative',
-                        'w-full',
-                        'overflow-x-visible',
-                        'overflow-y-scroll',
-                        { 'is-empty': !list[tabItem.value as AreaValue].length }
-                    ]"
-                >
-                    <SongItem
-                        v-for="song in list[tabItem.value as AreaValue].slice(
-                            0,
-                            showAll || !lessThan768 ? Infinity : 10
-                        )"
-                        :key="song.id"
-                        :song="song"
-                    />
-                </ul>
-                <div
-                    v-if="!showAll && lessThan768"
-                    class="flex w-full justify-center"
-                >
-                    <Button
-                        class="btn-ghost btn-sm"
-                        @click="showAll = true"
-                    >
-                        查看更多
-                    </Button>
-                </div>
+                <NewSongList :list="list[tabItem.value as AreaValue]" />
             </template>
         </Tabs>
     </div>
@@ -172,21 +137,6 @@ onMounted(() => {
         .list {
             min-height: 663px;
         }
-    }
-
-    .song-list::after {
-        content: '';
-        position: sticky;
-        bottom: 0;
-        left: 0;
-        display: block;
-        width: 100%;
-        height: 15px;
-        background: linear-gradient(to top, hsl(var(--b1)) 0%, hsl(var(--b1) / 0%));
-    }
-
-    .song-list.is-empty::after {
-        display: none;
     }
 }
 </style>

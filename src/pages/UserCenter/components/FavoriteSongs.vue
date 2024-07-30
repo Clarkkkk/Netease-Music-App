@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { watch } from 'vue'
+import { useVirtualList } from '@vueuse/core'
 import { useSonglist } from 'services'
 import { usePlaylistStore } from 'stores'
 import { Button, SongItem } from 'components'
@@ -8,6 +9,7 @@ const props = defineProps<{ id: number }>()
 
 const { songlist, onFullLoad, initSonglist } = useSonglist()
 const { switchToThisList } = usePlaylistStore()
+const { list, containerProps, wrapperProps } = useVirtualList(songlist, { itemHeight: 72 })
 
 async function onPlayAll() {
     if (songlist.value.length) {
@@ -38,12 +40,17 @@ watch(props, async (val) => {
                 播放全部
             </Button>
         </h2>
-        <ul class="song-list list relative w-full overflow-x-visible overflow-y-scroll">
-            <SongItem
-                v-for="song in songlist.slice(0, 13)"
-                :key="song.id"
-                :song="song"
-            />
+        <ul
+            class="song-list list relative w-full overflow-x-visible overflow-y-scroll"
+            v-bind="containerProps"
+        >
+            <div v-bind="wrapperProps">
+                <SongItem
+                    v-for="item in list"
+                    :key="item.data.id"
+                    :song="item.data"
+                />
+            </div>
         </ul>
     </div>
 </template>

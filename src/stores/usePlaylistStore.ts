@@ -131,9 +131,6 @@ export const usePlaylistStore = defineStore('playlist', () => {
 
     async function switchToThisSong(song: Song) {
         // TODO: handle url error
-        console.log('switchToThisSong')
-        console.log(playMode.value)
-        console.log(playlist.value)
         const songInList = playlist.value.find((item) => item.id === song.id)
         if (playMode.value === 'radio') {
             if (songInList && songInList !== currentSong.value) {
@@ -210,12 +207,6 @@ export const usePlaylistStore = defineStore('playlist', () => {
         const index = playlist.value.findIndex((item) => item === song)
         const current = currentSong.value
 
-        console.log('remove song')
-        console.log(index)
-        console.log(playlist.value)
-        console.log(song.name)
-        console.log(currentSong.value?.name)
-        console.log(currentSong.value?.name)
         playlist.value.splice(index, 1)
 
         if (song === current) {

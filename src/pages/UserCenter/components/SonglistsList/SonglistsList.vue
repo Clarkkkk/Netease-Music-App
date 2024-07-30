@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
+import { useVirtualList } from '@vueuse/core'
 import { storeToRefs } from 'pinia'
 import { useSonglistsStore } from 'stores'
 import ListItem from 'src/pages/Search/components/ListItem.vue'
@@ -19,6 +20,7 @@ const songlistArr = computed(() => {
         }
     })
 })
+const { list, containerProps, wrapperProps } = useVirtualList(songlistArr, { itemHeight: 72 })
 
 async function onTabChange() {
     currentTab.value = currentTab.value === 'created-list' ? 'collected-list' : 'created-list'
@@ -55,14 +57,17 @@ async function onTabChange() {
 
         <ul
             class="songlists-list relative flex h-[800px] w-full flex-wrap overflow-y-auto overflow-x-visible"
+            v-bind="containerProps"
         >
-            <ListItem
-                v-for="songlist in songlistArr"
-                :key="songlist.id"
-                :list-item="songlist"
-                type="songlist"
-                class="flex items-center"
-            />
+            <div v-bind="wrapperProps">
+                <ListItem
+                    v-for="item in list"
+                    :key="item.data.id"
+                    :list-item="item.data"
+                    type="songlist"
+                    class="flex items-center"
+                />
+            </div>
         </ul>
     </div>
 </template>

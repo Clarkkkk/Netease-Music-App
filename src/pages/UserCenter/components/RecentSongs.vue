@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
+import { useVirtualList } from '@vueuse/core'
 import type { ApiUserRecord } from 'api'
 import { storeToRefs } from 'pinia'
 import { useLoginService } from 'services'
@@ -25,6 +26,22 @@ const { profile } = storeToRefs(useProfileStore())
 const loading = ref(false)
 const weekList = ref<Array<RecentSong>>([])
 const allList = ref<Array<RecentSong>>([])
+
+const {
+    list: visibleWeekList,
+    containerProps: weekContainerProps,
+    wrapperProps: weekWrapperProps
+} = useVirtualList<RecentSong>(weekList, {
+    itemHeight: 72
+})
+
+const {
+    list: visibleAllList,
+    containerProps: allContainerProps,
+    wrapperProps: allWrapperProps
+} = useVirtualList<RecentSong>(allList, {
+    itemHeight: 72
+})
 
 async function getData(type: 0 | 1) {
     if (
@@ -103,16 +120,21 @@ onProfileLoaded(() => {
             >
                 <ul
                     class="song-list list relative h-full w-full overflow-x-visible overflow-y-scroll"
+                    v-bind="tabItem.name === '全部' ? allContainerProps : weekContainerProps"
                 >
-                    <SongItem
-                        v-for="song in tabItem.name === '全部' ? allList : weekList"
-                        :key="song.id"
-                        :song="song"
-                    >
-                        <div class="flex-fixed whitespace-nowrap text-xs text-base-content/80">
-                            {{ song.playCount }}次
-                        </div>
-                    </SongItem>
+                    <div v-bind="tabItem.name === '全部' ? allWrapperProps : weekWrapperProps">
+                        <SongItem
+                            v-for="item in tabItem.name === '全部'
+                                ? visibleAllList
+                                : visibleWeekList"
+                            :key="item.data.id"
+                            :song="item.data"
+                        >
+                            <div class="flex-fixed whitespace-nowrap text-xs text-base-content/80">
+                                {{ item.data.playCount }}次
+                            </div>
+                        </SongItem>
+                    </div>
                 </ul>
             </template>
         </Tabs>
