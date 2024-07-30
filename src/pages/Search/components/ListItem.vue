@@ -4,6 +4,7 @@ import { useRouter } from 'vue-router'
 import { useAlbum, useDeviceType, useIsHovering, useSonglist } from 'services'
 import { usePlaylistStore } from 'stores'
 import { Button, Image } from 'components'
+import { toHttps } from 'src/utils'
 
 interface SonglistItem {
     name: string
@@ -51,7 +52,7 @@ function onItemClick(id: number) {
     >
         <div class="relative mr-2 h-10 w-10 flex-fixed">
             <Image
-                :src="listItem.cover"
+                :src="toHttps(listItem.cover)"
                 :class="[
                     'absolute',
                     'left-0',
@@ -69,7 +70,7 @@ function onItemClick(id: number) {
                 :size="40"
             />
             <Image
-                :src="listItem.cover"
+                :src="toHttps(listItem.cover)"
                 class="relative z-10 h-full w-full flex-fixed rounded-lg"
                 loading="lazy"
                 :size="40"
