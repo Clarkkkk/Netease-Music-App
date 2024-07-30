@@ -157,7 +157,7 @@ export const usePlaylistStore = defineStore('playlist', () => {
     async function switchToThisList(list: Song[], shouldPlay?: Song) {
         // TODO: handle url error
         historyPlaylist.value = playlist.value
-        playlist.value = list
+        playlist.value = list.slice()
         await updateCurrentSong(shouldPlay || list[0] || null)
         updatePlayMode('list-sequent')
     }
