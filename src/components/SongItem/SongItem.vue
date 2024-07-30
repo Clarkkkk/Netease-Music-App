@@ -81,13 +81,24 @@ const { currentSong } = storeToRefs(usePlaylistStore())
             class="hidden w-2/12 overflow-hidden text-ellipsis whitespace-nowrap text-sm @2xl:block"
             :title="song.artist"
         >
-            {{ song.artist }}
+            <RouterLink
+                class="hover:underline"
+                :to="`/artist/${song.artistId}`"
+            >
+                {{ song.artist }}
+            </RouterLink>
         </div>
         <div
             class="hidden w-5/12 overflow-hidden text-ellipsis whitespace-nowrap text-sm @2xl:block"
             :title="song.album"
+            :to="`/album/${song.albumId}`"
         >
-            {{ song.album }}
+            <RouterLink
+                class="hover:underline"
+                :to="`/album/${song.albumId}`"
+            >
+                {{ song.album }}
+            </RouterLink>
         </div>
         <slot />
         <SongItemOption
