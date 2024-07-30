@@ -80,10 +80,8 @@ watch(
 
 <style lang="scss">
 #recommand-songs {
-    @media (min-width: 768px) {
-        .list {
-            height: calc(100vh - 400px);
-        }
+    .list {
+        height: calc(100vh - 400px);
     }
 
     .song-list::after {

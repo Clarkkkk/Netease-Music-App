@@ -127,16 +127,8 @@ onMounted(() => {
 
 <style lang="scss">
 #new-songs {
-    @media (min-width: 768px) {
-        .list {
-            height: calc(100vh - 400px);
-        }
-    }
-
-    @media (max-width: 640px) {
-        .list {
-            min-height: 663px;
-        }
+    .list {
+        height: calc(100vh - 400px);
     }
 }
 </style>

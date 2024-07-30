@@ -71,7 +71,7 @@ onMounted(() => {
 <style lang="scss">
 #new-albums {
     @media (max-width: 640px) {
-        height: 1586px;
+        height: 1700px;
     }
     @media (max-width: 1024px) {
         .album {
