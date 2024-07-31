@@ -26,10 +26,10 @@ export const useSonglistsStore = defineStore('songlists', () => {
             offset: 0
         })
         createdSonglists.value = createdSonglists.value.concat(
-            res.playlist.slice(0, createdCount.value)
+            res.playlist.slice(1, createdCount.value)
         )
         collectedSonglists.value = collectedSonglists.value.concat(
-            res.playlist.slice(createdCount.value + 1)
+            res.playlist.slice(createdCount.value)
         )
     }
 
