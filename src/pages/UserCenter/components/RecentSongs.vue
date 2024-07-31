@@ -32,7 +32,8 @@ const {
     containerProps: weekContainerProps,
     wrapperProps: weekWrapperProps
 } = useVirtualList<RecentSong>(weekList, {
-    itemHeight: 72
+    itemHeight: 72,
+    overscan: 20
 })
 
 const {
@@ -40,7 +41,8 @@ const {
     containerProps: allContainerProps,
     wrapperProps: allWrapperProps
 } = useVirtualList<RecentSong>(allList, {
-    itemHeight: 72
+    itemHeight: 72,
+    overscan: 15
 })
 
 async function getData(type: 0 | 1) {

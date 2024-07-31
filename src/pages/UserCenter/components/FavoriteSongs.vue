@@ -9,7 +9,10 @@ const props = defineProps<{ id: number }>()
 
 const { songlist, onFullLoad, initSonglist } = useSonglist()
 const { switchToThisList } = usePlaylistStore()
-const { list, containerProps, wrapperProps } = useVirtualList(songlist, { itemHeight: 72 })
+const { list, containerProps, wrapperProps } = useVirtualList(songlist, {
+    itemHeight: 72,
+    overscan: 15
+})
 
 async function onPlayAll() {
     if (songlist.value.length) {

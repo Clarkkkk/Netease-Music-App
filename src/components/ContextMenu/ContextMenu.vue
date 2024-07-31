@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { provide, ref, watch } from 'vue'
 import { Tippy } from 'vue-tippy'
-import { useDeviceType, useIsHovering } from 'services'
+import { useDeviceType } from 'services'
 import type { Instance, Placement } from 'tippy.js'
 import Button from '../Button.vue'
 
@@ -26,7 +26,6 @@ const { isPc } = useDeviceType()
 const tippy = ref<Instance | null>(null)
 const body = document.body
 const visible = ref(false)
-const { isHovering, onMouseEnter, onMouseLeave } = useIsHovering()
 const initialized = ref(false)
 
 function showMenu() {
@@ -49,21 +48,13 @@ watch(visible, (val) => {
 
 provide('ContextMenu', { hideMenu, visible })
 
-const unwatch = watch(isHovering, (val) => {
-    if (val) {
-        initialized.value = true
-        unwatch()
-    }
-})
-
 defineExpose({ showMenu, hideMenu })
 </script>
 
 <template>
     <div
         class="context-menu"
-        @mouseenter="onMouseEnter"
-        @mouseleave="onMouseLeave"
+        @mouseenter="() => (initialized = true)"
     >
         <Tippy
             v-if="isPc && initialized"

@@ -13,7 +13,7 @@ const {
     list: visibleList,
     containerProps,
     wrapperProps
-} = useVirtualList(listRef, { itemHeight: 72 })
+} = useVirtualList(listRef, { itemHeight: 72, overscan: 15 })
 </script>
 
 <template>

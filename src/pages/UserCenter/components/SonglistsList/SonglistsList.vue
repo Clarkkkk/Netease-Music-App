@@ -20,7 +20,10 @@ const songlistArr = computed(() => {
         }
     })
 })
-const { list, containerProps, wrapperProps } = useVirtualList(songlistArr, { itemHeight: 72 })
+const { list, containerProps, wrapperProps } = useVirtualList(songlistArr, {
+    itemHeight: 72,
+    overscan: 15
+})
 
 async function onTabChange() {
     currentTab.value = currentTab.value === 'created-list' ? 'collected-list' : 'created-list'

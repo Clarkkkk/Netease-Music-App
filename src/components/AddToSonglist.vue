@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import type { ComponentExposed } from 'vue-component-type-helpers'
 import { storeToRefs } from 'pinia'
 import { Image } from 'components'
@@ -12,6 +12,10 @@ const menuRef = ref<ComponentExposed<typeof ContextMenu>>()
 const { updateSonglists } = useSonglistsStore()
 const { createdSonglists } = storeToRefs(useSonglistsStore())
 const songIdToAdd = ref(0)
+
+onMounted(() => {
+    console.log('mounted')
+})
 
 async function onClick(songlistId: number) {
     if (!songIdToAdd.value || !songlistId) return

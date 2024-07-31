@@ -1,21 +1,19 @@
 <script setup lang="ts">
+import { ref } from 'vue'
 import { storeToRefs } from 'pinia'
-import { useDeviceType, useIsHovering } from 'services'
 import { usePlaylistStore } from 'src/stores'
 import Image from '../Image.vue'
 import SongItemOption from './SongItemOption.vue'
 
 defineProps<{ song: Song }>()
-const { isHovering, onMouseEnter, onMouseLeave } = useIsHovering()
-const { isPc } = useDeviceType()
 const { currentSong } = storeToRefs(usePlaylistStore())
+const shouldRenderOption = ref(false)
 </script>
 
 <template>
     <li
-        class="song-item my-2 flex h-14 w-full items-center rounded-lg p-2 transition-all duration-500 @container contain-strict content-auto intrinsic-w-auto-20 intrinsic-h-auto-14 hover:bg-base-200/50"
-        @mouseenter="onMouseEnter"
-        @mouseleave="onMouseLeave"
+        class="song-item group my-2 flex h-14 w-full items-center rounded-lg p-2 transition-all duration-500 @container contain-strict content-auto intrinsic-w-auto-20 intrinsic-h-auto-14 hover:bg-base-200/50"
+        @mouseenter="() => (shouldRenderOption = true)"
     >
         <div class="image-container relative mr-2 h-10 w-10 flex-fixed">
             <Image
@@ -27,8 +25,7 @@ const { currentSong } = storeToRefs(usePlaylistStore())
                     'h-full',
                     'w-full',
                     'flex-fixed',
-                    'rounded-lg',
-                    { hovering: isHovering }
+                    'rounded-lg'
                 ]"
                 loading="lazy"
                 :size="40"
@@ -101,10 +98,12 @@ const { currentSong } = storeToRefs(usePlaylistStore())
             </RouterLink>
         </div>
         <slot />
-        <SongItemOption
-            :song="song"
-            :class="['ml-2', 'transition-all', { 'opacity-0': !isHovering && isPc }]"
-        />
+        <div class="ml-2 h-8 w-8 flex-shrink-0 opacity-0 transition-all md:group-hover:opacity-100">
+            <SongItemOption
+                v-if="shouldRenderOption"
+                :song="song"
+            />
+        </div>
     </li>
 </template>
 
