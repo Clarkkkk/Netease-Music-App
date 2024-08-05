@@ -15,8 +15,8 @@ const { preference } = storeToRefs(usePreferenceStore())
                 v-model="preference.skipShortSongs"
                 class="w-full"
                 input-class="toggle-primary"
-                label="过滤30秒内的音乐"
-                explanation="自动跳过时长小于30秒的音乐"
+                label="过滤60秒内的音乐"
+                explanation="自动跳过时长小于60秒的音乐"
             />
             <Switch
                 v-model="preference.playTracing"
