@@ -61,7 +61,14 @@ export const usePlaylistStore = defineStore('playlist', () => {
         await nextTick()
 
         if (song) {
-            await updateSongUrl(song)
+            try {
+                await updateSongUrl(song)
+            } catch (e) {
+                console.error(e)
+                updateCurrentSongStatus('play-failed')
+                updateAudioStatus('error')
+                return
+            }
         }
         currentSong.value = song
 
