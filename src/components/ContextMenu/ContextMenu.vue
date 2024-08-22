@@ -120,9 +120,11 @@ defineExpose({ showMenu, hideMenu })
                         @click="visible = false"
                     />
                     <div
-                        class="context-menu-popup-content absolute bottom-0 left-0 w-full overflow-auto rounded-t-xl bg-base-100 px-2 pb-5 transition-all duration-300"
+                        class="context-menu-popup-content absolute bottom-0 left-0 w-full overflow-auto rounded-t-xl bg-base-100 pb-5 transition-all duration-300"
                     >
-                        <div class="sticky top-0 z-10 h-12 w-full bg-base-100 pt-4">
+                        <div
+                            class="sticky top-0 z-10 h-12 w-full bg-base-100/80 px-2 pt-4 backdrop-blur-sm"
+                        >
                             <Button
                                 class="btn-square btn-ghost btn-sm absolute right-0 top-2"
                                 @click="visible = false"
