@@ -10,7 +10,7 @@ export const usePlaylistStore = defineStore('playlist', () => {
     const historyPlaylist = ref<Song[]>([])
     const currentSong = ref<Song | null>(null)
     const playMode = ref<'list-loop' | 'list-sequent' | 'song-loop' | 'radio' | 'radio-song-loop'>(
-        'list-sequent'
+        'list-loop'
     )
     const { updateAudioStatus, setLoop } = useAudioStore()
     const { audioStatus } = storeToRefs(useAudioStore())
@@ -163,7 +163,7 @@ export const usePlaylistStore = defineStore('playlist', () => {
         historyPlaylist.value = playlist.value
         playlist.value = list.slice()
         await updateCurrentSong(shouldPlay || list[0] || null)
-        updatePlayMode('list-sequent')
+        updatePlayMode('list-loop')
     }
 
     async function switchToRadio() {
