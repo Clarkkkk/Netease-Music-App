@@ -18,6 +18,12 @@ const lessThan1280 = useMediaQuery('(max-width: 1279px)')
 const collapsible = computed(() => {
     return (props.info?.description?.length || 0) > (lessThan768 ? 150 : lessThan1280 ? 300 : 400)
 })
+const albumArtist = computed(() => {
+    const primaryArtist = props.info?.artist?.id ? props.info.artist : null
+    const fallbackArtist = props.info?.artists?.find((artist) => artist.id)
+
+    return primaryArtist || fallbackArtist || null
+})
 </script>
 
 <template>
@@ -81,8 +87,8 @@ const collapsible = computed(() => {
             </div>
             <div class="mt-4 flex items-center justify-center md:justify-start">
                 <Image
-                    v-if="info?.artist.picUrl || info?.artists[0].picUrl"
-                    :src="toHttps(info?.artist.picUrl || info?.artists[0].picUrl)"
+                    v-if="albumArtist?.picUrl"
+                    :src="toHttps(albumArtist.picUrl)"
                     class="mr-2 h-6 w-6 rounded-full"
                     :size="48"
                 />
@@ -90,8 +96,18 @@ const collapsible = computed(() => {
                     v-else
                     class="mr-2 h-6 w-6 text-primary"
                 />
-                <span class="text-sm text-base-content md:text-base">
-                    {{ info?.artists[0].name }}
+                <RouterLink
+                    v-if="albumArtist"
+                    class="text-sm text-base-content hover:underline md:text-base"
+                    :to="`/artist/${albumArtist.id}`"
+                >
+                    {{ albumArtist.name }}
+                </RouterLink>
+                <span
+                    v-else
+                    class="text-sm text-base-content md:text-base"
+                >
+                    {{ info?.artists?.[0]?.name || info?.artist?.name }}
                 </span>
             </div>
             <Collapsible

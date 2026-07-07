@@ -89,6 +89,7 @@ watch(
                 :name="album.name"
                 :sub-name="''"
                 :artist="info.name"
+                :artist-id="info.id"
                 :artist-pic-url="info.picUrl"
                 :pic-url="album.picUrl"
                 :create-time="album.publishTime"

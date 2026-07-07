@@ -9,6 +9,7 @@ import { toHttps } from 'src/utils'
 interface SonglistItem {
     name: string
     creator: string
+    creatorId?: number
     cover: string
     id: number
 }
@@ -25,6 +26,10 @@ const { prefetchRoute } = usePrefetch()
 function mouseenterHandler() {
     onMouseEnter()
     prefetchRoute(`/${props.type}/:id`)
+}
+
+function prefetchCreatorRoute() {
+    prefetchRoute('/artist/:id')
 }
 
 async function onPlayList(id: number) {
@@ -87,7 +92,18 @@ function onItemClick(id: number) {
                 class="overflow-hidden text-ellipsis whitespace-nowrap text-xs text-base-content/60"
                 :title="listItem.creator"
             >
-                {{ listItem.creator }}
+                <RouterLink
+                    v-if="type === 'album' && listItem.creatorId"
+                    class="hover:underline"
+                    :to="`/artist/${listItem.creatorId}`"
+                    @click.stop
+                    @mouseenter="prefetchCreatorRoute"
+                >
+                    {{ listItem.creator }}
+                </RouterLink>
+                <span v-else>
+                    {{ listItem.creator }}
+                </span>
             </div>
         </div>
         <div class="hidden w-6/12 flex-col overflow-hidden text-sm @2xl:flex">
@@ -102,7 +118,18 @@ function onItemClick(id: number) {
             class="hidden w-5/12 overflow-hidden text-ellipsis whitespace-nowrap text-sm @2xl:block"
             :title="listItem.creator"
         >
-            {{ listItem.creator }}
+            <RouterLink
+                v-if="type === 'album' && listItem.creatorId"
+                class="hover:underline"
+                :to="`/artist/${listItem.creatorId}`"
+                @click.stop
+                @mouseenter="prefetchCreatorRoute"
+            >
+                {{ listItem.creator }}
+            </RouterLink>
+            <span v-else>
+                {{ listItem.creator }}
+            </span>
         </div>
         <Button
             v-if="type !== 'artist'"

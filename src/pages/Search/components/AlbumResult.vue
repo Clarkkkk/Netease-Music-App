@@ -4,6 +4,7 @@ import ListItem from './ListItem.vue'
 interface SonglistItem {
     name: string
     creator: string
+    creatorId?: number
     cover: string
     id: number
 }

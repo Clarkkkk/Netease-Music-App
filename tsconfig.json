@@ -12,7 +12,6 @@
         "resolveJsonModule": true,
         "moduleResolution": "Bundler",
         "isolatedModules": true,
-        "esModuleInterop": false,
         "lib": [
             "esnext",
             "dom"

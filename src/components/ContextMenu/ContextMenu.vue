@@ -127,7 +127,11 @@ defineExpose({ showMenu, hideMenu })
                         >
                             <Button
                                 class="btn-square btn-ghost btn-sm absolute right-0 top-2"
-                                @click="visible = false"
+                                @click="
+                                    () => {
+                                        visible = false
+                                    }
+                                "
                             >
                                 <i-fluent-dismiss-32-regular />
                             </Button>

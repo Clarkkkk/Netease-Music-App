@@ -1,4 +1,5 @@
 <script setup lang="ts">
+// @ts-expect-error css
 import 'swiper/css'
 import { ref } from 'vue'
 import { onBeforeRouteLeave } from 'vue-router'

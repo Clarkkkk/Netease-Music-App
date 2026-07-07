@@ -8,6 +8,7 @@ interface AlbumItemProps {
     name: string
     subName: string
     artist: string
+    artistId: number
     artistPicUrl: string
     id: number
     picUrl: string
@@ -23,6 +24,10 @@ const router = useRouter()
 function mouseenterHandler() {
     onMouseEnter()
     prefetchRoute('/album/:id')
+}
+
+function prefetchArtistRoute() {
+    prefetchRoute('/artist/:id')
 }
 </script>
 
@@ -81,8 +86,20 @@ function mouseenterHandler() {
             </div>
             <div
                 class="mt-1 overflow-hidden text-ellipsis whitespace-nowrap text-xs text-base-content/90"
+                :title="artist"
             >
-                {{ artist }}
+                <RouterLink
+                    v-if="artistId"
+                    class="hover:underline"
+                    :to="`/artist/${artistId}`"
+                    @click.stop
+                    @mouseenter="prefetchArtistRoute"
+                >
+                    {{ artist }}
+                </RouterLink>
+                <span v-else>
+                    {{ artist }}
+                </span>
             </div>
         </div>
     </li>

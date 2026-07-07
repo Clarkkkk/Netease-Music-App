@@ -8,6 +8,7 @@ interface Album {
     name: string
     subName: string
     artist: string
+    artistId: number
     artistPicUrl: string
     id: number
     picUrl: string
@@ -26,6 +27,7 @@ onMounted(() => {
                     name: item.name,
                     subName: item.transNames?.[0] || item.alias[0] || '',
                     artist: item.artist.name,
+                    artistId: item.artist.id,
                     artistPicUrl: item.artist.picUrl,
                     id: item.id,
                     picUrl: toHttps(item.picUrl),
@@ -59,6 +61,7 @@ onMounted(() => {
                 :name="album.name"
                 :sub-name="album.subName"
                 :artist="album.artist"
+                :artist-id="album.artistId"
                 :artist-pic-url="album.artistPicUrl"
                 :pic-url="album.picUrl"
                 :create-time="album.createTime"

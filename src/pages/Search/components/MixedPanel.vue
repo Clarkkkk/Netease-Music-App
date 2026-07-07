@@ -98,6 +98,7 @@ async function getData(keyword: string) {
                     return {
                         name: item.name,
                         creator: item.artists[0]?.name || '',
+                        creatorId: item.artists[0]?.id,
                         id: item.id,
                         cover: toHttps(item.picUrl)
                     }

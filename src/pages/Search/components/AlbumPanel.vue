@@ -37,6 +37,7 @@ async function getData(offset: number, keyword: string) {
             return {
                 name: item.name,
                 creator: item.artist.name || '',
+                creatorId: item.artist.id,
                 id: item.id,
                 cover: toHttps(item.picUrl || '')
             }
